@@ -22,18 +22,24 @@ public:
 	Contact(void);		//Constructor
 	~Contact( void );		//Destructor
 	
-	void	set_first_name(char *str);
-	/*void	set_last_name(string str);
-	void	set_nickname(string str);
-	void	set_phone_number(string str);
-	void	set_darkest_secret(string str);*/
+	void	setFirstName(void);
+	void	setLastName(void);
+	void	setNickname(void);
+	void	setPhoneNumber(void);
+	void	setDarkestSecret(void);
+
+	std::string	getFirstName() const;
+	std::string getLastName() const;
+	std::string	getNickname() const;
+	std::string	getPhoneNumber() const;
+	std::string	getDarkestSecret() const;
 
 private:
-	std::string	_first_name;
-	std::string	_last_name;
+	std::string	_firstName;
+	std::string	_lastName;
 	std::string	_nickname;
-	std::string	_phone_number;
-	std::string	_darkest_secret;
+	std::string	_phoneNumber;
+	std::string	_darkestSecret;
 
 };
 

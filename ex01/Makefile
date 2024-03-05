@@ -12,11 +12,9 @@
 
 NAME	= phonebook
 
-CC	= c++
+CXX	= c++
 
-CPPFLAG	= -std=c++98
-
-CFLAGS	= -Wall -Wextra -Werror
+CXXFLAGS	= -Wall -Wextra -Werror -std=c++98
 
 SRCS	=	main.cpp Contact.class.cpp PhoneBook.class.cpp
 
@@ -27,7 +25,7 @@ RM		=	rm -f
 all:		$(NAME)
 
 $(NAME):	$(SRCS)
-			$(CC) $(CFLAGS) $(CPPFLAG) $(SRCS) -o $@
+			$(CXX) $(CXXFLAGS) $(SRCS) -o $@
 
 clean:
 

@@ -25,10 +25,13 @@ public:
 	~PhoneBook(void);
 
 	Contact	contacts[8];
-	void	add_contact(void);
+
+	void	addContact(void);
+	void	searchContact(void);
 
 private:
-	static int	number_contacts;
+	static int	numberContacts;
+	
 };
 
 #endif

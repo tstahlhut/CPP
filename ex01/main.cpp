@@ -16,7 +16,7 @@
 
 int	main(void)
 {
-	PhoneBook		phone_book;
+	PhoneBook		MyPhoneBook;
 	std::string		input;
 
 	std::cout << "Program programming ... phonebook ..." << std::endl
@@ -26,12 +26,12 @@ int	main(void)
 	while (1)
 	{
 		std::cin >> input;
-		if (input.compare(0,input.length(), "ADD") == 0)
-			phone_book.add_contact();
+		if (input == "ADD" || input == "add" || input == "Add")
+			MyPhoneBook.addContact();
 			//std::cout << "You want to add a new contact. Great!" << std::endl;
-		else if (input.compare(0,input.length(), "SEARCH") == 0)
-			std::cout << "You want to search the phonebook." << std::endl;
-		else if (input.compare(0,input.length(), "EXIT") == 0)
+		else if (input == "SEARCH" || input == "search" || input == "Search")
+			MyPhoneBook.searchContact();
+		else if (input == "EXIT" || input == "exit" || input == "Exit")
 			return (0);
 		std::cout << "--- MyPhoneBook: ADD, SEARCH or EXIT ..." << std::endl;
 	}

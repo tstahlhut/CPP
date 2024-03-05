@@ -13,6 +13,7 @@
 // In this source file the PhoneBook class is defined.
 
 #include <iostream>
+#include <iomanip> //for setw
 #include "PhoneBook.class.hpp"
 
 PhoneBook::PhoneBook(void)
@@ -27,34 +28,48 @@ PhoneBook::~PhoneBook(void)
 	return;
 }
 
-int	PhoneBook::number_contacts = 0;
+int	PhoneBook::numberContacts = 0;
 
-void	PhoneBook::add_contact(void)
+void	PhoneBook::addContact(void)
 {
-	std::string	firstname;
-	/*std::string	lastname;
-	std::string	nickname;
-	std::string	phonenumber;
-	std::string secret;
-*/
-	std::cout << "Enter First Name: " << std::endl;
-	std::cin >> firstname;
-	/*std::cout << "Enter Last Name: " << std::endl;
-	std::cin >> lastname;
-	std::cout << "Enter Nickname: " << std::endl;
-	std::cin >> nickname;
-	std::cout << "Enter Phone Number: " << std::endl;
-	std::cin >> phonenumber;
-	std::cout << "Enter the their darkest secret: " << std::endl;
-	std::cin >> secret;*/
+	int	index;
 
-	Contact[0]::set_first_name(firstname);
+	index = this->numberContacts;
+	if (index >= 7)
+		index -= 7;
+	this->contacts[index].setFirstName();
+	this->contacts[index].setLastName();
+	this->contacts[index].setNickname();
+	this->contacts[index].setPhoneNumber();
+	this->contacts[index].setDarkestSecret();	
 
-	this->number_contacts += 1;
+	if (this->numberContacts < 8)
+		this->numberContacts += 1;
 	std::cout << "New contact successfully added! You now have " 
-			<< this->number_contacts << " contact(s)." << std::endl;
+			<< this->numberContacts << " contact(s)." << std::endl;
 	
 	return ;
-	//Contact	contact1;
-	//Contact::Contact(firstname, lastname, nickname, phonenumber, secret);
 }
+
+void	PhoneBook::searchContact(void)
+{
+	int	i = 0;
+	const int	columnWidth = 10;
+	//const int	columnSeparator = ' |';
+
+//set it right aligned!
+	while (i < this->numberContacts)
+	{
+		std::cout << std::setw(10) << "index" << '|' 
+				<< std::setw(10) << "First Name" << '|' 
+				<< std::setw(10) << "Last Name" << '|' 
+				<< std::setw(10) << "Nickname" << '|' << std::endl;
+		std::cout << std::setw(columnWidth) << i + 1 << '|'
+			<< std::setw(columnWidth) << contacts[i].getFirstName() << ' |'
+			<< std::setw(columnWidth) << contacts[i].getLastName() << ' |'
+			<< std::setw(columnWidth) << contacts[i].getNickname() << std::endl;
+		i++;
+	}
+	return ;
+}
+
