@@ -427,6 +427,55 @@ As you want to initialize non-member attributes before you create the first inst
 
 		int	Sample::_x = 0;
 
+Do not forget to specify the class (here: Sample::)! Otherwise you get error messages while linking.
+
 ### Pointers to Members 
 
 watch intranet video again and fill out
+
+## Manipulators for cout and cin
+
+### setprecision, fixed, showpoint
+
+Setprecision is used to adjust the number of digits that are printed of a number. As default, 6 digits are printed.
+
+	double number = 107.567;
+
+	std::cout << std::setprecision(3) << number << std::endl;
+
+	output: 107
+
+If you want to print a specific number of decimal digits, you can add std::fixed which limits the number of decimals to the number given in std::setprecision.
+
+	cout << std::fixed << std::setprecision(2) << number << std::endl;
+
+	output: 107.56.
+
+If, however, you always want to show a decimal point, you use std::showpoint. It fills out the field length with zeros. But then you can adjust the field lenght again with std::setprecision. 
+
+	double x = 5;
+
+	cout << std::showpoint << std::setprecision(2) << x << std::endl;
+
+	output: 5.0
+
+However, this will show the first 2 digits and not 2 decimals. In that case it is better to use std::fixed and std::setprecision.
+
+Setprecisionhas to only be used once to set a certain limit length. The same goes for std::fixed and showpoint. So, you can just set it at the beginning once:
+
+	std::cout << setprecision(2) << fixed;
+
+To set it back to the default, just type:
+
+	std::cout << std::setprecision(6);
+	std::cout.unset(ios::fixed);
+
+### setw
+
+The default width of a field is 8 characters. If you have more, C++ expands the field width automatically. 
+
+By default, they are printed right justified.
+
+	std::cout << std::left << std::setw(10) << str << std::endl;
+
+Other than setprecision, fixed, showpoint and left and right, which are only set once, setw has to be set for every field. 
