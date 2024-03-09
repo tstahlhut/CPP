@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 13:07:44 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/02/27 13:10:31 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/03/08 11:33:27 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,14 @@
 // Definition of the constructor
 Contact::Contact(void)
 {
-	//this->set_first_name();
-	/*std::cout << "First name: " << this->_first_name << std::endl;
-	std::cout << "Last name: " << this->_last_name << std::endl;
-	std::cout << "Nickame: " << this->_nickname << std::endl;
-	std::cout << "Phone Number: " << this->_phone_number << std::endl;
-	std::cout << "Darkest secret: " << this->_darkest_secret << std::endl;*/
+	//std::cout << "Contact constructor called" << std::endl;
 	return;
 }
 
 //Definition of destructor
 Contact::~Contact(void)
 {
-	std::cout << "Contact destructor called" << std::endl;
+	//std::cout << "Contact destructor called" << std::endl;
 	return;
 }
 
@@ -52,7 +47,7 @@ void	Contact::setFirstName(void)
 			std::cin.clear();
 			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		}
-		std::cout << "You entered: " << this->_firstName << std::endl;
+		//std::cout << "You entered: " << this->_firstName << std::endl;
 		i = 0;
 	}
 	return;
@@ -71,7 +66,7 @@ void	Contact::setLastName(void)
 			std::cin.clear();
 			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		}
-		std::cout << "You entered: " << this->_lastName << std::endl;
+		//std::cout << "You entered: " << this->_lastName << std::endl;
 		i = 0;
 	}
 	return;
@@ -90,7 +85,7 @@ void	Contact::setNickname(void)
 			std::cin.clear();
 			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		}
-		std::cout << "You entered: " << this->_nickname << std::endl;
+		//std::cout << "You entered: " << this->_nickname << std::endl;
 		i = 0;
 	}
 	return;
@@ -109,7 +104,7 @@ void	Contact::setPhoneNumber(void)
 			std::cin.clear();
 			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		}
-		std::cout << "You entered: " << this->_phoneNumber << std::endl;
+		//std::cout << "You entered: " << this->_phoneNumber << std::endl;
 		i = 0;
 	}
 	return;
@@ -128,7 +123,7 @@ void	Contact::setDarkestSecret(void)
 			std::cin.clear();
 			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		}
-		std::cout << "You entered: " << this->_darkestSecret<< std::endl;
+		//std::cout << "You entered: " << this->_darkestSecret<< std::endl;
 		i = 0;
 	}
 	return;

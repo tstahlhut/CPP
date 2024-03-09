@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 13:10:52 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/02/27 12:40:46 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/03/08 11:32:12 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ int	main(void)
 	PhoneBook		MyPhoneBook;
 	std::string		input;
 
-	std::cout << "Program programming ... phonebook ..." << std::endl
-		<< "Welcome to your Phone Book!" << std::endl
-		<< "You have no contacts :(" << std::endl
-		<< "You can ADD a new contact or EXIT." << std::endl;
+	std::cout << std::endl << std::endl
+		<< "Welcome to your Phone Book!" << std::endl << std::endl
+		<< "        You have no contacts :(" << std::endl
+		<< "        You can ADD a new contact or EXIT." << std::endl;
 	while (1)
 	{
 		std::cin >> input;
@@ -33,7 +33,7 @@ int	main(void)
 			MyPhoneBook.searchContact();
 		else if (input == "EXIT" || input == "exit" || input == "Exit")
 			return (0);
-		std::cout << "--- MyPhoneBook: ADD, SEARCH or EXIT ..." << std::endl;
+		std::cout <<std::endl << "--- MyPhoneBook: ADD, SEARCH or EXIT ..." << std::endl;
 	}
 	return (0);
 }

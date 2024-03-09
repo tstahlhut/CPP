@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 13:00:00 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/02/27 12:56:31 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/03/08 11:05:39 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@ public:
 
 	void	addContact(void);
 	void	searchContact(void);
+	void	printContactList(void);
+	void	printContactInfo(std::string str);
+	void	displayContact(int index);
 
 private:
 	static int	numberContacts;
