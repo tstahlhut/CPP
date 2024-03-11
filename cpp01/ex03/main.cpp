@@ -6,11 +6,15 @@
 /*   By: tstahlhu <tstahlhu@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 12:18:35 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/03/11 16:32:03 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/03/11 16:30:03 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
+
+#define RED "\e[31m"
+#define YELLOW "\e[33m"
+#define WHITE "\e[37m"
 
 int	main( void )
 {
