@@ -6,7 +6,7 @@
 #    By: tstahlhu <tstahlhu@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/23 14:13:04 by vm                #+#    #+#              #
-#    Updated: 2024/03/11 16:21:40 by tstahlhu         ###   ########.fr        #
+#    Updated: 2024/03/11 17:00:48 by tstahlhu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CXX	= c++
 
 CXXFLAGS	= -Wall -Wextra -Werror -std=c++98
 
-SRCS	=	main.cpp
+SRCS	=	main.cpp HumanA.cpp HumanB.cpp Weapon.cpp
 
 OBJS	=	$(SRCS:.cpp=.o)
 
