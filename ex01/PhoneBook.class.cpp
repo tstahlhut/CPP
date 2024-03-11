@@ -6,14 +6,12 @@
 /*   By: tstahlhu <tstahlhu@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 13:05:20 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/03/08 12:14:11 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/03/11 12:53:57 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // In this source file the PhoneBook class is defined.
 
-#include <iostream>
-#include <iomanip> //for setw
 #include "PhoneBook.class.hpp"
 
 PhoneBook::PhoneBook(void)

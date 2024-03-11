@@ -479,3 +479,35 @@ By default, they are printed right justified.
 	std::cout << std::left << std::setw(10) << str << std::endl;
 
 Other than setprecision, fixed, showpoint and left and right, which are only set once, setw has to be set for every field. 
+
+# CPP01
+
+## Memory Management
+
+When allocating and deallocating classes in C++, malloc() and free() won't work properly, because they do not call the constructor/ destructor. Therefore, you use new() and delete(). For example:
+
+		MyClass	*instance = new MyClass();
+		...
+		delete instance;
+
+If you want to allocate an array of instances, you can do it as follows:
+
+		MyClass *instances = new MyClass[10];
+		...
+		delete [] instances;
+
+If you allocate an array, you pass the number of instances to be created in square brackets. Unfortunately, you cannot pass parameters to the constructor and have to find workarounds. Do not forget the square brackets after the delete when deallocating the array.
+
+## References
+
+# CPP02
+
+## The Orthodox Canonical Class Form
+
+From module CPP02 on The Orthodox Canonical Class Form is required. It prescribes that every class has a default constructor, a copy constructor, an assignement constructor and a destructor.
+
+1. **Default Constructor**: initializes object - for internal use when no other value is available
+2. **Copy Constructor**: used in the implementation of call-by-value parameters
+3. **Assignment Operator**: used to assign one value to another
+4. **Destructor**: deletes object
+

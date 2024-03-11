@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 12:59:56 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/02/27 13:10:56 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/03/11 12:30:15 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 
 #ifndef CONTACT_CLASS_H
 # define CONTACT_CLASS_H
+
+# include <iostream>
+# include <iomanip>
+# include <limits>
+# include <ios>
 
 class	Contact 
 {

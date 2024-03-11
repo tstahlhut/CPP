@@ -6,16 +6,12 @@
 /*   By: tstahlhu <tstahlhu@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 13:07:44 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/03/08 11:33:27 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/03/11 12:53:13 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 //In this source file the Contact class is defined.
 
-#include <iostream>
-#include <iomanip>
-#include <limits>
-#include <ios>
 #include "Contact.class.hpp"
 
 // Definition of the constructor
