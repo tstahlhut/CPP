@@ -6,17 +6,23 @@
 #    By: tstahlhu <tstahlhu@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/23 14:13:04 by vm                #+#    #+#              #
-#    Updated: 2024/03/11 17:00:48 by tstahlhu         ###   ########.fr        #
+#    Updated: 2024/03/12 18:12:20 by tstahlhu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	= brain
+NAME	= fight
 
 CXX	= c++
 
 CXXFLAGS	= -Wall -Wextra -Werror -std=c++98
 
-SRCS	=	main.cpp HumanA.cpp HumanB.cpp Weapon.cpp
+DIRINCL	=	./includes/
+
+DIRSRCS =	./sources/
+
+SRC		= 	main HumanA HumanB Weapon
+
+SRCS	=	$(addprefix $(DIRSRCS), $(addsuffix .cpp, $(SRC)))
 
 OBJS	=	$(SRCS:.cpp=.o)
 
@@ -24,8 +30,13 @@ RM		=	rm -f
 
 all:		$(NAME)
 
-$(NAME):	$(SRCS)
-			$(CXX) $(CXXFLAGS) $(SRCS) -o $@
+%.o = $(DIRSRCS)%.cpp
+			$(CXX) $(CXXFLAGS) -c $< -o $@ -I $(DIRINCL)
+
+$(NAME):	$(OBJS)
+			$(CXX) $(CXXFLAGS) -o $@ -I $(DIRINCL)
+
+
 
 clean:
 

@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 16:40:22 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/03/11 17:49:59 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/03/12 17:46:14 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,13 @@ class	HumanB
 	HumanB( std::string name );
 	~HumanB( void );
 
-	Weapon*	weapon;
-	void	setWeapon( Weapon weapon );
+	void	setWeapon( Weapon& weapon );
 
 	void	attack( void );
 
 	private:
-
-	std::string	_name;
+		std::string const	_name;
+		Weapon*		_weapon;
 };
 
 #endif

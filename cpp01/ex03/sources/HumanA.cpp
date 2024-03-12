@@ -1,49 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Weapon.cpp                                         :+:      :+:    :+:   */
+/*   HumanA.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tstahlhu <tstahlhu@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/11 16:36:03 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/03/11 18:25:15 by tstahlhu         ###   ########.fr       */
+/*   Created: 2024/03/11 16:49:09 by tstahlhu          #+#    #+#             */
+/*   Updated: 2024/03/12 18:03:33 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Weapon.hpp"
+#include "../includes/HumanA.hpp"
 
 /*********** CONSTRUCTOR ******************************/
-Weapon::Weapon( void )
-{
-	std::cout << "Weapon constructed" << std::endl;
-	return ;
-}
 
-Weapon::Weapon( std::string type )
+HumanA::HumanA( std::string const name, Weapon const & someWeapon ): _name(name), _weapon(someWeapon)
 {
-	this->_type = type;
-	std::cout << "Weapon of type " << type << "constructed" << std::endl;
+	std::cout << this->_name << " enters the ring armed with a " << this->_weapon.getType() << std::endl;
 	return ;
 }
 
 /*********** DESTRUCTOR ******************************/
 
-Weapon::~Weapon( void )
+HumanA::~HumanA( void )
 {
-	std::cout << Weapon
+	std::cout << this->_name << " left the ring" << std::endl;
+	return ;
 }
 
-/*********** GETTER	******************************/
-
-std::string	Weapon::getType( void ) const
+void	HumanA::attack( void )
 {
-	return this->_type;
-}
-
-/*********** SETTER	******************************/
-
-void	Weapon::setType( std::string type)
-{
-	this->_type = type;
+	std::cout << this->_name << " attacks with their " << this->_weapon.getType() << std::endl;
 	return ;
 }
