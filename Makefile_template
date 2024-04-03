@@ -6,12 +6,12 @@
 #    By: tstahlhu <tstahlhu@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/23 14:13:04 by vm                #+#    #+#              #
-#    Updated: 2024/03/11 13:46:13 by tstahlhu         ###   ########.fr        #
+#    Updated: 2024/03/12 18:12:20 by tstahlhu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
-NAME	= zombie
+NAME	=  #INSERT HERE
 CXX		= g++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 FILEEXT	= .cpp
@@ -20,7 +20,7 @@ INCDIR   = ./includes
 OBJDIR   = ./objects
 
 # List of source files
-SRC      = main Zombie randomChump newZombie
+SRC      = #INSERT HERE
 
 # List of source files with file extension .cpp
 SRCS	= $(addsuffix $(FILEEXT), $(SRC))

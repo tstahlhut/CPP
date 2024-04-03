@@ -6,28 +6,41 @@
 #    By: tstahlhu <tstahlhu@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/23 14:13:04 by vm                #+#    #+#              #
-#    Updated: 2024/03/11 16:21:40 by tstahlhu         ###   ########.fr        #
+#    Updated: 2024/03/12 18:12:20 by tstahlhu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+
 NAME	= brain
+CXX		= g++
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98
+FILEEXT	= .cpp
 
-CXX	= c++
+# List of source files
+SRC      = main
 
-CXXFLAGS	= -Wall -Wextra -Werror -std=c++98
+# List of source files with file extension .cpp
+SRCS	= $(addsuffix $(FILEEXT), $(SRC))
 
-SRCS	=	main.cpp
+# List of object files to be created from source files
+OBJS     = $(SRCS:%$(FILEEXT)=%.o)
 
-OBJS	=	$(SRCS:.cpp=.o)
 
-RM		=	rm -f
 
-all:		$(NAME)
+all: $(NAME)
 
-$(NAME):	$(SRCS)
-			$(CXX) $(CXXFLAGS) $(SRCS) -o $@
+# Rule to compile object files
+%.o: %$(FILEEXT)
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+# Rule to link object files into executable
+$(NAME): $(OBJS)
+	$(CXX) $(CXXFLAGS) -o $@ $^
 
 clean:
+ifneq ("$(wildcard $(OBJS))", "")
+	rm -rf $(OBJS)
+endif
 
 fclean:	clean
 ifneq ("$(wildcard $(NAME))", "")
@@ -36,4 +49,4 @@ endif
 
 re:		fclean all
 
-.PHONY:	all clean fclean re
+.PHONY: all clean fclean re

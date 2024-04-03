@@ -6,28 +6,51 @@
 #    By: tstahlhu <tstahlhu@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/23 14:13:04 by vm                #+#    #+#              #
-#    Updated: 2024/03/11 14:32:31 by tstahlhu         ###   ########.fr        #
+#    Updated: 2024/03/12 18:12:20 by tstahlhu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	= zombie
 
-CXX	= c++
+NAME	=  zombie
+CXX		= g++
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98
+FILEEXT	= .cpp
+SRCDIR   = ./sources
+INCDIR   = ./includes
+OBJDIR   = ./objects
 
-CXXFLAGS	= -Wall -Wextra -Werror -std=c++98
+# List of source files
+SRC      = main Zombie zombieHorde
 
-SRCS	=	main.cpp Zombie.cpp zombieHorde.cpp
+# List of source files with file extension .cpp
+SRCS	= $(addsuffix $(FILEEXT), $(SRC))
 
-OBJS	=	$(SRCS:.cpp=.o)
+# List of object files to be created from source files
+OBJS     = $(SRCS:%$(FILEEXT)=$(OBJDIR)/%.o)
 
-RM		=	rm -f
+# List of header files
+INCLS    = $(wildcard $(INCDIR)/*.h)
 
-all:		$(NAME)
 
-$(NAME):	$(SRCS)
-			$(CXX) $(CXXFLAGS) $(SRCS) -o $@
+
+all: $(OBJDIR) $(NAME)
+
+# Creation of object directory
+$(OBJDIR):
+	mkdir -p $(OBJDIR)
+
+# Rule to compile object files
+$(OBJDIR)/%.o: $(SRCDIR)/%$(FILEEXT) $(INCLS)
+	$(CXX) $(CXXFLAGS) -c $< -o $@ -I $(INCDIR)
+
+# Rule to link object files into executable
+$(NAME): $(OBJS)
+	$(CXX) $(CXXFLAGS) -o $@ $^
 
 clean:
+ifneq ("$(wildcard $(OBJS))", "")
+	rm -rf $(OBJDIR)
+endif
 
 fclean:	clean
 ifneq ("$(wildcard $(NAME))", "")
@@ -36,4 +59,4 @@ endif
 
 re:		fclean all
 
-.PHONY:	all clean fclean re
+.PHONY: all clean fclean re

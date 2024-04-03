@@ -10,35 +10,47 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME	= fight
 
-CXX	= c++
+NAME	= unnecessary_violence
+CXX		= g++
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98
+FILEEXT	= .cpp
+SRCDIR   = ./sources
+INCDIR   = ./includes
+OBJDIR   = ./objects
 
-CXXFLAGS	= -Wall -Wextra -Werror -std=c++98
+# List of source files
+SRC      = main HumanA HumanB Weapon
 
-DIRINCL	=	./includes/
+# List of source files with file extension .cpp
+SRCS	= $(addsuffix $(FILEEXT), $(SRC))
 
-DIRSRCS =	./sources/
+# List of object files to be created from source files
+OBJS     = $(SRCS:%$(FILEEXT)=$(OBJDIR)/%.o)
 
-SRC		= 	main HumanA HumanB Weapon
-
-SRCS	=	$(addprefix $(DIRSRCS), $(addsuffix .cpp, $(SRC)))
-
-OBJS	=	$(SRCS:.cpp=.o)
-
-RM		=	rm -f
-
-all:		$(NAME)
-
-%.o = $(DIRSRCS)%.cpp
-			$(CXX) $(CXXFLAGS) -c $< -o $@ -I $(DIRINCL)
-
-$(NAME):	$(OBJS)
-			$(CXX) $(CXXFLAGS) -o $@ -I $(DIRINCL)
+# List of header files
+INCLS    = $(wildcard $(INCDIR)/*.h)
 
 
+
+all: $(OBJDIR) $(NAME)
+
+# Creation of object directory
+$(OBJDIR):
+	mkdir -p $(OBJDIR)
+
+# Rule to compile object files
+$(OBJDIR)/%.o: $(SRCDIR)/%$(FILEEXT) $(INCLS)
+	$(CXX) $(CXXFLAGS) -c $< -o $@ -I $(INCDIR)
+
+# Rule to link object files into executable
+$(NAME): $(OBJS)
+	$(CXX) $(CXXFLAGS) -o $@ $^
 
 clean:
+ifneq ("$(wildcard $(OBJS))", "")
+	rm -rf $(OBJDIR)
+endif
 
 fclean:	clean
 ifneq ("$(wildcard $(NAME))", "")
@@ -47,4 +59,4 @@ endif
 
 re:		fclean all
 
-.PHONY:	all clean fclean re
+.PHONY: all clean fclean re
