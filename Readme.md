@@ -511,3 +511,20 @@ From module CPP02 on The Orthodox Canonical Class Form is required. It prescribe
 3. **Assignment Operator**: used to assign one value to another
 4. **Destructor**: deletes object
 
+## Opening Files (fstream)
+
+You could open and close files in C++ just as in C with fopen() and fclose(), however, in these exercises we are not allowed to. Another way of doing this, is ifstream() and ofstream().
+
+Include the fstream header and the iostream header (to print error message) and use ifstream() to open the file. You have to check if it was successfully opened before performing any manipulations on it. 
+
+	#include <fstream>
+
+	std::ifstream inputFile("name.txt");
+	if (!inputFile.is_open())
+	{
+		std::cerr << "Failed to open file" << std::endl;
+		return (1);
+	}
+	//do something
+	inputFile.close();
+
