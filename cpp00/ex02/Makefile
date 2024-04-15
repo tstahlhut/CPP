@@ -24,10 +24,16 @@ RM		=	rm -f
 
 all:		$(NAME)
 
-$(NAME):	$(SRCS)
-			$(CXX) $(CXXFLAGS) $(SRCS) -o $@
+$(NAME):	$(OBJS)
+		$(CXX) $(CXXFLAGS) $(SRCS) -o $@
+
+$(OBJS): $(SRCS)
+		$(CXX) $(CXXFLAGS) $(SRCS) -c			
 
 clean:
+ifneq ("$(wildcard $(OBJS))", "")
+		$(RM) $(OBJS)
+endif
 
 fclean:	clean
 ifneq ("$(wildcard $(NAME))", "")

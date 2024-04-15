@@ -12,22 +12,28 @@
 
 NAME	= phonebook
 
-CXX	= c++
+CXX		= c++
 
-CXXFLAGS	= -Wall -Wextra -Werror -std=c++98
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 
 SRCS	=	main.cpp Contact.class.cpp PhoneBook.class.cpp
 
-OBJS	=	$(SRCS:.cpp=.o)
+OBJS	=	$(SRCS:%.cpp=%.o)
 
 RM		=	rm -f
 
 all:		$(NAME)
 
-$(NAME):	$(SRCS)
-			$(CXX) $(CXXFLAGS) $(SRCS) -o $@
+$(NAME):	$(OBJS)
+		$(CXX) $(CXXFLAGS) -o $@ $^
+
+$(OBJS): $(SRCS)
+			$(CXX) $(CXXFLAGS) $(SRCS) -c 
 
 clean:
+ifneq ("$(wildcard) $(OBJS)", "")
+		$(RM) $(OBJS)
+endif
 
 fclean:	clean
 ifneq ("$(wildcard $(NAME))", "")

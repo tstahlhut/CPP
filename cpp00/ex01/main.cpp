@@ -11,8 +11,14 @@
 /* ************************************************************************** */
 
 #include <iostream>
+#include <limits>
 #include "PhoneBook.class.hpp"
 #include "Contact.class.hpp"
+
+void	cin_error_handling()
+{
+	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+}
 
 int	main(void)
 {
@@ -26,6 +32,9 @@ int	main(void)
 	while (1)
 	{
 		std::cin >> input;
+		if (std::cin.eof())
+			input = "exit";
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		if (input == "ADD" || input == "add" || input == "Add")
 			MyPhoneBook.addContact();
 			//std::cout << "You want to add a new contact. Great!" << std::endl;

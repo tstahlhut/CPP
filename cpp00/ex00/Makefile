@@ -12,22 +12,28 @@
 
 NAME	= megaphone
 
-CC	= c++
+CXX		= c++
 
-CPPFLAG	= -std=c++98
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 
-CFLAGS	= -Wall -Wextra -Werror
+SRC		=	megaphone.cpp
 
-SRCS	=	megaphone.cpp
+OBJ		=	$(SRC:%.cpp=%.o)
 
 RM		=	rm -f
 
 all:		$(NAME)
 
-$(NAME):	$(SRCS)
-			$(CC) $(CFLAGS) $(CPPFLAG) $< -o $@
+$(NAME):	$(OBJ)
+		$(CXX) $(CXXFLAGS) -o $@ $^
+
+%.o: %.cpp
+			$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
+ifneq ("$(wildcard $(OBJ))", "")
+		$(RM) $(OBJ)
+endif
 
 fclean:	clean
 ifneq ("$(wildcard $(NAME))", "")
