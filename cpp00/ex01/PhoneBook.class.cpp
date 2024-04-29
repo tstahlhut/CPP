@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 13:05:20 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/29 14:55:16 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/29 17:03:32 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,9 @@ void	PhoneBook::addContact(void)
 	int	index;
 
 	index = this->numberContacts;
-	std::cout << "index before: " << index << std::endl;
 	if (index > 7)
 	{
 		index -= 8;
-		std::cout << "index after: " << index << std::endl;
 	}
 	this->contacts[index].setFirstName();
 	this->contacts[index].setLastName();
@@ -68,6 +66,8 @@ void	PhoneBook::searchContact(void)
 	std:: cin >> inputIndex;
 	while (std::cin.fail() || inputIndex < 1 || inputIndex > this->numberContacts)
 	{
+		if (std::cin.eof())
+			return ;
 		std::cout << std::endl << "Typo? This index does not exist in your phonebook." << std::endl;
 		this->printContactList();
 		std::cout << "Please try again:" << std::endl;
