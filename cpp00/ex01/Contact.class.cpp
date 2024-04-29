@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Contact.class.cpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tstahlhu <tstahlhu@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 13:07:44 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/03/11 12:53:13 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/29 12:45:26 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,10 @@ void	Contact::setFirstName(void)
 	{
 		std::cout << "Enter First Name: " << std::endl;
 		std::cin >> this->_firstName;
-		if (std::cin.fail())
-		{
-			std::cin.clear();
-			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-		}
-		//std::cout << "You entered: " << this->_firstName << std::endl;
+		// clear error flag in case cin failed
+		std::cin.clear();
+		//ignore everything until next newline (i.e. clear buffer)
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		i = 0;
 	}
 	return;
@@ -57,12 +55,8 @@ void	Contact::setLastName(void)
 	{
 		std::cout << "Enter Last Name: " << std::endl;
 		std::cin >> this->_lastName;
-		if (std::cin.fail())
-		{
-			std::cin.clear();
-			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-		}
-		//std::cout << "You entered: " << this->_lastName << std::endl;
+		std::cin.clear();
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		i = 0;
 	}
 	return;
@@ -76,12 +70,8 @@ void	Contact::setNickname(void)
 	{
 		std::cout << "Enter Nickname: " << std::endl;
 		std::cin >> this->_nickname;
-		if (std::cin.fail())
-		{
-			std::cin.clear();
-			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-		}
-		//std::cout << "You entered: " << this->_nickname << std::endl;
+		std::cin.clear();
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		i = 0;
 	}
 	return;
@@ -95,12 +85,8 @@ void	Contact::setPhoneNumber(void)
 	{
 		std::cout << "Enter phone number: " << std::endl;
 		std::cin >> this->_phoneNumber;
-		if (std::cin.fail())
-		{
-			std::cin.clear();
-			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-		}
-		//std::cout << "You entered: " << this->_phoneNumber << std::endl;
+		std::cin.clear();
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		i = 0;
 	}
 	return;
@@ -114,23 +100,12 @@ void	Contact::setDarkestSecret(void)
 	{
 		std::cout << "Enter the person's darkest secret: " << std::endl;
 		std::cin >> this->_darkestSecret;
-		if (std::cin.fail())
-		{
-			std::cin.clear();
-			std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-		}
-		//std::cout << "You entered: " << this->_darkestSecret<< std::endl;
+		std::cin.clear();
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		i = 0;
 	}
 	return;
 }
-
-/* Notes:
-	If I use std::cin to read input, the whitespaces at the beginning
-	will be ignored. This means that only hitting enter has no effect
-	other than it proves a newline in the terminal.
-	To change that behavior, you can add: std::cin >> std::noskipws;
-	*/
 
 //getter functions
 
@@ -158,3 +133,16 @@ std::string	Contact::getDarkestSecret() const
 {
 	return (this->_darkestSecret);
 }
+
+
+/* Notes:
+	If I use std::cin to read input, the whitespaces at the beginning
+	will be ignored. This means that only hitting enter has no effect
+	other than it proves a newline in the terminal.
+	To change that behavior, you can add: std::cin >> std::noskipws;
+	The cin buffer has to be cleared with 
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+	Otherwise, if you enter for example two names when prompted to enter the first
+	name, the second one will be assigned to last name directly without prompting
+	for input first. 
+	*/

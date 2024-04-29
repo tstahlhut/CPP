@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Account.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tstahlhu <tstahlhu@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 14:19:40 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/03/09 17:55:45 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/29 14:14:51 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,23 @@ void	Account::_displayTimestamp( void )
 	time_t now = time(0);
 	tm 		*t = localtime(&now);
 
-	std::cout << '[' << 1900 + t->tm_year << 1 + t->tm_mon << t->tm_mday
-		<< '_' << 0+t->tm_hour << 0+t->tm_min << t->tm_sec << "] ";
+	std::cout << '[' << 1900 + t->tm_year;
+	if ((1 + t->tm_mon) < 10)
+		std::cout << "0";
+	std::cout << 1 + t->tm_mon;
+	if ((1 + t->tm_mday) < 10)
+		std::cout << "0";
+	std::cout << t->tm_mday;
+	std::cout << '_';
+	if ((0 + t->tm_hour) < 10)
+		std::cout << "0";
+	std::cout << 0 + t->tm_hour;
+	if ((0 + t->tm_min) < 10)
+		std::cout << "0";
+	std::cout << 0 + t->tm_min;
+	if ((t->tm_sec) < 10)
+		std::cout << "0";
+	std::cout << t->tm_sec << "] ";
 
 	return ;
 }

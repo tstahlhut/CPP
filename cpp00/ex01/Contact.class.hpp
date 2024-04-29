@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Contact.class.hpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tstahlhu <tstahlhu@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 12:59:56 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/03/11 12:30:15 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/29 12:49:35 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ class	Contact
 	
 public:
 	Contact(void);		//Constructor
-	~Contact( void );		//Destructor
+	~Contact( void );	//Destructor
 	
 	void	setFirstName(void);
 	void	setLastName(void);

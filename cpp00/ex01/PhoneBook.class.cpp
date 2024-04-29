@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PhoneBook.class.cpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tstahlhu <tstahlhu@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 13:05:20 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/03/11 12:53:57 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/29 14:55:16 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,12 @@ void	PhoneBook::addContact(void)
 	int	index;
 
 	index = this->numberContacts;
-	if (index >= 7)
-		index -= 7;
+	std::cout << "index before: " << index << std::endl;
+	if (index > 7)
+	{
+		index -= 8;
+		std::cout << "index after: " << index << std::endl;
+	}
 	this->contacts[index].setFirstName();
 	this->contacts[index].setLastName();
 	this->contacts[index].setNickname();
@@ -60,14 +64,15 @@ void	PhoneBook::searchContact(void)
 	}
 
 	this->printContactList();
-	std::cout << "Who's your favourite? Enter index of contact you would like to display" << std::endl;
+	std::cout << "Who's your favourite? Enter index of contact you would like to display:" << std::endl;
 	std:: cin >> inputIndex;
 	while (std::cin.fail() || inputIndex < 1 || inputIndex > this->numberContacts)
 	{
-		std::cout << "Typo? This index does not exist in your phonebook." << std::endl << std::endl;
+		std::cout << std::endl << "Typo? This index does not exist in your phonebook." << std::endl;
+		this->printContactList();
 		std::cout << "Please try again:" << std::endl;
 		std::cin.clear();
-		std::cin.ignore();
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		std::cin >> inputIndex;
 	}
 	this->displayContact(inputIndex);
