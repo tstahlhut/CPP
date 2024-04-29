@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tstahlhu <tstahlhu@student.42berlin.de>    +#+  +:+       +#+         #
+#    By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/23 14:13:04 by vm                #+#    #+#              #
-#    Updated: 2024/03/12 18:12:20 by tstahlhu         ###   ########.fr        #
+#    Updated: 2024/04/29 17:14:28 by tstahlhu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 NAME	= unnecessary_violence
-CXX		= g++
+CXX		= c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 FILEEXT	= .cpp
 SRCDIR   = ./sources

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Zombie.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tstahlhu <tstahlhu@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 12:19:13 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/03/11 13:42:06 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/29 17:29:16 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ Zombie::Zombie	( std::string name )
 //Destructor
 Zombie::~Zombie	( void )
 {
-	std::cout << "Zombie destructor called" << std::endl;
+	std::cout << "Zombie destructor called: "<< this->_name << " deleted" << std::endl;
 	return ;
 }
 

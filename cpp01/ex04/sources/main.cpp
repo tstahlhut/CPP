@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tstahlhu <tstahlhu@student.42berlin.de>    #+#  +:+       +#+        */
+/*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024-04-04 07:38:29 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024-04-04 07:38:29 by tstahlhu         ###   ########.fr       */
+/*   Created: 2024/04/04 07:38:29 by tstahlhu          #+#    #+#             */
+/*   Updated: 2024/04/29 17:58:44 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,9 @@ int	replace(const std::string& infile)
 	outfile.append(".replace");
 	if (!openFiles(infile, outfile, infileStream, outfileStream))
 		return (1);
+	// read from file with ifstream
+	// write to file with ofstream
+	// use functions from std::string (not read char by char!)
 	return (0);	
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Weapon.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tstahlhu <tstahlhu@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 16:36:03 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/03/12 16:10:17 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/29 17:47:34 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ Weapon::~Weapon( void )
 
 std::string	Weapon::getType( void ) const
 {
-	return this->_type;
+	std::string const&	type = this->_type;
+	return type;
 }
 
 /*********** SETTER	******************************/
