@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 13:07:59 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/30 14:42:40 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/30 14:46:55 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ void	Harl::complain( std::string level )
 		std::cout << "I love to complain! But this level is unknown to me." << std::endl;
 		return ;
 	}
-//	f = &Harl::debug;
-	//(instance.*f());
+	f = &Harl::level;
+	(instance.*f());
 	return ;
 }
 

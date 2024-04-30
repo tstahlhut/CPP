@@ -6,12 +6,12 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 13:07:27 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/30 13:52:46 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/04/30 14:50:56 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef _HARL_H
-# define HARL_H
+# define _HARL_H
 
 # include <iostream>
 # include <string>

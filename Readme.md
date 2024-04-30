@@ -618,3 +618,12 @@ Include the fstream header and the iostream header (to print error message) and 
 	//do something
 	inputFile.close();
 
+
+## Additional Notes
+
+For style, see: https://google.github.io/styleguide/cppguide.html
+
+In cpp00/ex01: Don't mix methods. The setter functions of the Contact class should only set the info and not std::cin -> this is part of the phonebook class.
+
+Use one style: either function( void ); function(void); or function()
+
