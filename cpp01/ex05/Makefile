@@ -6,12 +6,12 @@
 #    By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/23 14:13:04 by vm                #+#    #+#              #
-#    Updated: 2024/04/30 11:54:36 by tstahlhu         ###   ########.fr        #
+#    Updated: 2024/04/30 13:08:57 by tstahlhu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
-NAME	=  replace
+NAME	=  harl
 CXX		= c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 FILEEXT	= .cpp
@@ -20,7 +20,7 @@ INCDIR   = ./includes
 OBJDIR   = ./objects
 
 # List of source files
-SRC      = main
+SRC      = main Harl
 
 # List of source files with file extension .cpp
 SRCS	= $(addsuffix $(FILEEXT), $(SRC))
@@ -29,7 +29,7 @@ SRCS	= $(addsuffix $(FILEEXT), $(SRC))
 OBJS     = $(SRCS:%$(FILEEXT)=$(OBJDIR)/%.o)
 
 # List of header files
-INCLS    = $(wildcard $(INCDIR)/*.h)
+INCLS    = $(wildcard $(INCDIR)/*.hpp)
 
 
 

@@ -431,7 +431,97 @@ Do not forget to specify the class (here: Sample::)! Otherwise you get error mes
 
 ### Pointers to Members 
 
-watch intranet video again and fill out
+#### Pointer to Member Attributes
+
+In your main, you can declare a pointer to a member attribute which you can then use to point to the same member attribute but in different instances.
+If we have the following class with the member attribute *int x*:
+
+	class	MyClass {
+
+		public:
+			
+			int	x;
+			MyClass( void );
+			~MyClass( void );
+
+			void	function( void ) const;
+	}
+
+We can create a pointer *p* that points to *int x*:
+
+	int	main( void )
+	{
+		MyClass	instance1;
+		MyClass	instance2;
+
+		int	MyClass::*p = NULL;
+
+		p = &MyClass::x;
+
+		[...]
+
+		return (0);
+	}
+
+This pointer can be used for any instance of the MyClass class:
+
+	int	main( void )
+	{
+		[...]
+
+		instance1.*p = 21;
+		instance2.*p = 42;
+
+		return (0);
+	}
+
+If you have a pointer to an instance, the syntax changes slightly:
+
+	int	main( void )
+	{
+		MyClass		instance;
+		MyClass*	instancep = &instance;
+
+		[...]
+
+		instancep->*p = 84;
+
+		return (0);
+	}
+
+#### Pointer to Member Functions
+
+As in the example above, we have the class MyClass:
+
+	class	MyClass {
+
+		public:
+			
+			int	x;
+			MyClass( void );
+			~MyClass( void );
+
+			void	myFunction( void ) const;
+	}
+
+This time we create in our main a pointer to the function myFunction(). When creating the pointer to the member function, we have to specify the type of the function: *void ... ( void ) const*. Then we have to assign to that pointer *f* the function it should point to: *myFunction*. Now, we have a pointer to a member function and can use it on any instance of the class MyClass:
+
+	int	main( void )
+	{
+		MyClass		instance;
+		MyClass*	instancep = &instance;
+
+		void	(MyClass::*f)( void ) const;
+
+		f = &MyClass::myFunction;
+
+		(instance.*f());
+		(instance->*f());
+
+		return (0);
+	}
+	
+
 
 ## Manipulators for cout and cin
 
