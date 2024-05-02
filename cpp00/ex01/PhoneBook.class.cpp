@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 13:05:20 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/29 17:03:32 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/05/02 11:06:16 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 PhoneBook::PhoneBook(void)
 {
 	//std::cout << "construtor called" << std::endl;
+
+	this->_numberContacts = 0;
 	return;
 }
 
@@ -26,27 +28,25 @@ PhoneBook::~PhoneBook(void)
 	return;
 }
 
-int	PhoneBook::numberContacts = 0;
-
 void	PhoneBook::addContact(void)
 {
 	int	index;
 
-	index = this->numberContacts;
+	index = this->_numberContacts;
 	if (index > 7)
 	{
 		index -= 8;
 	}
-	this->contacts[index].setFirstName();
-	this->contacts[index].setLastName();
-	this->contacts[index].setNickname();
-	this->contacts[index].setPhoneNumber();
-	this->contacts[index].setDarkestSecret();	
+	this->_contacts[index].setFirstName();
+	this->_contacts[index].setLastName();
+	this->_contacts[index].setNickname();
+	this->_contacts[index].setPhoneNumber();
+	this->_contacts[index].setDarkestSecret();	
 
-	if (this->numberContacts < 8)
-		this->numberContacts += 1;
+	if (this->_numberContacts < 8)
+		this->_numberContacts += 1;
 	std::cout << "New contact successfully added! You now have " 
-			<< this->numberContacts << " contact(s)." << std::endl;
+			<< this->_numberContacts << " contact(s)." << std::endl;
 	
 	return ;
 }
@@ -55,7 +55,7 @@ void	PhoneBook::searchContact(void)
 {
 	int	inputIndex;
 
-	if (numberContacts == 0)
+	if (_numberContacts == 0)
 	{
 		std::cout << "You have no contacts in your phonebook. ADD a contact first, to search." << std::endl;
 		return ;
@@ -64,7 +64,7 @@ void	PhoneBook::searchContact(void)
 	this->printContactList();
 	std::cout << "Who's your favourite? Enter index of contact you would like to display:" << std::endl;
 	std:: cin >> inputIndex;
-	while (std::cin.fail() || inputIndex < 1 || inputIndex > this->numberContacts)
+	while (std::cin.fail() || inputIndex < 1 || inputIndex > this->_numberContacts)
 	{
 		if (std::cin.eof())
 			return ;
@@ -90,13 +90,13 @@ void	PhoneBook::printContactList(void)
 		<< std::setw(10) << "First Name" << std::setw(1) << columnSeparator
 		<< std::setw(10) << "Last Name" << std::setw(1) << columnSeparator 
 		<< std::setw(10) << "Nickname" << std::setw(1) << columnSeparator << std::endl << std::endl;
-	while (i < this->numberContacts)
+	while (i < this->_numberContacts)
 	{
 		//Contact row
 		std::cout << std::setw(10)<< i + 1 << std::setw(1) << columnSeparator;
-		this->printContactInfo(contacts[i].getFirstName());
-		this->printContactInfo(contacts[i].getLastName());
-		this->printContactInfo(contacts[i].getNickname());
+		this->printContactInfo(_contacts[i].getFirstName());
+		this->printContactInfo(_contacts[i].getLastName());
+		this->printContactInfo(_contacts[i].getNickname());
 		std::cout << std::endl;
 		i++;
 	}
@@ -123,11 +123,11 @@ void	PhoneBook::displayContact(int index)
 	index -= 1;
 
 	std::cout << std::left << std::endl;
-	std::cout << std::setw(16) << "First Name: " << contacts[index].getFirstName() << std::endl;
-	std::cout << std::setw(16) << "Last Name: " << contacts[index].getLastName() << std::endl;
-	std::cout << std::setw(16) << "Nickname: " << contacts[index].getNickname() << std::endl;
-	std::cout << std::setw(16) << "Phone Number: " << contacts[index].getPhoneNumber() << std::endl;
-	std::cout << std::setw(16) << "Darkest Secret: " << contacts[index].getDarkestSecret() << std::endl;
+	std::cout << std::setw(16) << "First Name: " << _contacts[index].getFirstName() << std::endl;
+	std::cout << std::setw(16) << "Last Name: " << _contacts[index].getLastName() << std::endl;
+	std::cout << std::setw(16) << "Nickname: " << _contacts[index].getNickname() << std::endl;
+	std::cout << std::setw(16) << "Phone Number: " << _contacts[index].getPhoneNumber() << std::endl;
+	std::cout << std::setw(16) << "Darkest Secret: " << _contacts[index].getDarkestSecret() << std::endl;
 	std::cout << std::endl;
 	return ;
 }

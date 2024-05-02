@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 12:59:56 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/29 12:49:35 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/05/02 11:08:17 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ class	Contact
 	
 public:
 	Contact(void);		//Constructor
-	~Contact( void );	//Destructor
+	~Contact(void);	//Destructor
 	
 	void	setFirstName(void);
 	void	setLastName(void);
@@ -33,11 +33,11 @@ public:
 	void	setPhoneNumber(void);
 	void	setDarkestSecret(void);
 
-	std::string	getFirstName() const;
-	std::string getLastName() const;
-	std::string	getNickname() const;
-	std::string	getPhoneNumber() const;
-	std::string	getDarkestSecret() const;
+	std::string	getFirstName(void) const;
+	std::string getLastName(void) const;
+	std::string	getNickname(void) const;
+	std::string	getPhoneNumber(void) const;
+	std::string	getDarkestSecret(void) const;
 
 private:
 	std::string	_firstName;

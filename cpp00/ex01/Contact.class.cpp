@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 13:07:44 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/29 12:45:26 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/05/02 11:09:22 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,27 +109,27 @@ void	Contact::setDarkestSecret(void)
 
 //getter functions
 
-std::string	Contact::getFirstName() const
+std::string	Contact::getFirstName(void) const
 {
 	return (this->_firstName);
 }
 
-std::string Contact::getLastName() const
+std::string Contact::getLastName(void) const
 {
 	return (this->_lastName);
 }
 
-std::string	Contact::getNickname() const
+std::string	Contact::getNickname(void) const
 {
 	return (this->_nickname);
 }
 
-std::string	Contact::getPhoneNumber() const
+std::string	Contact::getPhoneNumber(void) const
 {
 	return (this->_phoneNumber);
 }
 
-std::string	Contact::getDarkestSecret() const
+std::string	Contact::getDarkestSecret(void) const
 {
 	return (this->_darkestSecret);
 }
