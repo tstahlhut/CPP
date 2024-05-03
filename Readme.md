@@ -623,6 +623,25 @@ Include the fstream header and the iostream header (to print error message) and 
 The switch statement is a multiway conditional from C.
 Switch only compares integers. You can find an example in cpp01/ex06/main.cpp.
 
+## Floating Point Numbers
+
+- 4-byte floating point number can hold fewer distinct values than a 4-byte integer
+
+### Accuracy vs. Precision
+
+Accuracy = how close to the true value
+Precision = how precise ( 5 / 2)
+
+Integers are 100% accurate: 2 is 2, not more not less. So, whatever arithmetic operations we do with integers, there will be no overflow.
+
+However, integers are not precise. If we divide 5 by 2 or 4 by 2, both will be 2.
+
+Floating point numbers have a good precision (never discard info: 5 / 2 = 2.5) but low accuracy (e.g. 1/3).
+
+#### Representation of Floating Numbers
+Bits representing an integer are interpreted literally as a binary number.
+
+Info from: https://www.cprogramming.com/tutorial/floating_point/understanding_floating_point.html
 
 ## Additional Notes
 
