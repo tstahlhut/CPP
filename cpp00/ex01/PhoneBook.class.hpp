@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 13:00:00 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/05/02 11:04:38 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/05/03 10:15:35 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ public:
 
 private:
 	int	_numberContacts;
+	int	_index;
 
 	Contact	_contacts[8];
 	

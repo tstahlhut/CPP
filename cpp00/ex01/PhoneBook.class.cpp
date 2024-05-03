@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 13:05:20 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/05/02 11:06:16 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/05/03 10:17:30 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,13 @@
 
 PhoneBook::PhoneBook(void)
 {
-	//std::cout << "construtor called" << std::endl;
+	std::cout << std::endl << std::endl
+		<< "Welcome to your Phone Book!" << std::endl << std::endl
+		<< "        You have no contacts :(" << std::endl
+		<< "        You can ADD a new contact or EXIT." << std::endl;
 
 	this->_numberContacts = 0;
+	this->_index = 0;
 	return;
 }
 
@@ -30,18 +34,13 @@ PhoneBook::~PhoneBook(void)
 
 void	PhoneBook::addContact(void)
 {
-	int	index;
+	this->_contacts[_index % 8].setFirstName();
+	this->_contacts[_index % 8].setLastName();
+	this->_contacts[_index % 8].setNickname();
+	this->_contacts[_index % 8].setPhoneNumber();
+	this->_contacts[_index % 8].setDarkestSecret();
 
-	index = this->_numberContacts;
-	if (index > 7)
-	{
-		index -= 8;
-	}
-	this->_contacts[index].setFirstName();
-	this->_contacts[index].setLastName();
-	this->_contacts[index].setNickname();
-	this->_contacts[index].setPhoneNumber();
-	this->_contacts[index].setDarkestSecret();	
+	this->_index += 1;
 
 	if (this->_numberContacts < 8)
 		this->_numberContacts += 1;

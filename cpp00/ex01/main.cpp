@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 13:10:52 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/29 12:51:07 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/05/03 10:12:35 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,6 @@ int	main(void)
 	PhoneBook		MyPhoneBook;
 	std::string		input;
 
-	std::cout << std::endl << std::endl
-		<< "Welcome to your Phone Book!" << std::endl << std::endl
-		<< "        You have no contacts :(" << std::endl
-		<< "        You can ADD a new contact or EXIT." << std::endl;
 	while (1)
 	{
 		std::cin >> input;
