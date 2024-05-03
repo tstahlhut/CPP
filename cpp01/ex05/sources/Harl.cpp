@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 13:07:59 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/30 14:46:55 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/05/03 12:24:44 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,52 +15,56 @@
 //Default Constructor
 Harl::Harl( void )
 {
-	std::cout << "Constructor called" << std::endl;
+	//std::cout << "Hi I am Harl and I love Sahara!" << std::endl;
+	//std::cout << "So much that I am more than ready to complain ..." << std::endl;
 	return ;
 }
 
 //Destructor
 Harl::~Harl( void )
 {
-	std::cout << "Destructor called" << std::endl;
+	//std::cout << "This is enough. I will leave you now." << std::endl;
 	return ;
 }
 
 void	Harl::complain( std::string level )
 {
-	Harl	instance;
-	void	(Harl::*f)( void );
+	//array of pointers to member functions
+	void	(Harl::*FunctionPointer[4])( void ) = {&Harl::_debug, &Harl::_info, &Harl::_warning, &Harl::_error};
 
-	if (level != "debug" && level != "info" && level != "warning" && level != "error")
+	std::string levels[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
+	for (int i = 0; i < 4; i++)	
 	{
-		std::cout << "I love to complain! But this level is unknown to me." << std::endl;
-		return ;
+		if (levels[i] == level) 
+		{
+			(this->*FunctionPointer[i])();
+			return ;
+		}
 	}
-	f = &Harl::level;
-	(instance.*f());
+	std::cerr << "Unknown level: " << level << std::endl;	
 	return ;
 }
 
-void	Harl::debug( void )
+void	Harl::_debug( void )
 {
-	std::cout << "I love having extra peanut sauce on my Sahara sandwich. I really do!" << std::endl;
+	std::cout << "'I love having extra peanut sauce on my Sahara sandwich. I really do!'" << std::endl;
 	return ;
 }
 
-void	Harl::info( void )
+void	Harl::_info( void )
 {
-	std::cout << "This is not the level of peanut sauce I meant. It should be more." << std::endl;
+	std::cout << "'This is not the level of peanut sauce I meant. It should be more.'" << std::endl;
 	return ;
 }
 
-void	Harl::warning( void )
+void	Harl::_warning( void )
 {
-	std::cout << "I think I deserve more peanut sauce. Otherwise, I take back the tip." << std::endl;
+	std::cout << "'I think I deserve more peanut sauce. Otherwise, I take back the tip.'" << std::endl;
 	return ;
 }
 
-void	Harl::error( void )
+void	Harl::_error( void )
 {
-	std::cout << "This is unacceptable! I want to speak to the owner now." << std::endl;
+	std::cout << "'This is unacceptable! I want to speak to the owner now.'" << std::endl;
 	return ;
 }

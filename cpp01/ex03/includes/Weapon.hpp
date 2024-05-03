@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Weapon.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tstahlhu <tstahlhu@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 16:33:26 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/03/11 17:53:22 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/05/02 11:23:30 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,16 @@ class	Weapon
 {
 	public:
 
-	Weapon( void );
-	Weapon( std::string type );
-	~Weapon( void );
+		Weapon( void );
+		Weapon( std::string type );
+		~Weapon( void );
 
-	std::string	getType( void ) const;
-	void	setType( std::string type);
+		std::string	getType( void ) const;
+		void	setType( std::string type);
 
 	private:
 
-	std::string	_type;
+		std::string	_type;
 
 };
 

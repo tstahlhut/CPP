@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   HumanA.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tstahlhu <tstahlhu@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 16:39:20 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/03/12 17:43:04 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/05/02 11:22:37 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,17 @@
 
 class	HumanA
 {
-	private:
-		std::string	const _name;
-		Weapon const &	_weapon;
-
 	public:
 
 		HumanA( std::string const name, Weapon const & someWeapon );
 		~HumanA( void );
 
 		void	attack( void );
+	
+	private:
+		std::string	const _name;
+		Weapon const &	_weapon;
+
 };
 
 #endif
