@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Zombie.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tstahlhu <tstahlhu@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 12:18:55 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/03/11 13:40:24 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/05/03 12:43:01 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,15 @@ class	Zombie
 {
 	public:
 
-	Zombie ( void );	//Constructor
-	Zombie ( std::string name );
-	~Zombie ( void );	//Destructor
+		Zombie ( void );	//Constructor
+		Zombie ( std::string name );
+		~Zombie ( void );	//Destructor
 
-	void	announce( void );
+		void	announce( void );
 
 	private:
 
-	std::string	_name;
+		std::string	_name;
 
 };
 

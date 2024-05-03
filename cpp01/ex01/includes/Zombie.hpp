@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 12:18:55 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/29 17:37:00 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/05/03 12:43:41 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,16 @@ class	Zombie
 {
 	public:
 
-	Zombie ( void );		// Default Constructor
-	Zombie ( std::string name ); // Constructor
-	~Zombie ( void );	//Destructor
+		Zombie ( void );		// Default Constructor
+		Zombie ( std::string name ); // Constructor
+		~Zombie ( void );	//Destructor
 
-	void	announce( void );
-	void	setName( std::string name );
+		void	announce( void );
+		void	setName( std::string name );
 
 	private:
 
-	std::string	_name;
+		std::string	_name;
 
 };
 

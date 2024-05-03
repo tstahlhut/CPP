@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 13:07:44 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/05/03 10:15:16 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/05/03 10:23:18 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ Contact::~Contact(void)
 }
 
 // Setter functions
-
+// better to not use cin in the setter functions and use cin in the phonebook class
 void	Contact::setFirstName(void)
 {
 	int	i = 1;
