@@ -618,6 +618,11 @@ Include the fstream header and the iostream header (to print error message) and 
 	//do something
 	inputFile.close();
 
+## Switch Statement
+
+The switch statement is a multiway conditional from C.
+Switch only compares integers. You can find an example in cpp01/ex06/main.cpp.
+
 
 ## Additional Notes
 
