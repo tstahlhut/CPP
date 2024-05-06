@@ -6,13 +6,28 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/04 07:38:29 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/04/30 13:02:42 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/05/06 13:10:33 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <fstream>
 #include <string>
+
+int	check_strings(std::string word1, std::string word2)
+{
+	if (word1 == "\0")
+	{
+		std::cerr << "Error: string_to_find empty" << std::endl;
+		return (0);
+	}
+	if (word1 == word2)
+	{
+		std::cerr << "Error: the strings are identical" << std::endl;
+		return (0);
+	}
+	return (1);
+}
 
 int openFiles(const std::string& infile, const std::string& outfile, std::ifstream& in, std::ofstream& out)
 {
@@ -34,10 +49,12 @@ int openFiles(const std::string& infile, const std::string& outfile, std::ifstre
 
 int	replace(const char* infile, const std::string& word1, const std::string& word2)
 {
+	if (!check_strings(word1, word2))
+		return (1);
+
 	//open infile
 	std::ifstream in(infile);
 	
-
 	//create outfile name
 	std::string outfile = infile;
 	outfile.append(".replace");
@@ -52,6 +69,7 @@ int	replace(const char* infile, const std::string& word1, const std::string& wor
 	//read from infile with ifstream and getline into buffer
 	std::string buf;
 	std::string::size_type	w; //word position
+	int	lines = 0;
 	while (std::getline(in, buf))
 	{
 		w = buf.find(word1);
@@ -64,8 +82,10 @@ int	replace(const char* infile, const std::string& word1, const std::string& wor
 		// write to file with ofstream
 		out << buf;
 		out << "\n";
+		if (buf.length())
+			lines ++;
 	}
-	if (!buf.length())
+	if (!buf.length() && lines == 0)
 		std::cout << "Warning: infile empty: " << infile << std::endl;
 	//ifstream and ofstream normally close stream themselves
 	in.close();
