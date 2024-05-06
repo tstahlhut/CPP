@@ -702,6 +702,25 @@ When we have implemented the << operator for our Integer class, we can easily ou
 
 **<< x** calls the ostream function implemented before and thus we can output the private int _n.
 
+## Orthodox Canonical Form
+
+The Orthodox Canonical Form refers to the standard norm of declaring a class in C++. From CPP02 onwards, 42 students are obliged to use the canonical form. This standard prescribes that a class should have at least:
+
+	- A default constructor
+	- A copy constructor
+	- A copy assignment operator
+	- A destructor
+
+As I already wrote about what a constructor and a destructor is, I will only explain what a copy constructor an dwhat a copy assignment operator is. 
+
+In the **copy constructor** a new instance is created:
+
+	MyClass( MyClass const & src );
+
+In the **copy assignment operator** the current instance is changed by assigning another instance (as a parameter) to it:
+
+	MyClass &	operator=( MyClass const & rhs);
+
 ## Floating Point Numbers
 
 - 4-byte floating point number can hold fewer distinct values than a 4-byte integer

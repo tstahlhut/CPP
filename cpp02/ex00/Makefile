@@ -3,15 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+         #
+#    By: tstahlhu <tstahlhu@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/23 14:13:04 by vm                #+#    #+#              #
-#    Updated: 2024/05/03 16:54:37 by tstahlhu         ###   ########.fr        #
+#    Updated: 2024/05/06 20:40:36 by tstahlhu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
-NAME	=  executable
+NAME	=  fixed
 CXX		= c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 FILEEXT	= .cpp
@@ -20,7 +20,7 @@ INCDIR   = ./includes
 OBJDIR   = ./objects
 
 # List of source files
-SRC      = main
+SRC      = main Fixed
 
 # List of source files with file extension .cpp
 SRCS	= $(addsuffix $(FILEEXT), $(SRC))
