@@ -623,6 +623,85 @@ Include the fstream header and the iostream header (to print error message) and 
 The switch statement is a multiway conditional from C.
 Switch only compares integers. You can find an example in cpp01/ex06/main.cpp.
 
+## Ad hoc Polymorphism
+
+Ad hoc polymorphism is also referred to as function overloading. It means that you can define many functions in C++ with the same name but different parameters. For example:
+
+	void	function( char const c ) const;
+	void	function( int const n ) const;
+	void	function( float const z ) const;
+	void	function( MyClass const & i ) const;
+
+Thus, I can pass either a char, an int, a float or a MyClass to the function *function*. This is pretty handy.
+
+### Operator Overload
+
+#### Arithmetic Notations
+
+1. **Infix notation** = the operator (+, -, etc) is set between the operands, e.g. 1 + 1.
+
+2. **prefix** or **function notation** = the operator is set before the operands, e.g. + 1 1. It is also called function notation because it looks a lot like a function: +(1, 1) or sum(1, 1). Or: 1.+( 1 )
+
+3. **postfix notation** = the operator is behind the two operands, e.g. when calculating with stacks.
+
+#### Syntax of Operator Overloads
+
+As an example, we create an Integer class:
+
+	class Integer {
+
+		public:
+		Integer( int const n );
+		[...]
+		Integer &	operator=( Integer const &rhs );
+		Integer		operator+( Integer const & rhs ) const;
+	}
+
+As these two functions are member functions, a pointer to the current instance will always be passed to the function. This pointer will be the first operand. The instance passed as a parameter will be the second operand. In both examples, the second operand (rhs) will not be changed and is put therefore as "const".
+
+In the first example, we use an assignment operator: the current instance is set equal to the instance rhs passed as a parameter. The current instance is changed and equals the instance rhs. Therefore, it returns a reference to the instance. It cannot return void because then operations like this one (a = b = c = d) would not be possible.
+
+In the second example, neither of the two instances is changed (1 + 1 = 2) but a new instance created and a copy of the result is returned. Therefore, the function is also set as const. 
+
+Of couse, you can also have pre- or postincrementations. There you do not need a parameter because it is a unary operation (e.g. i++;).
+
+	Integer &	Integer::operator=( Integer const & rhs ) {
+
+		this->_n = rhs.getValue();
+		return *this;
+	}
+
+	Integer		Integer::operator+( Integer const &rhs ) const {
+
+		return Integer( this->_n + rhs.getValue() );
+	}
+
+#### Syntax of Operator Overloads with ostream
+
+As the first operand has to be an std::ostream, we cannot use the << operator on member functions but only on "normal" functions:
+
+	std::ostream &	operator<<( std::ostream & o, Integer const & rhs);
+
+	std::ostream &	operator<<( std::ostream & o, Integer const &rhs) {
+
+		o << rhs.getValue();
+		return 0;
+	}
+
+When we have implemented the << operator for our Integer class, we can easily output the value of any integer of that class:
+
+	int	main( void ) {
+
+		Integer	x( 21 );
+		Integer	y( 42 );
+		Integer	z( 0 );
+
+		std::cout << "Value of x: " << x << std::endl;
+		return 0;
+	}
+
+**<< x** calls the ostream function implemented before and thus we can output the private int _n.
+
 ## Floating Point Numbers
 
 - 4-byte floating point number can hold fewer distinct values than a 4-byte integer

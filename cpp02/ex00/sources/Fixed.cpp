@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 16:57:10 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/05/03 17:36:16 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/05/06 14:14:56 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ Fixed::Fixed( void )
 }
 
 //Copy Constructor
-Fixed::Fixed( const Fixed& other)
+Fixed::Fixed( const Fixed& other) : _fixedPointValue( other._fixedPointValue)
 {
 	std::cout << "Copy constructor called" << std::endl;
 	this->_fixedPointValue = other._fixedPointValue;

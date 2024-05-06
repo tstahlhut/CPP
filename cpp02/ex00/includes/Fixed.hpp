@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 16:56:25 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/05/03 17:39:22 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/05/06 13:47:24 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@ class Fixed
 		Fixed( void ); //Default Constructor initializes fixed-point number value to 0.
 		Fixed( const Fixed& other); //Copy Constructor
 		// Copy assignment operator overloads
+		// operator overloads:
+		// Integer &	operator-( Integer const & rhs );
+		// Integer		operator+( Integer const & rhs) const;
 		~Fixed();	//Destructor
 
 		int		getRawBits( void ) const; //returns the raw value of the fixed-point value
