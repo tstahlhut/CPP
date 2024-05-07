@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tstahlhu <tstahlhu@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 16:57:10 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/05/06 20:44:17 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/05/07 09:29:55 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,4 @@ void	Fixed::setRawBits( int const raw ) {
 	return ;
 }
 
-const int	_numBits = 8;
+const int	Fixed::_fractionalBits = 8;

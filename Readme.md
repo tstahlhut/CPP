@@ -685,7 +685,7 @@ As the first operand has to be an std::ostream, we cannot use the << operator on
 	std::ostream &	operator<<( std::ostream & o, Integer const &rhs) {
 
 		o << rhs.getValue();
-		return 0;
+		return o;
 	}
 
 When we have implemented the << operator for our Integer class, we can easily output the value of any integer of that class:
@@ -721,11 +721,54 @@ In the **copy assignment operator** the current instance is changed by assigning
 
 	MyClass &	operator=( MyClass const & rhs);
 
-## Floating Point Numbers
+## Fixed-Point Numbers
+
+"In computing, fixed-point is a method of representing fractional (non-integer) numbers by storing a fixed number of digits of their fractional part." ([Wikipedia](https://en.wikipedia.org/wiki/Fixed-point_arithmetic))
+
+Fixed-point numbers are often used in graphics where efficiency is more important than precision. Fixed-point numbers are **stored as integers**, where a fixed part of the bits represents the **fractional bits**. 
+
+As fixed-point numbers are stored as integers, the only difference is what the bits represent. For a 32-bit signed integer, the bits represent:
+
+$-2^{31}, 2^{30}, 2^{29}, ... , 2^2, 2^1, 2^0$
+
+There are no fractional bits. In a fixed-point number, the bit places represent not only integral bits but also fractional bits. This is how the bits of a fixed-point number with 8 fractional bits is interpreted:
+
+$-2^{23} , 2^{22}, 2^{21}, ... , 2^1, 2^0, 2^{-1}, ... , 2^{-7}, 2^{-8}$
+
+Thus, the fixed-point number cannot represent MAX_INT (because it lacks integral bits for this) but it can represent decimal numbers, e.g. 2.5.
+
+So, when you want to **convert an integer to a fixed-point number** and vice versa, you have to use **bit shifting**.
+
+In order to store an int as a fixed-point number, you shift the number number_of_fractional_bits times to the left:
+
+	int fixedPoint = int i << fractionalBits;
+
+When you want to reverse it (fixed-point to int), you just shift it to the right:
+
+	int i = int fixedPoint >> fractionalBits;
+
+
+Fixed-point numbers are not as precise as floating point numbers because they only have a limited amount of fractional bits. 
+
+
+For example: When you want to store numbers for a currency, you only need to have a fractional part that can respresent numbers from 0 to 99. For this range you would need 7 fractional bits(is this correct?).
+
+So, you would not be able to represent 10.257 with the fixed-point number but would have to round it. Therefore, when storing a [floating point number](#Floating-Point-Numbers) as a fixed-point number you have to round it (roundf()).
+
+	int fixedPoint = roundf( float_f * (1 << fractionalBits));
+
+which is the same as: fixedPoint = float_f * 2^(fractionalBits).
+
+If you want to **convert a fixed-point number to a float** you do the reverse and divide:
+
+	float f = (float)fixedPoint / (1 << fractionalBits)
+
+
+### Floating Point Numbers
 
 - 4-byte floating point number can hold fewer distinct values than a 4-byte integer
 
-### Accuracy vs. Precision
+#### Accuracy vs. Precision
 
 Accuracy = how close to the true value
 Precision = how precise ( 5 / 2)
