@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 19:16:59 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/05/06 19:24:21 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/05/07 18:42:11 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@
 class	Template {
 
 	public:
-		Template( void ); // Default constructor (can also be put into private if user should not be able to use it )
-		Template( Template const & src ); // Copy constructor: a new instance is created
-		~Template( void );	// Destuctor
+		Template( void );					// Default constructor (can also be put into private if user should not be able to use it )
+		Template( Template const & src );	// Copy constructor: a new instance is created
+		~Template( void );					// Destuctor
 
 		// Copy assignment operator overload
 		Template &	operator=( Template const & rhs ); // current instance is updated with rhs instance
