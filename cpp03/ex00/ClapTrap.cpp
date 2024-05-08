@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 19:24:38 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/05/07 19:05:51 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/05/08 11:34:52 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,11 +79,44 @@ std::string	ClapTrap::getName( ClapTrap const & src ) {
 
 void	ClapTrap::attack( const std::string& target ) {
 
-	std::cout << this->_name << " attacks " << target;
-	std::cout << ", causing " << this->_damage << " points of damage!" << std::endl;
-
-
-
+	// loses 1 energy point for attacking
+	if (this->_health == 0)
+		std::cout << this->_name << " is out of health and cannot attack." << std::endl;
+	else if (this->_energy == 0)
+		std::cout << this->_name << " is out of energy and cannot attack." << std::endl;
+	else if (this->_name == target)
+		this->_health -= this->_damage;
+	else {
+		std::cout << this->_name << " attacks " << target;
+		std::cout << ", causing " << this->_damage << " points of damage!" << std::endl;
+		this->_energy -= 1;
+	}
+	return ;
 }
-		void	ClapTrap::takeDamage( unsigned int amount );
-		void	ClapTrap::beRepaired( unsigned int amount );
+
+void	ClapTrap::takeDamage( unsigned int amount ) {
+
+	std::cout << this->_name << " was attacked and lost " << amount << " hit points." << std::endl;
+	if (amount > this->_health)
+		this->_health = 0;
+	else
+		this->_health -= amount;
+	std::cout << this->_name << ": health(" << this->_health << ")" << std::endl;
+	return ;
+}
+
+
+void	ClapTrap::beRepaired( unsigned int amount ) {
+
+i	if (this->_health == 0)
+		std::cout << this->_name << " is out of health and cannot repair." << std::endl;
+	else if (this->_energy == 0)
+		std::cout << this->_name << " is out of energy and cannot repair." << std::endl;
+	else {
+		this->_energy -= 1;
+		this->_health += amount;
+		std::cout << this->_name << " repaired itself and got " << amount << " hit points.";
+		std::cout << "It now has " << this->_health << " health." << std::endl;
+	}
+	return ;
+}
