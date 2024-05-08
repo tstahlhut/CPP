@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   template.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tstahlhu <tstahlhu@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 19:24:38 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/05/06 19:37:08 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/05/08 12:57:37 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 Template::Template( void ) {
 
-	std::cout "Default Constructor called" << std::endl;
+	std::cout << "Default Constructor called" << std::endl;
 
 	return ;
 }
@@ -32,14 +32,14 @@ Template::Template( Template const & src ) {
 
 	*this = src ;
 
-	return 
+	return ;
 }
 
 // Destructor
 
 Template::~Template( void ) {
 
-	std::cout << "Destructor called" << std::end;
+	std::cout << "Destructor called" << std::endl;
 
 	return ;
 }
@@ -50,7 +50,7 @@ Template &	Template::operator=( Template const & rhs ) {
 
 	std::cout << "Copy assignement operator called" << std::endl;
 
-	this->_variable = rhs.getValue();
+	//this->_variable = rhs.getValue();
 
 	return *this ;
 }

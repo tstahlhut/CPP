@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 16:57:10 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/05/07 14:03:50 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/05/08 14:13:23 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,14 +97,6 @@ void	Fixed::setRawBits( int const raw ) {
 
 // converts fixed-point value to floating-point value
 float	Fixed::toFloat( void ) const {
-
-/*	float	floatNum;
-	int	i;
-
-	i = this->_fractionalBits;
-
-	while (i--) 
-		floatNum = this->_raw << i;*/
 	
 	return (float)this->_raw / (1 << _fractionalBits);
 }	

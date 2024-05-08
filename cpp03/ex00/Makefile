@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tstahlhu <tstahlhu@student.42berlin.de>    +#+  +:+       +#+         #
+#    By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/23 14:13:04 by vm                #+#    #+#              #
-#    Updated: 2024/05/07 18:38:52 by tstahlhu         ###   ########.fr        #
+#    Updated: 2024/05/08 13:06:28 by tstahlhu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 NAME	=  claptrap
-CXX		= g++
+CXX		= c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 FILEEXT	= .cpp
 SRCDIR   = ./sources
@@ -29,7 +29,7 @@ SRCS	= $(addsuffix $(FILEEXT), $(SRC))
 OBJS     = $(SRCS:%$(FILEEXT)=$(OBJDIR)/%.o)
 
 # List of header files
-INCLS    = $(wildcard $(INCDIR)/*.h)
+INCLS    = $(wildcard $(INCDIR)/*.hpp)
 
 
 
