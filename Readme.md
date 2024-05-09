@@ -799,6 +799,28 @@ But the constructors and destructors of the base class will be called automatica
 
 The keyword after the colon specifies the accessibility the inherited members will have. If it is **public**, the derived class will have the same accessibily to the inherited members as the base class has: public members of the base class, will be public members in the derived class, too; protected members, will be protected. If it is set to **protected**, the public members of the base class, will be protected members in the derived class. If no keyword is specified, the compiler will assume the keyword to be **private**. This means that all inherited members will be private automatically. So, the keyword after the colon specifies the **less restrictive access level** of the members to be inherited. It is most common to use the **public** keyword. 
 
+## Multiple Inheritance
+
+A class can inherit from multiple base classes. After the colon you just classify the base classes separated by commas:
+
+	class Cat : public Predator, public Pet;
+
+### Diamond Problem
+
+When a class inherits from two classes which are based on the same base class, it is called a diamon-shaped inheritance structure.
+
+		A
+	  /   \
+	B		C
+	  \   /
+	    D
+
+This can lead to ambiguity issues because the derived class effectively inherits two copies of the base class due to the multiple paths through the inheritance hierarchy. This problem can be solved by virtual inheritance. Class B and C inherit virtual class A:
+
+	class B: virtual public A;
+	class C: virtual public A;
+	class D: public B, public C;
+
 
 ## Additional Notes
 
