@@ -784,6 +784,22 @@ Bits representing an integer are interpreted literally as a binary number.
 
 Info from: https://www.cprogramming.com/tutorial/floating_point/understanding_floating_point.html
 
+# CPP03
+## Inheritance
+
+Classes can inherit from one another. This means that the class which inherits from another class (a **derived class**) inherits all the member variables and member functions from the **base class**. 
+
+	class Cat : public Animal
+
+The Cat class will inherit all the members of the Animal class. On top of that, it can add its own members. However, it does **not inherit** the constructors and destructors, the assignment operator memebers (=), the friends and private members. They have to be declared again. 
+
+But the constructors and destructors of the base class will be called automatically, when the derived class is constructed or destructed. By default, the default constructor of the base class will be called. If you want another constructor of the base class to be called (i.e. one taking parameters), you have to specify it in the following way:
+
+	Cat ( int a ) : Animal ( a ) // Constructor
+
+The keyword after the colon specifies the accessibility the inherited members will have. If it is **public**, the derived class will have the same accessibily to the inherited members as the base class has: public members of the base class, will be public members in the derived class, too; protected members, will be protected. If it is set to **protected**, the public members of the base class, will be protected members in the derived class. If no keyword is specified, the compiler will assume the keyword to be **private**. This means that all inherited members will be private automatically. So, the keyword after the colon specifies the **less restrictive access level** of the members to be inherited. It is most common to use the **public** keyword. 
+
+
 ## Additional Notes
 
 For style, see: https://google.github.io/styleguide/cppguide.html

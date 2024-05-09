@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 19:16:59 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/05/08 13:09:10 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/05/09 14:15:42 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,10 @@ class	ClapTrap {
 		ClapTrap( ClapTrap const & src );	// Copy constructor
 		~ClapTrap( void );					// Destuctor
 
-		// Copy assignment operator overload
-		ClapTrap &		operator=( ClapTrap const & rhs ); // current instance is updated with rhs instance
+		ClapTrap &		operator=( ClapTrap const & rhs ); // Copy assignment operator
 	
 		std::string		getName( void ) const;
-		unsigned int	getHealthHitPoints( void ) const;
+		unsigned int	getHitPoints( void ) const;
 		unsigned int	getEnergyPoints( void ) const;
 		unsigned int	getAttackDamage( void ) const;
 
@@ -39,12 +38,12 @@ class	ClapTrap {
 
 	private:
 
-		ClapTrap( void ); 					// Default constructor ( user should not be able to use it )
+		ClapTrap( void ); 			// Default constructor ( user should not be able to use it )
 
 		std::string		_name;
-		unsigned int	_health;	// Hit Points
-		unsigned int	_energy;	// Energy Points
-		unsigned int	_damage;	// Attack Damage
+		unsigned int	_hitPoints;	// health
+		unsigned int	_energyPoints;	// Energy Points
+		unsigned int	_attackDamage;	// Attack Damage
 };
 
 

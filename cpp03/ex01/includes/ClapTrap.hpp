@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 19:16:59 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/05/08 13:09:10 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/05/09 14:17:54 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ class	ClapTrap {
 		ClapTrap &		operator=( ClapTrap const & rhs ); // current instance is updated with rhs instance
 	
 		std::string		getName( void ) const;
-		unsigned int	getHealthHitPoints( void ) const;
+		unsigned int	getHitPoints( void ) const;
 		unsigned int	getEnergyPoints( void ) const;
 		unsigned int	getAttackDamage( void ) const;
 
@@ -37,14 +37,14 @@ class	ClapTrap {
 		void	takeDamage( unsigned int amount );
 		void	beRepaired( unsigned int amount );
 
-	private:
+	protected:
 
 		ClapTrap( void ); 					// Default constructor ( user should not be able to use it )
 
 		std::string		_name;
-		unsigned int	_health;	// Hit Points
-		unsigned int	_energy;	// Energy Points
-		unsigned int	_damage;	// Attack Damage
+		unsigned int	_hitPoints;	// Hit Points
+		unsigned int	_energyPoints;	// Energy Points
+		unsigned int	_attackDamage;	// Attack Damage
 };
 
 
