@@ -1,32 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   FragTrap.hpp                                       :+:      :+:    :+:   */
+/*   ScavTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/09 14:40:10 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/05/09 14:54:35 by tstahlhu         ###   ########.fr       */
+/*   Created: 2024/05/08 14:41:59 by tstahlhu          #+#    #+#             */
+/*   Updated: 2024/05/09 14:14:23 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef _FRAGTRAP_HPP
-# define _FRAGTRAP_HPP
+#ifndef _SCAVTRAP_HPP
+# define _SCAVTRAP_HPP
 
 # include "ClapTrap.hpp"
 
-class FragTrap : public ClapTrap
+class ScavTrap : public ClapTrap
 {
 	public:
-		FragTrap( std::string name );					// Constructor
-		FragTrap( FragTrap const & src );				// Copy constructor
-		FragTrap &	operator=( FragTrap const & rhs );	// Copy assignment operator
-		~FragTrap( void );								// Destuctor
+		ScavTrap( std::string name );
+		ScavTrap( ScavTrap const & src );	// Copy constructor
+		~ScavTrap( void );					// Destuctor
 
-		void	highFivesGuys( void );
+		ScavTrap &	operator=( ScavTrap const & rhs ); // Copy assignment operator
+	
+		void	attack( const std::string& target );
+		void	guardGate( void );
 
 	private:
-		FragTrap( void );								// Default Constructor
+		ScavTrap( void );	// Default Constructor
 };
 
 
