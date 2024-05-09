@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 19:16:59 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/05/09 14:15:42 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/05/09 14:47:41 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,10 @@
 class	ClapTrap {
 
 	public:
-		ClapTrap( std::string name );
-		ClapTrap( ClapTrap const & src );	// Copy constructor
-		~ClapTrap( void );					// Destuctor
-
-		ClapTrap &		operator=( ClapTrap const & rhs ); // Copy assignment operator
+		ClapTrap( std::string name );					// Constructor
+		ClapTrap( ClapTrap const & src );				// Copy constructor
+		ClapTrap &	operator=( ClapTrap const & rhs );	// Copy assignment operator
+		~ClapTrap( void );								// Destuctor
 	
 		std::string		getName( void ) const;
 		unsigned int	getHitPoints( void ) const;
@@ -36,9 +35,10 @@ class	ClapTrap {
 		void	takeDamage( unsigned int amount );
 		void	beRepaired( unsigned int amount );
 
+
 	private:
 
-		ClapTrap( void ); 			// Default constructor ( user should not be able to use it )
+		ClapTrap( void ); 								// Default constructor ( user should not be able to use it )
 
 		std::string		_name;
 		unsigned int	_hitPoints;	// health

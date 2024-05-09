@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 19:24:38 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/05/09 14:22:26 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/05/09 14:48:46 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <iostream>
 
 /* ************************************************************************** */
-/*            			Constructors & Destructor                             */
+/*       Constructors, Assignment Operator & Destructor                       */
 /* ************************************************************************** */
 
 
@@ -47,20 +47,6 @@ ClapTrap::ClapTrap( ClapTrap const & src ) {
 	return ;
 }
 
-ClapTrap::~ClapTrap( void ) {
-
-	std::cout << "Destructor called" << std::endl;
-
-	return ;
-}
-
-/* ************************************************************************** */
-/*            			Operator Overload 		                              */
-/* ************************************************************************** */
-
-
-// Copy assignment operator overload
-
 ClapTrap &	ClapTrap::operator=( ClapTrap const & rhs ) {
 
 	std::cout << "Copy assignement operator ScavTrap called" << std::endl;
@@ -71,6 +57,13 @@ ClapTrap &	ClapTrap::operator=( ClapTrap const & rhs ) {
 	this->_attackDamage = rhs.getAttackDamage();
 
 	return *this ;
+}
+
+ClapTrap::~ClapTrap( void ) {
+
+	std::cout << "Destructor called" << std::endl;
+
+	return ;
 }
 
 /* ************************************************************************** */

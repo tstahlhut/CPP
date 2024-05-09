@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 19:16:59 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/05/09 14:49:42 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/05/09 14:49:54 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ class	ClapTrap {
 		ClapTrap( ClapTrap const & src );				// Copy constructor
 		ClapTrap &	operator=( ClapTrap const & rhs );	// Copy assignment operator
 		~ClapTrap( void );								// Destuctor
-
 	
 		std::string		getName( void ) const;
 		unsigned int	getHitPoints( void ) const;
