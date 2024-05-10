@@ -3,15 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+         #
+#    By: tstahlhu <tstahlhu@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/23 14:13:04 by vm                #+#    #+#              #
-#    Updated: 2024/05/09 15:07:04 by tstahlhu         ###   ########.fr        #
+#    Updated: 2024/05/10 15:03:05 by tstahlhu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
-NAME	=  traps
+NAME	=  frag
 CXX		= c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 FILEEXT	= .cpp

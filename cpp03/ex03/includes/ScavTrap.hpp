@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ScavTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tstahlhu <tstahlhu@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 14:41:59 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/05/09 15:44:43 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/05/10 15:02:33 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ class ScavTrap : virtual public ClapTrap
 		void	attack( const std::string& target );
 		void	guardGate( void );
 
-	private:
+	protected:
 		ScavTrap( void );	// Default Constructor
 };
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ClapTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tstahlhu <tstahlhu@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 19:24:38 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/05/09 14:51:49 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/05/10 16:33:32 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ ClapTrap::ClapTrap( void ) {
 
 ClapTrap::ClapTrap( std::string name ) : _name( name ) {
 
-	std::cout << "Constructor ClapTrap called" << std::endl;
+	std::cout << "Constructor ClapTrap called: " << std::endl;
 
 	this->_hitPoints = 10;
 	this->_energyPoints = 10;

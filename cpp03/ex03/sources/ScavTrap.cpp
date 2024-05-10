@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ScavTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tstahlhu <tstahlhu@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 14:42:46 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/05/09 14:55:08 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/05/10 18:08:07 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,16 @@ ScavTrap::ScavTrap( void ) {
 
 ScavTrap::ScavTrap( std::string name ) : ClapTrap( name ) {
 
+	if (this->_hitPoints == 10)
+		this->_hitPoints = 100;
+	if (this->_energyPoints == 10)
+		this->_energyPoints = 50;
+	if (this->_attackDamage == 0)
+		this->_attackDamage = 20;
+
 	std::cout << "Constructor ScavTrap called" << std::endl;
-	this->_hitPoints = 100;
-	this->_energyPoints = 50;
-	this->_attackDamage = 20;
+
+	std::cout << "Energy: " << this->_energyPoints << std::endl;
 	return ;
 }
 

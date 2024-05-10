@@ -815,11 +815,52 @@ When a class inherits from two classes which are based on the same base class, i
 	  \   /
 	    D
 
-This can lead to ambiguity issues because the derived class effectively inherits two copies of the base class due to the multiple paths through the inheritance hierarchy. This problem can be solved by virtual inheritance. Class B and C inherit virtual class A:
+This can lead to ambiguity issues because the derived class effectively inherits two copies of the base class due to the multiple paths through the inheritance hierarchy. When we construct an object D, A will be constructed two times: 1 time to construct B and 1 time to construct C:
+
+	Constructor A
+	Constructor B
+	Constructor A
+	Constructor C
+	Constructor D
+
+This problem can be solved by **virtual inheritance**. Class B and C inherit virtual class A:
 
 	class B: virtual public A;
 	class C: virtual public A;
 	class D: public B, public C;
+
+This means, that as soon as C will be created, the compiler knows that there already is a copy of A and will not create it again:
+
+	Constructor A
+	Constructor B
+	Constructor C
+	Constructor D
+
+### Ambiguity Problems of Mulitple Inheritance
+
+When B and C are the base classes of D and both, B and C, have the same member function or variable, D will inherit both. When we then want to call that function or set that variable in our main, the compiler will throw an error. We have to specify which of these two functions D inherited should be used. We can just specify in the main which function to call, e.g.:
+
+	D	derived;
+	derived.B::function();
+
+It might, however, make more sense to choose which member function or variable should be inherited when declaring D. Then only one of the functions will be inherited. To do so, use the following syntax:
+
+	class D: public B, public C{
+
+		public:
+			void function(){
+				B::function();
+			}
+	}
+
+A more readable and shorter way, would be to use the keyword **using** to specify which of the inherited functions to use. Then you do not have to re-declare the function:
+
+	class D: public B, public C {
+
+		public:
+			using B::function;
+	}
+
 
 
 ## Additional Notes

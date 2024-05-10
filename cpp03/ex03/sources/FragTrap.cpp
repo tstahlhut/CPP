@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   FragTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tstahlhu <tstahlhu@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 14:56:18 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/05/09 15:09:43 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/05/10 18:11:36 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,14 @@ FragTrap::FragTrap( void ) {
 
 FragTrap::FragTrap( std::string name ) : ClapTrap( name ) {
 
-	std::cout << "Constructor FragTrap called" << std::endl;
-	this->_hitPoints = 100;
-	this->_energyPoints = 100;
+	if (this->_hitPoints == 10)
+		this->_hitPoints = 100;
+	if (this->_energyPoints == 10)
+		this->_energyPoints = 100;
 	this->_attackDamage = 30;
+
+	std::cout << "Constructor FragTrap called" << std::endl;
+	
 	return ;
 }
 

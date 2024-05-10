@@ -3,42 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tstahlhu <tstahlhu@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 11:35:18 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/05/09 15:17:55 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/05/10 17:54:11 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/FragTrap.hpp"
-#include "../includes/ScavTrap.hpp"
+#include "../includes/DiamondTrap.hpp"
 
 int	main( void )
 {
 	
-	FragTrap	Frag("Frag");
-	std::cout << Frag.getName() << " enters with ";
-	std::cout << Frag.getHitPoints() << " hit Points, ";
-	std::cout << Frag.getEnergyPoints() << " energy points and ";
-	std::cout << Frag.getAttackDamage() << " attack damage." << std::endl;
-
-/*	ScavTrap	Scav("Scav");
-	std::cout << Scav.getName()  << " enters with ";
-	std::cout << Scav.getHitPoints() << " hit Points, ";
-	std::cout << Scav.getEnergyPoints() << " energy points and ";
-	std::cout << Scav.getAttackDamage() << " attack damage." << std::endl;
-
+	DiamondTrap	Diamond("Diamond");
+	std::cout << Diamond.getName() << " enters with ";
+	std::cout << Diamond.getHitPoints() << " hit Points, ";
+	std::cout << Diamond.getEnergyPoints() << " energy points and ";
+	std::cout << Diamond.getAttackDamage() << " attack damage." << std::endl;
 	
-	Frag.attack("Scav");
-	Scav.takeDamage(30);
-	Scav.guardGate();
-	Scav.attack("Frag");
-	Frag.takeDamage(20);
-	Frag.beRepaired(10);
-	Scav.beRepaired(30);
-*/
+	Diamond.attack("Scav");		// inherited from ScavTrap
 
-	Frag.highFivesGuys();
+	Diamond.guardGate();		// inherited from ScavTrap
+
+	Diamond.highFivesGuys();	// inherited from FragTrap
+	
+	Diamond.whoAmI();
 
 	return 0;
 }

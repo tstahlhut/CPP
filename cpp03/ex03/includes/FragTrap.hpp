@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   FragTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tstahlhu <tstahlhu@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 14:40:10 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/05/09 15:44:46 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/05/10 15:12:37 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "ClapTrap.hpp"
 
-class FragTrap : virtual public ClapTrap
+class FragTrap : virtual public ClapTrap				// virtual inheritance solves Diamond problem
 {
 	public:
 		FragTrap( std::string name );					// Constructor
@@ -25,7 +25,7 @@ class FragTrap : virtual public ClapTrap
 
 		void	highFivesGuys( void );
 
-	private:
+	protected:
 		FragTrap( void );								// Default Constructor
 };
 

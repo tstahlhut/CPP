@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   DiamondTrap.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tstahlhu <tstahlhu@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 15:30:41 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/05/09 16:00:20 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/05/10 17:58:29 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,15 @@ class DiamondTrap : public ScavTrap, public FragTrap
 		DiamondTrap &	operator=( DiamondTrap const & rhs );	// Copy assignment operator
 		~DiamondTrap( void );								// Destuctor
 
-		void	whoAmI();
-		//attack function should be inherited from ScavTrap
+		using 	ScavTrap::attack;							// using keyword defines which inherited attack function should be used (Scav or Frag)
+		
+		void	whoAmI( void );
 
 	private:
 		DiamondTrap( void );								// Default Constructor
 
 		std::string	_name;
+		using ScavTrap::_energyPoints;
 };
 
 
