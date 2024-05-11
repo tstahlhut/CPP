@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 19:24:38 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/05/11 16:34:50 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/05/11 17:42:03 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ Dog::Dog( void ) {
 	std::cout << "Default Dog Constructor called" << std::endl;
 
 	this->_type = "Dog";
+	this->_dogBrain = new Brain();
 	
 	return ;
 }
@@ -38,6 +39,8 @@ Dog::Dog( Dog const & src ) {
 
 Dog::~Dog( void ) {
 
+	delete _dogBrain;
+	
 	std::cout << "Dog Destructor called" << std::endl;
 
 	return ;

@@ -6,12 +6,12 @@
 #    By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/23 14:13:04 by vm                #+#    #+#              #
-#    Updated: 2024/05/11 16:35:32 by tstahlhu         ###   ########.fr        #
+#    Updated: 2024/05/11 17:40:55 by tstahlhu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
-NAME	=  polymorphism
+NAME	=  brain
 CXX		=	c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 FILEEXT	= .cpp
@@ -20,7 +20,7 @@ INCDIR   = ./includes
 OBJDIR   = ./objects
 
 # List of source files
-SRC      = main Animal Dog Cat WrongAnimal WrongCat
+SRC      = main Animal Dog Cat Brain
 
 # List of source files with file extension .cpp
 SRCS	= $(addsuffix $(FILEEXT), $(SRC))

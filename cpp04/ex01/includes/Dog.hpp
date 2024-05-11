@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 19:16:59 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/05/11 16:34:50 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/05/11 17:20:58 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # define _DOG_HPP
 
 # include "Animal.hpp"
+# include "Brain.hpp"
 # include <iostream>
 # include <string>
 
@@ -27,6 +28,10 @@ class	Dog : public Animal {
 		~Dog( void );							// Destuctor
 
 		virtual void	makeSound( void ) const;
+
+	private:
+		Brain*	_dogBrain;
+
 };
 
 

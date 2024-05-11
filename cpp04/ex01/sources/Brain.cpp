@@ -1,33 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   template.cpp                                       :+:      :+:    :+:   */
+/*   Brain.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/06 19:24:38 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/05/11 17:11:03 by tstahlhu         ###   ########.fr       */
+/*   Created: 2024/05/11 17:09:52 by tstahlhu          #+#    #+#             */
+/*   Updated: 2024/05/11 17:40:52 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// This is a template for a class.cpp file
-
-#include "../includes/template.hpp"
+#include "../includes/Brain.hpp"
 
 // Default Constructor
 
-Template::Template( void ) {
+Brain::Brain( void ) {
 
-	std::cout << "Default Constructor called" << std::endl;
+	std::cout << "Default Brain Constructor called" << std::endl;
 
 	return ;
 }
 
 // Copy Constructor
 
-Template::Template( Template const & src ) {
+Brain::Brain( Brain const & src ) {
 
-	std::cout << "Copy Constructor called" << std::endl;
+	std::cout << "Copy Brain Constructor called" << std::endl;
 
 	*this = src ;
 
@@ -36,18 +34,18 @@ Template::Template( Template const & src ) {
 
 // Destructor
 
-Template::~Template( void ) {
+Brain::~Brain( void ) {
 
-	std::cout << "Destructor called" << std::endl;
+	std::cout << "Brain Destructor called" << std::endl;
 
 	return ;
 }
 
 // Copy assignment operator overload
 
-Template &	Template::operator=( Template const & rhs ) {
+Brain &	Brain::operator=( Brain const & rhs ) {
 
-	std::cout << "Copy assignement operator called" << std::endl;
+	std::cout << "Brain Copy assignement operator called" << std::endl;
 
 	if (this == &rhs)
 		return *this;

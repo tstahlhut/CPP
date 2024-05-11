@@ -1,37 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Animal.hpp                                         :+:      :+:    :+:   */
+/*   Brain.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/06 19:16:59 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/05/11 17:04:00 by tstahlhu         ###   ########.fr       */
+/*   Created: 2024/05/11 17:08:51 by tstahlhu          #+#    #+#             */
+/*   Updated: 2024/05/11 17:17:21 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef _BRAIN_HPP
+# define _BRAIN_HPP
 
-#ifndef _ANIMAL_HPP
-# define _ANIMAL_HPP
-
-# include <string>
 # include <iostream>
+# include <string>
 
-class	Animal {
+class	Brain {
 
 	public:
-		Animal( void );									// Default constructor
-		Animal( Animal const & src );					// Copy constructor
-		Animal &	operator=( Animal const & rhs );	// Copy assignment operator
-		virtual ~Animal( void );								// Destuctor
+		Brain( void );								// Default constructor 
+		Brain( Brain const & src );					// Copy constructor
+		Brain &	operator=( Brain const & rhs );		// Copy assignment operator overload
+		~Brain( void );								// Destuctor
+
 	
-		std::string	getType( void ) const;
-
-		virtual void	makeSound( void ) const;
-
-	protected:
-		std::string	_type;
-
+	private:
+		std::string	_ideas[100]; // array of 100 ideas
 };
 
 

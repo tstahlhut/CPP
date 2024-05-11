@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 19:16:59 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/05/11 13:54:51 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/05/11 17:10:25 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 #ifndef _TEMPLATE_HPP
 # define _TEMPLATE_HPP
+
+# include <iostream>
 
 class	Template {
 

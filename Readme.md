@@ -925,6 +925,14 @@ A virtually linked member function is called a **method**.
 		return 0;
 	}
 
+## Array of Objects
+
+To declare an array of objects of the same class, use the following syntax:
+
+	ClassName	ObjectName[number of objects];
+
+	Animal		array[10];
+
 ## Additional Notes
 
 For style, see: https://google.github.io/styleguide/cppguide.html
