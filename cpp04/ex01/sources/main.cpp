@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 14:42:59 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/05/11 17:04:59 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/05/11 16:56:57 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,6 @@ int	main( void ) {
 
 	std::cout << std::endl << "and a Cat will ..." << std::endl;
 	NormalCat->makeSound();
-	std::cout << std::endl;
-
-	delete meta;
-	delete NormalCat;
-	delete NormalDog;
 
 
 	std::cout << std::endl << "But what if ..." << std::endl << std::endl;
@@ -58,10 +53,6 @@ int	main( void ) {
 	std::cout << std::endl << "If you get that wrong and do not use the keyword 'virtual' your cat will make ..." << std::endl;
 	WrongCatAnimal->makeSound();
 	std::cout << std::endl;
-
-	delete DogAnimal;
-	delete CatAnimal;
-	delete WrongCatAnimal;
 	
 	return 0;
 }

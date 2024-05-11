@@ -1,37 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Animal.hpp                                         :+:      :+:    :+:   */
+/*   WrongCat.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 19:16:59 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/05/11 17:04:00 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/05/11 16:34:50 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
-#ifndef _ANIMAL_HPP
-# define _ANIMAL_HPP
+#ifndef _WRONGCAT_HPP
+# define _WRONGCAT_HPP
 
-# include <string>
+# include "WrongAnimal.hpp"
 # include <iostream>
+# include <string>
 
-class	Animal {
+class	WrongCat : public WrongAnimal {
 
 	public:
-		Animal( void );									// Default constructor
-		Animal( Animal const & src );					// Copy constructor
-		Animal &	operator=( Animal const & rhs );	// Copy assignment operator
-		virtual ~Animal( void );								// Destuctor
-	
-		std::string	getType( void ) const;
+		WrongCat( void );							// Default constructor
+		WrongCat( WrongCat const & src );					// Copy constructor
+		WrongCat &	operator=( WrongCat const & rhs );	// Copy assignment operator
+		~WrongCat( void );							// Destuctor
 
-		virtual void	makeSound( void ) const;
-
-	protected:
-		std::string	_type;
-
+		void	makeSound( void ) const;
 };
 
 

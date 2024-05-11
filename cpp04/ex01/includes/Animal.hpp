@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 19:16:59 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/05/11 17:04:00 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/05/11 16:34:50 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ class	Animal {
 		Animal( void );									// Default constructor
 		Animal( Animal const & src );					// Copy constructor
 		Animal &	operator=( Animal const & rhs );	// Copy assignment operator
-		virtual ~Animal( void );								// Destuctor
+		~Animal( void );								// Destuctor
 	
 		std::string	getType( void ) const;
 
