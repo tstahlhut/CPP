@@ -1,30 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   template.hpp                                       :+:      :+:    :+:   */
+/*   Cat.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 19:16:59 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/05/11 13:54:51 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/05/11 16:34:50 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// This is a template for a class in Orthodox Canoncial Form
 
-#ifndef _TEMPLATE_HPP
-# define _TEMPLATE_HPP
+#ifndef _CAT_HPP
+# define _CAT_HPP
 
-class	Template {
+# include "Animal.hpp"
+# include <iostream>
+# include <string>
+
+class	Cat : public Animal {
 
 	public:
-		Template( void );								// Default constructor (can also be put into private if user should not be able to use it )
-		Template( Template const & src );				// Copy constructor: a new instance is created
-		Template &	operator=( Template const & rhs );	// Copy assignment operator overload
-		~Template( void );								// Destuctor
+		Cat( void );							// Default constructor
+		Cat( Cat const & src );					// Copy constructor
+		Cat &	operator=( Cat const & rhs );	// Copy assignment operator
+		~Cat( void );							// Destuctor
 
-	
-	private:
+		virtual void	makeSound( void ) const;
 };
 
 

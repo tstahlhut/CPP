@@ -1,30 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   template.hpp                                       :+:      :+:    :+:   */
+/*   Animal.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 19:16:59 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/05/11 13:54:51 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/05/11 16:34:50 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// This is a template for a class in Orthodox Canoncial Form
 
-#ifndef _TEMPLATE_HPP
-# define _TEMPLATE_HPP
+#ifndef _ANIMAL_HPP
+# define _ANIMAL_HPP
 
-class	Template {
+# include <string>
+# include <iostream>
+
+class	Animal {
 
 	public:
-		Template( void );								// Default constructor (can also be put into private if user should not be able to use it )
-		Template( Template const & src );				// Copy constructor: a new instance is created
-		Template &	operator=( Template const & rhs );	// Copy assignment operator overload
-		~Template( void );								// Destuctor
-
+		Animal( void );									// Default constructor
+		Animal( Animal const & src );					// Copy constructor
+		Animal &	operator=( Animal const & rhs );	// Copy assignment operator
+		~Animal( void );								// Destuctor
 	
-	private:
+		std::string	getType( void ) const;
+
+		virtual void	makeSound( void ) const;
+
+	protected:
+		std::string	_type;
+
 };
 
 

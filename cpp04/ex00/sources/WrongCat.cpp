@@ -1,34 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   template.cpp                                       :+:      :+:    :+:   */
+/*   WrongCat.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 19:24:38 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/05/11 14:52:05 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/05/11 16:34:50 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// This is a template for a class.cpp file
-
-#include "template.hpp"
-#include <iostream>
+#include "WrongCat.hpp"
 
 // Default Constructor
 
-Template::Template( void ) {
+WrongCat::WrongCat( void ) {
 
-	std::cout << "Default Constructor called" << std::endl;
+	std::cout << "Default WrongCat Constructor called" << std::endl;
 
+	this->_type = "WrongCat";
+	
 	return ;
 }
 
 // Copy Constructor
 
-Template::Template( Template const & src ) {
+WrongCat::WrongCat( WrongCat const & src ) {
 
-	std::cout << "Copy Constructor called" << std::endl;
+	std::cout << "Copy WrongCat Constructor called" << std::endl;
 
 	*this = src ;
 
@@ -37,23 +36,28 @@ Template::Template( Template const & src ) {
 
 // Destructor
 
-Template::~Template( void ) {
+WrongCat::~WrongCat( void ) {
 
-	std::cout << "Destructor called" << std::endl;
+	std::cout << "WrongCat Destructor called" << std::endl;
 
 	return ;
 }
 
 // Copy assignment operator overload
 
-Template &	Template::operator=( Template const & rhs ) {
+WrongCat &	WrongCat::operator=( WrongCat const & rhs ) {
 
-	std::cout << "Copy assignement operator called" << std::endl;
+	std::cout << "WrongCat Copy assignement operator called" << std::endl;
 
 	if (this == &rhs)
 		return *this;
 
-	//this->_variable = rhs.getValue();
+	this->_type = rhs.getType();
 
 	return *this ;
+}
+
+void	WrongCat::makeSound( void ) const {
+
+	std::cout << "*meow*" << std::endl;
 }

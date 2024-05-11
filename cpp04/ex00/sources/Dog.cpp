@@ -1,34 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   template.cpp                                       :+:      :+:    :+:   */
+/*   Dog.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 19:24:38 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/05/11 14:52:05 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/05/11 16:34:50 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// This is a template for a class.cpp file
-
-#include "template.hpp"
-#include <iostream>
+#include "Dog.hpp"
 
 // Default Constructor
 
-Template::Template( void ) {
+Dog::Dog( void ) {
 
-	std::cout << "Default Constructor called" << std::endl;
+	std::cout << "Default Dog Constructor called" << std::endl;
 
+	this->_type = "Dog";
+	
 	return ;
 }
 
 // Copy Constructor
 
-Template::Template( Template const & src ) {
+Dog::Dog( Dog const & src ) {
 
-	std::cout << "Copy Constructor called" << std::endl;
+	std::cout << "Copy Dog Constructor called" << std::endl;
 
 	*this = src ;
 
@@ -37,23 +36,28 @@ Template::Template( Template const & src ) {
 
 // Destructor
 
-Template::~Template( void ) {
+Dog::~Dog( void ) {
 
-	std::cout << "Destructor called" << std::endl;
+	std::cout << "Dog Destructor called" << std::endl;
 
 	return ;
 }
 
 // Copy assignment operator overload
 
-Template &	Template::operator=( Template const & rhs ) {
+Dog &	Dog::operator=( Dog const & rhs ) {
 
-	std::cout << "Copy assignement operator called" << std::endl;
+	std::cout << "Dog Copy assignement operator called" << std::endl;
 
 	if (this == &rhs)
 		return *this;
 
-	//this->_variable = rhs.getValue();
+	this->_type = rhs.getType();
 
 	return *this ;
+}
+
+void	Dog::makeSound( void ) const {
+
+	std::cout << "*bark*" << std::endl;
 }

@@ -1,34 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   template.cpp                                       :+:      :+:    :+:   */
+/*   Animal.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 19:24:38 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/05/11 14:52:05 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/05/11 16:34:50 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// This is a template for a class.cpp file
-
-#include "template.hpp"
-#include <iostream>
+#include "../includes/Animal.hpp"
 
 // Default Constructor
 
-Template::Template( void ) {
+Animal::Animal( void ) {
 
-	std::cout << "Default Constructor called" << std::endl;
+	std::cout << "Default Animal Constructor called" << std::endl;
 
 	return ;
 }
 
 // Copy Constructor
 
-Template::Template( Template const & src ) {
+Animal::Animal( Animal const & src ) {
 
-	std::cout << "Copy Constructor called" << std::endl;
+	std::cout << "Copy Animal Constructor called" << std::endl;
 
 	*this = src ;
 
@@ -37,23 +34,33 @@ Template::Template( Template const & src ) {
 
 // Destructor
 
-Template::~Template( void ) {
+Animal::~Animal( void ) {
 
-	std::cout << "Destructor called" << std::endl;
+	std::cout << "Animal Destructor called" << std::endl;
 
 	return ;
 }
 
 // Copy assignment operator overload
 
-Template &	Template::operator=( Template const & rhs ) {
+Animal &	Animal::operator=( Animal const & rhs ) {
 
-	std::cout << "Copy assignement operator called" << std::endl;
+	std::cout << "Animal Copy assignement operator called" << std::endl;
 
 	if (this == &rhs)
 		return *this;
 
-	//this->_variable = rhs.getValue();
+	this->_type = rhs.getType();
 
 	return *this ;
+}
+
+std::string	Animal::getType( void ) const {
+
+	return this->_type;
+}
+
+void	Animal::makeSound( void ) const {
+
+	std::cout << "*some animal sound*" << std::endl;
 }

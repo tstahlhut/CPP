@@ -861,7 +861,69 @@ A more readable and shorter way, would be to use the keyword **using** to specif
 			using B::function;
 	}
 
+# CPP04
 
+## Polymorphism
+
+Building on the part of inheritance in cpp03, cpp04 introduces polymorphism. 
+
+What is polymorphism?
+
+If you have a base class (Animal) and a derived class (Cat), which both have the same function makeSound() and create a pointer of type Animal which points to a Cat, you will get a message from the compiler warning you about **polymorphism**.
+
+	class Animal {
+		//Constructors & Destructor
+
+		void	makeSound() {
+			std::cout << "animal sound" << std::endl;
+		}
+	}
+
+	class Cat : public Animal {
+		// Constructors & Destructor
+
+		void	makeSound() {
+			std::cout << "meow" << std::endl;
+		}
+	}
+
+	int	main ( void ) {
+
+		Animal*	A = new Cat();
+
+		A->makeSound();
+
+		return 0;
+	}
+
+To solve this problem and make A act like a cat and not like an animal, we can use the keyword **virtual** (similar to the Diamond Problem above). We put "virtual" in front of the function makeSound() in both classes. Now the function will not be linked static but **dynamic**. This means that the compiler will look at the point of **execution** (and not compilation) which function to use: it will go down the whole inheritance tree and pick the right function (in this case the function of Cat). Otherwise (at the point of compilation), it would statically link the function of the type (in this case Animal) and the Cat A would make an animal sound instead of a cat sound. 
+
+A virtually linked member function is called a **method**.
+
+	class Animal {
+		//Constructors & Destructor
+
+		virtual void	makeSound() {
+			std::cout << "animal sound" << std::endl;
+		}
+	}
+
+	class Cat : public Animal {
+		// Constructors & Destructor
+
+		virtual void	makeSound() {
+			std::cout << "meow" << std::endl;
+		}
+	}
+
+	int	main ( void ) {
+
+		Animal*	A = new Cat();
+
+		A->makeSound();
+
+		return 0;
+	}
 
 ## Additional Notes
 
