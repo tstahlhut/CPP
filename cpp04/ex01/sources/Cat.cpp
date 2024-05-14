@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 19:24:38 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/05/11 18:12:19 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/05/14 14:28:38 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ Cat::Cat( void ) {
 	std::cout << "Default Cat Constructor called" << std::endl;
 
 	this->_type = "Cat";
-	this->_catBrain = new Brain();
+	this->_brain = new Brain();
 	
 	return ;
 }
 
 // Copy Constructor
 
-Cat::Cat( Cat const & src ) : Animal(), _catBrain(NULL) {
+Cat::Cat( Cat const & src ) : _brain(NULL) {
 
 	std::cout << "Copy Cat Constructor called" << std::endl;
 
@@ -39,7 +39,7 @@ Cat::Cat( Cat const & src ) : Animal(), _catBrain(NULL) {
 
 Cat::~Cat( void ) {
 
-	delete _catBrain;
+	delete _brain;
 	
 	std::cout << "Cat Destructor called" << std::endl;
 
@@ -56,11 +56,11 @@ Cat &	Cat::operator=( Cat const & rhs ) {
 		
 		this->_type = rhs.getType();
 
-		if (this->_catBrain) {
-			
-			delete this->_catBrain;
-			this->_catBrain = rhs.getBrain();
-		}
+		if (this->_brain)		
+			delete this->_brain;
+		this->_brain = new Brain();
+		*(this->_brain) = *(rhs.getBrain());
+		
 	}
 	
 	return *this ;
@@ -70,7 +70,7 @@ Cat &	Cat::operator=( Cat const & rhs ) {
 
 Brain*	Cat::getBrain( void ) const {
 
-	return this->_catBrain;
+	return this->_brain;
 }
 
 

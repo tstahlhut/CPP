@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 19:16:59 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/05/11 17:20:58 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/05/14 14:47:26 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,12 @@ class	Dog : public Animal {
 		Dog &	operator=( Dog const & rhs );	// Copy assignment operator
 		~Dog( void );							// Destuctor
 
+		Brain*	getBrain( void ) const;			// Getter
+
 		virtual void	makeSound( void ) const;
 
 	private:
-		Brain*	_dogBrain;
+		Brain*	_brain;
 
 };
 

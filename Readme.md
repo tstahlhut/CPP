@@ -933,6 +933,70 @@ To declare an array of objects of the same class, use the following syntax:
 
 	Animal		array[10];
 
+If however, you want the array to contain different objects (for example dogs AND cats), you have to use a pointer:
+
+	Animal*		array[2];
+
+	array[0] = new Dog();
+	array[1] = new Cat();
+
+You may then delete the objects by simply looping through the array:
+
+	for (int i = 0; i < 2; i++)
+		delete array[i];
+
+## Copies: Shallow vs. Deep Copy
+
+If you copy an instance and you have not declared a copy constructor yourself, the compiler will use a default copy constuctor which will create a **shallow copy**. 
+
+	Animal1 = Animal2;
+
+This shallow copy is totally sufficient if the Animal class only has variables, e.g. strings and integers:
+
+	class	Animal {
+
+		public:
+			// Constructors & Destructor
+
+		private:
+			std::sting	_name;
+			int			age;
+	}
+
+Animal1 will have the same name and age as Animal2. The copy worked all fine. However, this does not work for pointers. If you have a pointer, the default copy constructor will copy the memory address that pointer points to.
+
+	class	Animal {
+
+		public:
+			// imagine Constructors here
+
+			~Animal() {
+
+				free(age);
+			}
+
+			int	*		age;
+
+		private:
+			std::sting	_name;
+	}
+
+ Thus, Animal1 and Animal2 will point to the exact same memory address. Animal2's age pointer will point to the same allocated memory on the heap as the Animal1's age pointer. And so, if you change Animal1's age, Animal2's age will be changed, too.
+ 
+	Animal1 = Animal 2;
+
+	*(Animal1.age) = 5;
+
+The other problem is that the program will crash at the end of main() because both destructors for Animal1 and Animal2 will try to free the same pointer. In this case (when dealing with pointers), you need a **deep copy** and have to implement your own copy constructor where you define how instances of the Animal class should be copied. 
+
+	Animal( const Animal& otherAnimal ) {
+		
+		age = (int*) malloc(sizeof(int));
+		*age = *(otherAnimal.age);
+	}
+
+Therefore, it is important to use the Orthodox Canonical Form where you specify in your copy assignment operator and copy constructor how an instance of this class should be copied. 
+
 ## Additional Notes
 
 For style, see: https://google.github.io/styleguide/cppguide.html
