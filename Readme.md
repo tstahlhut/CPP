@@ -997,6 +997,73 @@ The other problem is that the program will crash at the end of main() because bo
 
 Therefore, it is important to use the Orthodox Canonical Form where you specify in your copy assignment operator and copy constructor how an instance of this class should be copied. 
 
+## Abstract Classes
+
+### Recap "virtual" keyword
+
+We have already encountered the keyword **virtual** in the context of inheritance. It means that the most derived version of the virtual function will be used, e.g.
+
+	class Animal {
+		public:
+			virtual void	makeSound( void ) {
+				std::cout << *animal sound* << std::endl;
+			}
+	}
+
+	class Cat : public Animal {
+		public:
+			void	makeSound( void ) {
+				std::cout << *meow* << std::endl;
+			}
+	}
+
+	int	main ( void ) {
+
+		Animal*	Findus = new Cat;
+		Findus->makeSound();
+	}
+
+In this case, as the makeSound() function in the base class Animal is virtual, Findus will meow and not make an animal sound.
+
+### Pure Virtual Functions
+
+If you think it unnecessary to have an animal which can make *some animal sound* as such an animal does not exist but you want all your derived classes (cats, dogs, birds, etc.) to be able to make a sound, you can use a pure virtual function. This means that you declare the function makeSound() in your Animal base class but do not implement it. Instead, it equals 0.
+
+	class Animal {
+		public:
+			virtual void	makeSound( void )  = 0;
+	}
+
+This forces all the derived classes of Animal to implement the function makeSound. 
+
+### Abstract Class
+
+Our animal class has now become an **abstract class**. An abstract class in C++ means that the class has at least one pure virtual function (virtual ... = 0). To denote that it is an abstract class, you may put a capital "A" in front of the class name:
+
+	class AAnimal {
+		public:
+			virtual void	makeSound( void )  = 0;
+	}
+
+	int	main ( void ) {
+
+		AAnimal*	animals[10] = { new Cat, new Dog, [and so on...] };
+
+		for (int i = 0; i < 10; i++)
+			animals[i]->makeSound();
+	}
+
+This way, by using an abstract class we can use polymorphism to let different animals make their sound by just looping through the animal array. At runtime the right makeSound() implementation will be called. However, we cannot instantiate a pure Animal object anymore because it has no implementation of the makeSound() function:
+
+	int main ( void ) {
+
+		AAnimal someAnimal;
+	}
+
+	error: variable type 'AAnimal' is an abstract class
+	note: unimplemented pure virtual method 'makeSound' in 'AAnimal'
+                virtual void    makeSound( void ) const = 0; 
+
 ## Additional Notes
 
 For style, see: https://google.github.io/styleguide/cppguide.html

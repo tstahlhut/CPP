@@ -6,11 +6,11 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 14:42:59 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/05/15 12:47:10 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/05/15 13:32:40 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/Animal.hpp"
+#include "../includes/AAnimal.hpp"
 #include "../includes/Brain.hpp"
 #include "../includes/Cat.hpp"
 #include "../includes/Dog.hpp"
@@ -67,7 +67,7 @@ void	testCatCopy( void ) {
 
 void	testArray( void ) {
 
-	const Animal*	animals[10];
+	const AAnimal*	animals[10];
 
 	for (int i = 0; i < 4; i++) {
 		if (i < 2)
@@ -94,6 +94,8 @@ int	main( void ) {
 //	testCatCopy();
 	
 	testArray();
+
+//	AAnimal anAnimal;
 	
 
 	return 0;
