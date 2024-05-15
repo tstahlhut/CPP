@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 19:24:38 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/05/11 17:11:03 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/05/15 16:10:18 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,6 @@ Template::Template( Template const & src ) {
 	return ;
 }
 
-// Destructor
-
-Template::~Template( void ) {
-
-	std::cout << "Destructor called" << std::endl;
-
-	return ;
-}
-
 // Copy assignment operator overload
 
 Template &	Template::operator=( Template const & rhs ) {
@@ -55,4 +46,13 @@ Template &	Template::operator=( Template const & rhs ) {
 	//this->_variable = rhs.getValue();
 
 	return *this ;
+}
+
+// Destructor
+
+Template::~Template( void ) {
+
+	std::cout << "Destructor called" << std::endl;
+
+	return ;
 }

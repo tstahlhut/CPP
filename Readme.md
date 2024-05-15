@@ -1064,6 +1064,8 @@ This way, by using an abstract class we can use polymorphism to let different an
 	note: unimplemented pure virtual method 'makeSound' in 'AAnimal'
                 virtual void    makeSound( void ) const = 0; 
 
+Note: Any derived class that does not implement the makeSound() function, will itself become an abstract class. Thise classes who implement it, are called **concrete classes**. This means that we can create object instances of that class. 
+
 ## Additional Notes
 
 For style, see: https://google.github.io/styleguide/cppguide.html

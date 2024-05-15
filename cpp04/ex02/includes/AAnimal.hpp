@@ -6,13 +6,13 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 19:16:59 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/05/15 13:07:06 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/05/15 14:14:53 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
-#ifndef _ANIMAL_HPP
-# define _ANIMAL_HPP
+#ifndef _AANIMAL_HPP
+# define _AANIMAL_HPP
 
 # include <string>
 # include <iostream>
