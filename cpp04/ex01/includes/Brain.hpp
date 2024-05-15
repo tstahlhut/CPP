@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 17:08:51 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/05/14 15:11:23 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/05/15 12:12:16 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,12 @@ class	Brain {
 		Brain &	operator=( Brain const & rhs );			// Copy assignment operator overload
 		~Brain( void );									// Destuctor
 
-		std::string	getIdeas(int index ) const;			// Getter
-		void	setIdeas( std::string const newIdea ) ;	// Setter
+		std::string	getIdeas(int index ) const;				// Getter
+		void		setIdeas( std::string const newIdea );	// Setter
 
 	private:
-		std::string	_ideas[100]; // array of 100 ideas
+		static int const	_nbIdeas = 100;					// size of array
+		std::string			_ideas[_nbIdeas]; 				// array of ideas
 };
 
 

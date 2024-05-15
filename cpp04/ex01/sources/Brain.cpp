@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 17:09:52 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/05/14 15:13:04 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/05/15 12:13:56 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ Brain &	Brain::operator=( Brain const & rhs ) {
 
 	if (this != &rhs) {
 
-		for (int i = 0; i < 100; i++)
-			this->_ideas[i] = rhs.getIdeas(i);
+		for (int i = 0; i < _nbIdeas; i++)
+			this->_ideas[i] = rhs._ideas[i];
 	}
 
 	return *this ;
@@ -61,8 +61,10 @@ Brain &	Brain::operator=( Brain const & rhs ) {
 
 std::string	Brain::getIdeas( int index ) const {
 
-	if (index < 0 || index > 100 || this->_ideas[index].empty())
-		return NULL;
+	if (index < 0 || index >= _nbIdeas)
+		return "Idea is out of scope";
+	if (this->_ideas[index].empty())
+		return "... no idea ...";
 	return this->_ideas[index];
 }
 
@@ -71,11 +73,13 @@ std::string	Brain::getIdeas( int index ) const {
 void		Brain::setIdeas( std::string const newIdea) {
 
 	int	i = 0;
-	while (i < 100 && !this->_ideas[i].empty())
+	
+	while (i < _nbIdeas && !this->_ideas[i].empty())
 		i++;
-	if (i == 100)
+	if (i == _nbIdeas)
 		std::cout << "Brain capacity reached: No space for new ideas!" << std::endl;	
-	this->_ideas[i] = newIdea;
+	else
+		this->_ideas[i] = newIdea;
 
 	return ;
 }

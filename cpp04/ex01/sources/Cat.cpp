@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 19:24:38 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/05/14 14:28:38 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/05/15 12:18:28 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ Cat &	Cat::operator=( Cat const & rhs ) {
 			delete this->_brain;
 		this->_brain = new Brain();
 		*(this->_brain) = *(rhs.getBrain());
-		
 	}
 	
 	return *this ;
