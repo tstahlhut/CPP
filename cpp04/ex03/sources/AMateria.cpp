@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 14:14:23 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/05/15 16:36:23 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/05/16 11:25:43 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 AMateria::AMateria( void ) {
 
-	std::cout << "AMateria default constructor called" << std::endl;
+//	std::cout << "AMateria default constructor called" << std::endl;
 
 	return ;
 }
@@ -22,7 +22,7 @@ AMateria::AMateria( void ) {
 
 AMateria::AMateria( std::string const & type ) : _type(type) {
 
-	std::cout << "AMateria constructor called" << std::endl;
+//	std::cout << "AMateria constructor called" << std::endl;
 
 	return ;
 }
@@ -30,7 +30,7 @@ AMateria::AMateria( std::string const & type ) : _type(type) {
 
 AMateria::~AMateria( void ) {
 
-	std::cout << "AMateria destructor called" << std::endl;
+//	std::cout << "AMateria destructor called" << std::endl;
 
 	return ;
 }
@@ -45,6 +45,6 @@ std::string const & AMateria::getType( void ) const {
 
 void		AMateria::use( ICharacter& target ) {
 
-	std::cout << "*uses some materia on " << target.getName() << " *" << std::endl;
+	std::cout << "* uses some materia on " << target.getName() << " *" << std::endl;
 
 }

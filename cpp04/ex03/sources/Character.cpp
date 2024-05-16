@@ -42,7 +42,7 @@ Character::Character( std::string const & name ) : _name(name) {
 
 Character::Character( Character const & src ) {
 
-	std::cout << "Character copy constructor called" << std::endl;
+//	std::cout << "Character copy constructor called" << std::endl;
 
 	*this = src ;
 
@@ -71,7 +71,7 @@ Character &	Character::operator=( Character const & rhs ) {
 
 Character::~Character( void ) {
 
-	std::cout << "Character destructor called" << std::endl;
+//	std::cout << "Character destructor called" << std::endl;
 
 	for (int i = 0; i < 4; i++) {
 		
@@ -98,11 +98,13 @@ std::string const &	Character::getName( void ) const {
 
 void	Character::equip( AMateria* m ) {
 
+	if (m == NULL)
+		return ;
 	for (int i = 0; i < 4; i++) {
 
 		if (! _inventory[i]) {
 
-				_inventory[i] = m; // here is the problem!
+				_inventory[i] = m;
 				std::cout << _name << " now equipped with " << m->getType() << std::endl;
 				return ;
 		}
@@ -123,11 +125,11 @@ void	Character::unequip( int idx ) {
 
 void	Character::use( int idx, ICharacter& target ) {
 
-	if (idx >= 0 && idx < 4)
+	if (idx >= 0 && idx < 4 && this->_inventory[idx]) 
 		this->_inventory[idx]->use( target );
 
 	else
-		std::cout << "You are not equipped with this Materia." << std::endl;
+		std::cout << "you are not equipped with this materia" << std::endl;
 	
 	return ;	
 }

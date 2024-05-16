@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 15:00:51 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/05/15 17:15:17 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/05/16 11:24:32 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ class AMateria;
 class ICharacter {
 
 	public:
-		virtual ~ICharacter( void ) {};
+		virtual ~ICharacter( void ) {}
 		
 		virtual std::string const &	getName( void ) const = 0;
 

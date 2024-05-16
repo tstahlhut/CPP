@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:11:01 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/05/15 17:36:29 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/05/16 11:28:33 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 MateriaSource::MateriaSource( void ) {
 
-	std::cout << "MateriaSource default constructor called" << std::endl;
+//	std::cout << "MateriaSource default constructor called" << std::endl;
 
 	for (int i = 0; i < 4; i++)
 		this->_materias[i] = NULL;
@@ -28,7 +28,7 @@ MateriaSource::MateriaSource( void ) {
 
 MateriaSource::MateriaSource( MateriaSource const & src ) {
 
-	std::cout << "MateriaSource copy constructor called" << std::endl;
+//	std::cout << "MateriaSource copy constructor called" << std::endl;
 
 	*this = src ;
 
@@ -39,7 +39,7 @@ MateriaSource::MateriaSource( MateriaSource const & src ) {
 
 MateriaSource &	MateriaSource::operator=( MateriaSource const & rhs ) {
 
-	std::cout << "MateriaSource copy assignement operator called" << std::endl;
+//	std::cout << "MateriaSource copy assignement operator called" << std::endl;
 
 	if (this != &rhs) {
 		// deep copy
@@ -57,7 +57,7 @@ MateriaSource &	MateriaSource::operator=( MateriaSource const & rhs ) {
 
 MateriaSource::~MateriaSource( void ) {
 
-	std::cout << "MateriaSource destructor called" << std::endl;
+//	std::cout << "MateriaSource destructor called" << std::endl;
 
 	for (int i = 0; i < 4; i++) {
 		
@@ -87,11 +87,11 @@ AMateria*	MateriaSource::createMateria( std::string const & type ) {
 
 	int	i = 0;
 
-	while (i < 4 && this->_materias[i]->getType() != type)
+	while (i < 4 && this->_materias[i]) {
+		if (this->_materias[i]->getType() == type)
+			return this->_materias[i]->clone();
 		i++;
-	if (i < 4)
-		return this->_materias[i]->clone();
-	else
-		std::cout << "This materia is unknown to me. I have to learn it first." << std::endl;
+	}
+	std::cout << "The materia " << type << " is unknown to me. I have to learn it first." << std::endl;
 	return NULL;
 }

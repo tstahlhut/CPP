@@ -19,7 +19,7 @@ class Cure : public AMateria {
 
 	public:
 		Cure( void );									// Default constructor
-		Cure( Cure const & src );							// Copy constructor
+		Cure( Cure const & src );						// Copy constructor
 		Cure &	operator=( Cure const & rhs );
 		~Cure( void );
 

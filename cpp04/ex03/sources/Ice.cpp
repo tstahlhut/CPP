@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 14:32:36 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/05/15 17:04:50 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/05/16 11:11:10 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,16 @@
 
 Ice::Ice( void ) : AMateria("ice") {
 
-	std::cout << "Ice default constructor called" << std::endl;
+//	std::cout << "Ice default constructor called" << std::endl;
+
+	return ;
 }							
 
 // Copy constructor
 
 Ice::Ice( Ice const & src ) {
 
-	std::cout << "Ice copy constructor called" << std::endl;
+//	std::cout << "Ice copy constructor called" << std::endl;
 
 	*this = src;
 	
@@ -38,7 +40,7 @@ std::cout << "Ice copy assignement operator called" << std::endl;
 
 	if (this != &rhs) {
 
-		//something
+		// nothing specific to copy
 	}
 	return *this;
 }
@@ -47,7 +49,7 @@ std::cout << "Ice copy assignement operator called" << std::endl;
 
 Ice::~Ice( void ){
 
-	std::cout << "Ice destructor called" << std::endl;
+//	std::cout << "Ice destructor called" << std::endl;
 
 	return ;
 }
@@ -66,7 +68,7 @@ AMateria* 	Ice::clone( void ) const {
 
 void		Ice::use( ICharacter& target ) {
 
-	std::cout << "*shoots an ice bolt at " << target.getName() << " *" << std::endl;
+	std::cout << "* shoots an ice bolt at " << target.getName() << " *" << std::endl;
 
 	return ;
 }

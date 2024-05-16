@@ -6,13 +6,13 @@
 #    By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/23 14:13:04 by vm                #+#    #+#              #
-#    Updated: 2024/05/15 17:12:12 by tstahlhu         ###   ########.fr        #
+#    Updated: 2024/05/16 10:35:33 by tstahlhu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=  materia
 CXX		=	c++
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98
+CXXFLAGS = -Wall -Wextra -Werror -g -std=c++98
 FILEEXT	= .cpp
 SRCDIR   = ./sources
 INCDIR   = ./includes

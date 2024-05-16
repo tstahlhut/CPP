@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 15:54:25 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/05/15 17:15:22 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/05/16 11:23:50 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@
 class IMateriaSource {
 
 	public:
-		virtual ~IMateriaSource( void ) {};	
-		
+		virtual ~IMateriaSource( void ) {}
 		virtual	void		learnMateria( AMateria* ) = 0;
 		virtual AMateria*	createMateria( std::string const & type ) = 0;
 
