@@ -6,21 +6,11 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 12:13:48 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/05/17 15:23:28 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/05/17 16:28:03 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/Bureaucrat.hpp"
-
-void	createWrongBureaucrats( void ) {
-
-		//Bureaucrat	Heinz("Heinz", 151);
-		//Bureaucrat	Heiner("Heiner", 0);
-		Bureaucrat	Werner("Werner", 150);
-		Bureaucrat	KH("Karl-Hermann", 1);
-
-}
-
 
 int	main( void ) {
 
@@ -45,7 +35,7 @@ int	main( void ) {
 		std::cout << KH << std::endl;
 
 		// 2. Test exception when incremented above 1
-		//KH.incrementGrade();
+	//	KH.incrementGrade();
 		//std::cout << KH << std::endl;
 
 		std::cout << std::endl;
@@ -75,13 +65,18 @@ int	main( void ) {
 		Werner.decrementGrade();
 		std::cout << Werner << std::endl << std::endl;
 	}
+	catch (std::exception& e)
+	{
+		std::cerr << "Exception: " << e.what() << std::endl;
+	}
+	// you could also specify the exceptions:
+/*	catch (Bureaucrat::GradeTooLowException e)
+	{
+		std::cerr << "Exception: " << e.what() << std::endl;
+	}
 	catch (Bureaucrat::GradeTooHighException e)
 	{
-		std::cout << "Exception: " << e.what() << std::endl;
-	}
-	catch (Bureaucrat::GradeTooLowException e)
-	{
-		std::cout << "Exception: " << e.what() << std::endl;
-	}
+		std::cerr << "Exception: " << e.what() << std::endl;
+	}*/
 	return 0;
 }

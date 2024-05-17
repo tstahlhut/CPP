@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 08:38:24 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/05/17 16:08:44 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/05/17 17:15:45 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 // Default Constructor
 
-Bureaucrat::Bureaucrat( void ) : _name("default"), _grade(150) {
+Bureaucrat::Bureaucrat( void ) : _name(NULL), _grade(0) {
 
 	 std::cout << "Bureaucrat default constructor called" << std::endl;
 
@@ -31,6 +31,7 @@ Bureaucrat::Bureaucrat( std::string name, int grade ) : _name(name), _grade(grad
 		throw GradeTooHighException();
 	if (grade > 150)
 		throw GradeTooLowException();
+
 	return ;
 }
 
@@ -99,6 +100,25 @@ void	Bureaucrat::decrementGrade( void ) {
 	else
 		throw GradeTooLowException();
 	return ;
+}
+
+void	Bureaucrat::signForm( Form & form ) const {
+
+	try
+	{
+		form.beSigned(*this);
+		std::cout << this->_name << " signed form " << form.getName() << "." << std::endl;
+	}
+	catch (Form::GradeTooLowException e)
+	{
+		std::cout << this->getName() << " could not sign form " << form.getName();
+		std::cout << " because form " << form.getName() << " requires level " << form.getGradeToSign();
+		std::cout << " and bureaucrat " << this->getName() << " has only level " << this->getGrade() << ".";
+		std::cout << std::endl;
+	}
+
+	return ;
+
 }
 
 // overload of insertion operator

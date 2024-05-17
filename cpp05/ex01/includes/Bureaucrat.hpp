@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 08:39:04 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/05/17 15:49:34 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/05/17 17:04:10 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 # include  <string>
 # include <iostream>
 # include <stdexcept>
+# include "../includes/Form.hpp"
+
+class Form;
 
 class Bureaucrat
 {
@@ -27,34 +30,27 @@ class Bureaucrat
 
 		// Custom exceptions for bureaucrat class
 		class GradeTooHighException : public std::exception {
-
 				public:
-
 					virtual const char*	what( void ) const throw() {
-
 						return "Grade too high";
 					}
 		};
 
 		class	GradeTooLowException : public std::exception {
-
 				public:
-
 					virtual const char*	what( void ) const throw() {
-
 						return "Grade too low";
 					}
-	
-			//	private:
-			//		int	_grade;
 		};
 
-
+	// getters
 		std::string	getName( void ) const;
 		int			getGrade( void ) const;
 
+	// other member functions
 		void		incrementGrade( void );
 		void		decrementGrade( void );
+		void		signForm( Form & form ) const;
 
 	private:
 		Bureaucrat( void );
