@@ -1066,6 +1066,184 @@ This way, by using an abstract class we can use polymorphism to let different an
 
 Note: Any derived class that does not implement the makeSound() function, will itself become an abstract class. Thise classes who implement it, are called **concrete classes**. This means that we can create object instances of that class. 
 
+# CPP05
+
+## Nested Classes
+
+In C++ you can define a class in the definition of another class:
+
+	class Cat {
+
+		public:
+			class Leg 
+			{
+				//[...]
+			};
+	};
+
+This means that the class Cat will have its very own class Leg. It is used as a namespace. To instantiate Leg:
+
+	int	main() {
+
+		Cat::Leg	somecatslegs;
+	}
+
+## Exceptions
+
+Exceptions are another way of handling errors in C++. Instead of working with negative return values as in C to indicate that and what error happened, you can throw an exception in C++. However, exceptions are resource consuming and should only be used if the error is really exceptional. So, functions that check something and then return 0 or 1 (or a boolean) should not be replaced by throwing an exception every time the check returns false. Exceptions are used for more rare cases, for example by new() when there is no memory left and no new space could be allocated.
+
+In order to use exceptions, include the following header:
+
+	#include <stdexcept>
+
+Now, you are able to use:
+
+	std::exception()
+
+You can **throw** and **catch** an exception. You throw an exception when an error occurs. And later on, you catch the exception and define (if catched) what to do, i.e. free allocated memory, write an error message, etc. 
+	
+	int	main() 
+	{
+
+		try {
+			// some code
+			if (//this is true and it's a bad thing) 
+			{
+
+				throw std::exception();
+			}
+			else
+				// go on
+		}
+		catch (std::exception e) 
+		{
+			// handle the error, i.e. free memory etc.
+		}
+	}
+
+If you want to catch an exception, you have to "listen" for a throw. This is done in a **try** block. *Try* only specifies: watch out, there might be an exception thrown. For example, the function "at" of std::string throws an exception if you try to access a position in a string that does not exist. If you do not catch the exception, your program will crash and you get the exception printed in your terminal. However, you can also put the "at" function in a try() block. During the try block, it will "listen" for a throw and if the exception is thrown, the execution jumps directly to the catch block and the error is handled in a way you defined.
+
+int	main() 
+	{
+		std::string word = "test";
+
+		try
+		{
+			std::cout << word.at(4) << std::endl; // at will throw an exception because there is no character at position 5
+		}
+		catch (...)
+		{
+			std::cout << "Exception: position is not part of the string." << std::endl;
+		}
+
+		return 0;
+	}
+
+If you do not specify which exception to catch but just put three dots into the catch bracket (...), you catch any exception. If you want to only catch the exception thrown in the example above, you can specify the exception. Look up which exception is thrown (e.g. [here](https://en.cppreference.com/w/cpp/string/basic_string/at)) and specify it in the catch brackets:
+
+	int	main() 
+	{
+		std::string word = "test";
+
+		try
+		{
+			std::cout << word.at(4) << std::endl; // at will throw an exception because there is no character at position 5
+		}
+		catch(std::out_of_range& e)
+		{
+			std::cout << "Exception: " << e.what() << std::endl;
+		}
+
+		return 0;
+	}
+		
+The thrown object e has a method called **what()** which returns a string specifying what happened. You can use that string to get a more specific error message. In the above case, e.what() returns: "basic_string". So, it is similar to stderr() in C.
+
+Of course, you can also throw exceptions in a function and catch it in the main. But then be aware of putting that function into a try() block in the main.
+
+	void	function() 
+	{
+
+		// some code
+		if (//this error case is true)
+		{
+			throw std::exception();
+		}
+		else
+			// go on
+	}
+
+	int	main() {
+
+		try 
+		{
+			function ();
+		}
+		catch (std::exception& e) 
+		{
+			// handle error
+		}
+	}
+
+Instead of using the generic std::exception(), or the more specific already existing exceptions, you can also define an exception yourself. To do so, you just define a class that inherits from the exception class (std::exception) and override the what() function with your own custom what() function (see polymorphism).
+
+	class	MYException:: public std::exception {
+
+		public:
+			virtual const char*	what() const throw()
+			{
+				return ("Problem description");
+			}
+	};
+
+In the brackets after **throw** you have to specify what should be thrown. If they are empty, nothing will be thrown.
+
+When you define your own exceptions, you can also catch different exceptions and handle different errors differently. As in polymorphism, the most derived exception will be used.
+
+	int	main()
+	{
+		try
+		{
+			// something
+		}
+		catch (MYException& e)
+		{
+			// handle it this specific way
+		}
+		catch (OTHERException& e)
+		{
+			// handle it the other specific way
+		}
+		catch (std::exception& e)
+		{
+			// handle it in a generic way
+		}
+	}
+
+The first two catches are specific and the last catch is generic. This means that the first two will only handle the specific exception. The last one, however, will handle all thrown exceptions: std::exception() but also all exceptions inheriting from std::exception(). Therefore, it is called a **generic catch**.
+
+Be aware that catch blocks are checked in order. So, as soon as a catch matches an exception (and for the generic std::exception() all exception would match), the execution jumps to that catch block. Therefore, the most generic catch block should always be put at the end.
+
+As std::exception() returns an exception type object e, any exceptions thrown with another data type won't be catched by catch(std::exception& e). If you want to catch an int, for example, you can do so by:
+
+	try
+	{
+		throw 1;
+	}
+	catch (int error_code)
+	{
+		cout << "Error with error code " << error_code << std::endl;
+	}
+
+	Error with error code 1
+
+If you want to catch any exception, you can use the default catch:
+
+	catch(...)
+	{
+		cout << "Default Exception" << std::endl;
+	}
+
 ## Additional Notes
 
 For style, see: https://google.github.io/styleguide/cppguide.html
@@ -1074,3 +1252,15 @@ In cpp00/ex01: Don't mix methods. The setter functions of the Contact class shou
 
 Use one style: either function( void ); function(void); or function()
 
+## Recommended (and used) Resources
+
+General:
+
+- 42 Intranet Videos
+
+- YouTube: [Portfolio Courses](https://www.youtube.com/@PortfolioCourses/playlists) -> relevant C++ Videos
+
+
+Exceptions:
+
+- [Creating Custom, User Defined Exception Class](https://www.youtube.com/watch?v=Ix05fozWn0A)

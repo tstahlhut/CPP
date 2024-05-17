@@ -1,26 +1,26 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    Makefile_template                                  :+:      :+:    :+:    #
+#    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/23 14:13:04 by vm                #+#    #+#              #
-#    Updated: 2024/05/17 12:17:05 by tstahlhu         ###   ########.fr        #
+#    Updated: 2024/05/17 14:25:22 by tstahlhu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
-NAME	=  #INSERT HERE
+NAME	=  bureaucrat
 CXX		=	c++
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98
+CXXFLAGS = -Wall -Wextra -Werror -g -std=c++98
 FILEEXT	= .cpp
 SRCDIR   = ./sources
 INCDIR   = ./includes
 OBJDIR   = ./objects
 
 # List of source files
-SRC      = #INSERT HERE
+SRC      = main Bureaucrat
 
 # List of source files with file extension .cpp
 SRCS	= $(addsuffix $(FILEEXT), $(SRC))

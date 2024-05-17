@@ -57,10 +57,14 @@ Character &	Character::operator=( Character const & rhs ) {
 
 	if (this != &rhs) {
 		//deep copy
+		this->_name = rhs._name;
 		for (int i = 0; i < 4; i++) {
-			if (this->_inventory[i])
+			if (this->_inventory[i]) {
 				delete this->_inventory[i];
-			this->_inventory[i] = rhs._inventory[i]->clone();
+				this->_inventory[i] = NULL;
+			}
+			if (rhs._inventory[i] != NULL)
+				this->_inventory[i] = rhs._inventory[i]->clone();
 		}
 	}
 
