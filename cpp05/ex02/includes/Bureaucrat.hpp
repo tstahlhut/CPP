@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 08:39:04 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/05/17 17:04:10 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/05/21 15:33:45 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 # include  <string>
 # include <iostream>
 # include <stdexcept>
-# include "../includes/Form.hpp"
+# include "../includes/AForm.hpp"
 
-class Form;
+class AForm;
 
 class Bureaucrat
 {
@@ -50,7 +50,8 @@ class Bureaucrat
 	// other member functions
 		void		incrementGrade( void );
 		void		decrementGrade( void );
-		void		signForm( Form & form ) const;
+		void		signForm( AForm & form ) const;
+		void		executeForm( AForm const & form );
 
 	private:
 		Bureaucrat( void );

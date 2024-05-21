@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 17:50:43 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/05/17 18:06:33 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/05/21 15:34:58 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,11 @@ ShrubberyCreationForm::ShrubberyCreationForm( void ) :
 
 // Constructor
 
-ShrubberyCreationForm::ShrubberyCreationForm( std::string target ) : 
-				AForm("ShrubberyCreation", 145, 137) {
+ShrubberyCreationForm::ShrubberyCreationForm( std::string const target ) : 
+				AForm("ShrubberyCreation", 145, 137),
+				_target(target) {
 
 	std::cout << "ShrubberyCreationForm constructor called" << std::endl;
-
-	//Create a file <target>_shrubbery in the working directory, and writes ASCII trees inside it.
-	// but not on construction but execution, right?
-	// save target somewhere?
 	
 	return ;
 }
@@ -67,6 +64,39 @@ ShrubberyCreationForm::~ShrubberyCreationForm( void ) {
 	std::cout << "ShrubberyCreationForm destructor called" << std::endl;
 	
 			return ;
+}
+
+// Member Functions
+
+void	ShrubberyCreationForm::execute( Bureaucrat const & executor) const {
+
+	if (!isSigned())
+		throw NotSignedException();
+	if (executor.getGrade() > this->getGradeToExec())
+		throw GradeTooLowException();
+	
+	// open file with name <target>_shrubbery
+	std::string	filename = this->_target;
+	filename.append("_shrubbery");
+	std::ofstream	outfile(filename.c_str());
+	if (!outfile.is_open())
+	{
+		std::cerr << "Failed to open file" << std::endl;
+		return ;
+	}
+	//writes ASCII trees inside it.
+	const char* tree =
+	 "   /\\\n"
+        "  /  \\\n"
+        " /    \\\n"
+        "/______\\\n"
+        "   ||\n"
+        "   ||\n"
+        "   ||\n";
+	for (int i = 0; i < 12; i++)
+		outfile << tree << std::endl;
+	outfile.close();
+	return ;
 }
 
 

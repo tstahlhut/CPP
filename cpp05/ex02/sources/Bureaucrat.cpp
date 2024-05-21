@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 08:38:24 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/05/17 17:15:45 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/05/21 15:50:17 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,14 +102,14 @@ void	Bureaucrat::decrementGrade( void ) {
 	return ;
 }
 
-void	Bureaucrat::signForm( Form & form ) const {
+void	Bureaucrat::signForm( AForm & form ) const {
 
 	try
 	{
 		form.beSigned(*this);
 		std::cout << this->_name << " signed form " << form.getName() << "." << std::endl;
 	}
-	catch (Form::GradeTooLowException e)
+	catch (AForm::GradeTooLowException e)
 	{
 		std::cout << this->getName() << " could not sign form " << form.getName();
 		std::cout << " because form " << form.getName() << " requires level " << form.getGradeToSign();
@@ -118,7 +118,19 @@ void	Bureaucrat::signForm( Form & form ) const {
 	}
 
 	return ;
+}
 
+void		Bureaucrat::executeForm( AForm const & form ) {
+
+	try {
+		form.execute(*this);
+		std::cout << this->_name << " executed " << form.getName() << std::endl;
+	}
+	catch (std::exception& e)
+	{
+		std::cerr << "Exception: " << e.what() << std::endl;
+	}
+	return ;
 }
 
 // overload of insertion operator

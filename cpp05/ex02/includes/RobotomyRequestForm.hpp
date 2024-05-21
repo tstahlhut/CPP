@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   RobotomyRequest.hpp                                :+:      :+:    :+:   */
+/*   RobotomyRequestForm.hpp                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 17:43:33 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/05/17 18:09:50 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/05/21 16:08:45 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,12 @@ class  RobotomyRequestForm : public AForm {
 		RobotomyRequestForm&	operator=( RobotomyRequestForm const & rhs );
 		~RobotomyRequestForm( void );
 
+		void	execute( Bureaucrat const & executor) const;
+
 	private:
 		RobotomyRequestForm( void );
+		
+		std::string const	_target;
 
 };
 

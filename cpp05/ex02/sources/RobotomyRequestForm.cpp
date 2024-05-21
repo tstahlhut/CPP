@@ -25,14 +25,10 @@ RobotomyRequestForm::RobotomyRequestForm( void ) :
 // Constructor
 
 RobotomyRequestForm::RobotomyRequestForm( std::string target ) : 
-				AForm("RobotomyRequest", 72, 45) {
+				AForm("RobotomyRequest", 72, 45),
+				_target(target) {
 
 	std::cout << "RobotomyRequestForm constructor called" << std::endl;
-
-	//Makes some drilling noises. Then, informs that <target> has been robotomized
-	//successfully 50% of the time. Otherwise, informs that the robotomy failed
-	// but not on construction but execution, right?
-	// save target somewhere?
 	
 	return ;
 }
@@ -59,6 +55,24 @@ RobotomyRequestForm&	RobotomyRequestForm::operator=( RobotomyRequestForm const &
 		}
 
 		return *this;
+}
+
+void	RobotomyRequestForm::execute( Bureaucrat const & executor) const {
+
+	if (!this->isSigned()) {
+		std::cout << "Robotomy failed." << std::endl;
+		throw NotSignedException();
+	}
+		
+	if (executor.getGrade() > this->getGradeToExec()) {
+		std::cout << "Robotomy failed." << std::endl;
+		throw GradeTooLowException();
+	}
+
+	std::cout << "Rrrrrrrr... Rrrrrrrr... Rrrrrrrr...";
+	std::cout << this->_target << " has been robotomized sucessfully 50% of the time." << std::endl;
+	
+	return ;
 }
 
 // Destructor

@@ -25,13 +25,10 @@ PresidentialPardonForm::PresidentialPardonForm( void ) :
 // Constructor
 
 PresidentialPardonForm::PresidentialPardonForm( std::string target ) : 
-				AForm("PresidentialPardon", 25, 5) {
+				AForm("PresidentialPardon", 25, 5),
+				_target(target) {
 
 	std::cout << "PresidentialPardonForm constructor called" << std::endl;
-
-	//Informs that <target> has been pardoned by Zaphod Beeblebrox.
-	// but not on construction but execution, right?
-	// save target somewhere?
 	
 	return ;
 }
@@ -69,5 +66,16 @@ PresidentialPardonForm::~PresidentialPardonForm( void ) {
 			return ;
 }
 
+void	PresidentialPardonForm::execute( Bureaucrat const & executor) const {
 
+	if (!this->isSigned())
+		throw NotSignedException();
 		
+	if (executor.getGrade() > this->getGradeToExec())
+		throw GradeTooLowException();
+
+	
+	std::cout << this->_target << " has been pardoned by Zaphod Beeblebrox." << std::endl;
+	
+	return ;
+}

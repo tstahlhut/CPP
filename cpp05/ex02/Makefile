@@ -6,7 +6,7 @@
 #    By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/23 14:13:04 by vm                #+#    #+#              #
-#    Updated: 2024/05/17 17:03:51 by tstahlhu         ###   ########.fr        #
+#    Updated: 2024/05/21 16:48:26 by tstahlhu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,8 @@ INCDIR   = ./includes
 OBJDIR   = ./objects
 
 # List of source files
-SRC      = main Bureaucrat Form
+SRC      = main Bureaucrat AForm ShrubberyCreationForm RobotomyRequestForm \
+			PresidentialPardonForm
 
 # List of source files with file extension .cpp
 SRCS	= $(addsuffix $(FILEEXT), $(SRC))

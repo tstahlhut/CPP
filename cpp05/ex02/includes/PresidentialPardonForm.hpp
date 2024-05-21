@@ -23,8 +23,12 @@ class  PresidentialPardonForm : public AForm {
 		PresidentialPardonForm&	operator=( PresidentialPardonForm const & rhs );
 		~PresidentialPardonForm( void );
 
+		void	execute( Bureaucrat const & executor) const;
+
 	private:
 		PresidentialPardonForm( void );
+
+		std::string const	_target;
 
 };
 

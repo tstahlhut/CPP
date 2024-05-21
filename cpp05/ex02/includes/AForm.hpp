@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 15:25:38 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/05/17 17:54:12 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/05/21 15:34:37 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,21 @@ class AForm {
 				}
 			};
 
+		class	NotSignedException: public std::exception {
+			public:
+				virtual const char*	what( void ) const throw() {
+					return "Form not signed";
+				}
+		};
+
 	// getters
 		std::string	getName( void ) const;
 		bool		isSigned( void ) const;
 		int 		getGradeToSign( void ) const;
 		int			getGradeToExec( void ) const;
 
-		void		beSigned( Bureaucrat const & bureaucrat );
+		void			beSigned( Bureaucrat const & bureaucrat );
+		virtual void	execute( Bureaucrat const & executor) const = 0;
 
 	private:
 		AForm( void );

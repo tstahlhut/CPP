@@ -618,6 +618,24 @@ Include the fstream header and the iostream header (to print error message) and 
 	//do something
 	inputFile.close();
 
+The same applies if you want to write to a file that you get as a parameter:
+
+	...( std::string file)
+
+	#include <fstream>
+
+	std::ofstream	outfile(file.c_str());
+	if(!outfile.is_open())
+	{
+		std::cerr << "Failed to open file" << std::endl;
+		return (1);
+	}
+	outfile << "My text ..." << std::endl;
+	outfile.close();
+
+Be aware, that ofstream takes a char* as parameter and not std::string.
+
+
 ## Switch Statement
 
 The switch statement is a multiway conditional from C.
