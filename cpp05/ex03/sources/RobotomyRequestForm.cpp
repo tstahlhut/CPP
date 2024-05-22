@@ -15,7 +15,7 @@
 // Default constructor
 
 RobotomyRequestForm::RobotomyRequestForm( void ) : 
-				AForm("RobotomyRequest", 72, 45) {
+				AForm("RobotomyRequestForm", 72, 45) {
 
 	std::cout << "RobotomyRequestForm default constructor called" << std::endl;
 
@@ -25,10 +25,10 @@ RobotomyRequestForm::RobotomyRequestForm( void ) :
 // Constructor
 
 RobotomyRequestForm::RobotomyRequestForm( std::string target ) : 
-				AForm("RobotomyRequest", 72, 45),
+				AForm("RobotomyRequestForm", 72, 45),
 				_target(target) {
 
-	std::cout << "RobotomyRequestForm constructor called" << std::endl;
+	//std::cout << "RobotomyRequestForm constructor called" << std::endl;
 	
 	return ;
 }
@@ -79,7 +79,7 @@ void	RobotomyRequestForm::execute( Bureaucrat const & executor) const {
 
 RobotomyRequestForm::~RobotomyRequestForm( void ) {
 
-	std::cout << "RobotomyRequestForm destructor called" << std::endl;
+//	std::cout << "RobotomyRequestForm destructor called" << std::endl;
 	
 			return ;
 }

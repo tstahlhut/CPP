@@ -15,7 +15,7 @@
 // Default constructor
 
 PresidentialPardonForm::PresidentialPardonForm( void ) : 
-				AForm("PresidentialPardon", 25, 5) {
+				AForm("PresidentialPardonForm", 25, 5) {
 
 	std::cout << "PresidentialPardonForm default constructor called" << std::endl;
 
@@ -25,10 +25,10 @@ PresidentialPardonForm::PresidentialPardonForm( void ) :
 // Constructor
 
 PresidentialPardonForm::PresidentialPardonForm( std::string target ) : 
-				AForm("PresidentialPardon", 25, 5),
+				AForm("PresidentialPardonForm", 25, 5),
 				_target(target) {
 
-	std::cout << "PresidentialPardonForm constructor called" << std::endl;
+//	std::cout << "PresidentialPardonForm constructor called" << std::endl;
 	
 	return ;
 }
@@ -61,7 +61,7 @@ PresidentialPardonForm&	PresidentialPardonForm::operator=( PresidentialPardonFor
 
 PresidentialPardonForm::~PresidentialPardonForm( void ) {
 
-	std::cout << "PresidentialPardonForm destructor called" << std::endl;
+//	std::cout << "PresidentialPardonForm destructor called" << std::endl;
 	
 			return ;
 }

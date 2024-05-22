@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 17:50:43 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/05/21 15:34:58 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/05/22 10:58:24 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 // Default constructor
 
 ShrubberyCreationForm::ShrubberyCreationForm( void ) : 
-				AForm("ShrubberyCreation", 145, 137) {
+				AForm("ShrubberyCreationForm", 145, 137) {
 
 	std::cout << "ShrubberyCreationForm default constructor called" << std::endl;
 
@@ -25,10 +25,10 @@ ShrubberyCreationForm::ShrubberyCreationForm( void ) :
 // Constructor
 
 ShrubberyCreationForm::ShrubberyCreationForm( std::string const target ) : 
-				AForm("ShrubberyCreation", 145, 137),
+				AForm("ShrubberyCreationForm", 145, 137),
 				_target(target) {
 
-	std::cout << "ShrubberyCreationForm constructor called" << std::endl;
+//	std::cout << "ShrubberyCreationForm constructor called" << std::endl;
 	
 	return ;
 }
@@ -61,7 +61,7 @@ ShrubberyCreationForm&	ShrubberyCreationForm::operator=( ShrubberyCreationForm c
 
 ShrubberyCreationForm::~ShrubberyCreationForm( void ) {
 
-	std::cout << "ShrubberyCreationForm destructor called" << std::endl;
+//	std::cout << "ShrubberyCreationForm destructor called" << std::endl;
 	
 			return ;
 }

@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 12:13:48 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/05/21 17:43:16 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/05/22 11:23:11 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,108 +17,59 @@
 #include "../includes/Intern.hpp"
 
 
-void	WernerPlantsGarden( Bureaucrat Werner, Bureaucrat KH, AForm* garden) {
+void	WernerPlantsGarden( Bureaucrat Werner, Bureaucrat KH, AForm* form) {
 
-		std::cout << std::endl << "Hello, this me again:" << std::endl << std::endl;
-		std::cout << Werner << std::endl << std::endl;
-		std::cout << "Somehow I improved since we met last time ... " << std::endl << std::endl;
+		std::cout << std::endl << *form << std::endl << std::endl;
 
-		std::cout << "Now I have an important task: plant a shrubbery for the president Zaphod Beeblebrox.";
-		std::cout << "So, I start by getting the required form:" << std::endl << std::endl;
+		std::cout << "Great! Now, I just sign the form ..." << std::endl << std::endl;
 	
-		std::cout << std::endl << garden << std::endl << std::endl;
-		std::cout << "Great! Now, I execute the form ..." << std::endl << std::endl;
-		Werner.executeForm(*garden);
-		std::cout << std::endl << "... Ah, I have to sign it first ..." << std::endl << std::endl;
-		Werner.signForm(*garden);
-		std::cout << std::endl << "... now I can execute it ..." << std::endl << std::endl;
-		Werner.executeForm(*garden);
-		std::cout << std::endl << "Crap! So, " << Werner.getName() << " goes to his best colleague " << KH.getName();
-		std::cout << " and asks him to execute it." << std::endl << std::endl;
-		KH.executeForm(*garden);
+		Werner.signForm(*form);
+		std::cout << std::endl << "... and give it to "  << KH.getName() << " to execute it:" << std::endl << std::endl;
+	
+		KH.executeForm(*form);
 		std::cout << std::endl;
-		std::cout << "... and " << Werner.getName() << " planted the shrubbery - look into the garden ... ;)" << std::endl << std::endl;
+		std::cout << "... and done! Look into company backyard ... ;)" << std::endl << std::endl;
 
-		//ShrubberyCreationForm	garden2(garden);
-	//	std::cout << garden2 << std::endl << std::endl;
 		return ;
 }
 
-void	WernerRobotomizesHisTasks(Bureaucrat W, Bureaucrat K, AForm* form) {
+void	WernerRobotomizesHisTasks(Bureaucrat K, AForm* form) {
 
-	std::cout << std::endl << "Now that " << W.getName() << " made a wonderful garden, he wants to enjoy it.";
-	std::cout << "So, he tries to robotomize his most important task: " << std::endl << std::endl;
+	
+	std::cout << std::endl << *form << std::endl << std::endl;
 
-
-	std::cout << std::endl;
-
-	W.executeForm(*form);
-
-	std::cout << std::endl << "... of course the form has to be signed first, how could he forget!" << std:: endl;
-	std::cout << std::endl;
-
-	W.signForm(*form);
-
-	std::cout << std::endl << "Karl-Hermann is busy, so he asks his other collegue " << K.getName() << " ..." << std::endl;
+	std::cout << "This is so nice! Now, I just ask " << K.getName() << " to sign and execute the form ..." << std::endl << std::endl;
 
 	K.signForm(*form);
 
-	std::cout << std::endl;
-
-	W.executeForm(*form);
-
-	std::cout << std::endl << "Oh, he has to ask her to execute it as well..." << std::endl;
-
 	K.executeForm(*form);
-
-	std::cout << std::endl;
-	std::cout << "... and " << W.getName() << " sits 50% of the time happily in Zaphod Beeblebrox' garden :)" << std::endl;
-	std::cout << std::endl;
-
-	AForm*	form2(form);
-
-	K.executeForm(*form2);
-
-	std::cout << std::endl;
-	std::cout << "... and " << W.getName() << " sits 100% of the time happily in Zaphod Beeblebrox' garden :)" << std::endl;
+	
 	std::cout << std::endl;
 
 	return ;
 }
 
-void	KerstinRescuesWerner(Bureaucrat W, Bureaucrat K, Bureaucrat KH) {
+void	Pardon(Bureaucrat K, Bureaucrat KH, AForm* form) {
 
 	std::cout << std::endl;
-	std::cout << "Now that " << W.getName() << " was but chilling in the garden, president Zaphod Beeblebrox got angry with him and put him into prison." << std::endl;
-	std::cout << std::endl;
-	std::cout << K.getName() << " cares for " << W.getName() << " and tries to get him out ..." << std::endl;
-	std::cout << std::endl;
-	
-	PresidentialPardonForm	form("Werner");
 
-	std::cout << form << std::endl << std::endl;
+	std::cout << *form << std::endl << std::endl;
 
-	K.signForm(form);
+	std::cout << "Of course " << KH.getName() << " will ask somebody else to sign it: " << std::endl << std::endl;
 
-	K.executeForm(form);
+	K.signForm(*form);
+
+	std::cout << "... now " << KH.getName() << " can execute the form:" << std::endl << std::endl;
+
+	KH.executeForm(*form);
 
 	std::cout << std::endl;
-	std::cout << K.getName() << " could sign the Presidential Pardon Form but not execute it." << std::endl;
-	std::cout << K.getName() << " has only grade " << K.getGrade() << " ..." << std::endl << std::endl;
-	std::cout << "So, she goes to see her husband " << KH.getName() << "..." << std::endl;
-
-	std::cout << KH << std::endl;
-	std::cout << std::endl;
-	
-	KH.executeForm(form);
-
-	std::cout << std::endl;
-	std::cout << W.getName() << " is such a lucky *** !" << std::endl << std::endl;
 
 }
 
 int	main( void ) {
 
+	AForm* form[3];
 	try 
 	{
 		Bureaucrat	Werner("Werner", 145);
@@ -128,26 +79,39 @@ int	main( void ) {
 
 		std::cout << std::endl;
 
-		AForm* form;
+		std::cout << "From now on " << Werner.getName() << "'s life becomes even nicer: An Intern has come to the company. ";
+		std::cout << "From now on, " << Werner.getName() << " asks the Intern to create the forms for him:" << std::endl << std::endl;
+
 		
-		form = TheIntern.makeForm("ShrubberyCreationForm", "garden");
+	//1
+		form[0] = TheIntern.makeForm("ShrubberyCreationForm", "company");
 
-		WernerPlantsGarden(Werner, KH, form);
+		WernerPlantsGarden(Werner, Kerstin, form[0]);
 
+	//2
+		form[1] = TheIntern.makeForm("RobotomyRequestForm", "send e-mail");
 
-		delete form;
+		WernerRobotomizesHisTasks(Kerstin, form[1]);		
 
-	//	form = TheIntern.makeForm("RobotomyRequestForm", "sticking stamps");
+	//3
+		std::cout << KH.getName() << " was impressed by " << Werner.getName() << "'s productivity and calls the Intern, too:" << std::endl;
 
-	//	WernerRobotomizesHisTasks(Werner, Kerstin, form);
+		form[2] = TheIntern.makeForm("PresidentialPardonForm", "Some random dude");
 
-	//	KerstinRescuesWerner(Werner, Kerstin, KH);
-		
+		Pardon(Kerstin, KH, form[2]);
+
+	// delete allocated memory
+		for (int i = 0; i < 3; i++) {
+			delete form[i];
+		}
 	}
 	catch (std::exception& e)
 	{
 		std::cerr << "Exception: " << e.what() << std::endl;
-	}
-	
+		// delete allocated memory
+		for (int i = 0; i < 3; i++) {
+			delete form[i];
+		}
+	}	
 	return 0;
 }

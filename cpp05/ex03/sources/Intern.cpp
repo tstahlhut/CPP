@@ -59,16 +59,27 @@ Intern::~Intern( void ) {
 
 AForm*	Intern::makeForm( std::string form, std::string target ) {
 
-	AForm*	newForm[3] = {new ShrubberyCreationForm(target), new RobotomyRequestForm(target), new PresidentialPardonForm(target)};
+	AForm*	sampleForm[3] = {new ShrubberyCreationForm(target), new RobotomyRequestForm(target), new PresidentialPardonForm(target)};
 
+	AForm*	newForm = NULL;
+
+	// find matching sampleForm 
 	for (int i = 0; i < 3; i++) {
-		if (target == newForm[i]->getName()) {
-			std::cout << "Intern creates " << newForm[i]->getName() << std::endl;
-			return newForm[i];
+		if (form == sampleForm[i]->getName()) {
+			newForm = sampleForm[i];
+			std::cout << "Intern creates " << newForm->getName() << std::endl;
+			break ;
 		}
 	}
 
-	std::cout << form << " does not exist. I will make coffee instead." << std::endl;
+	// delete not matching sampleForms
+	for (int i = 0; i < 3; i++) {
+		if (newForm != sampleForm[i])
+			delete sampleForm[i];
+	}
 
-	return NULL;
+	if (newForm == NULL)
+		std::cout << form << " does not exist. I will make coffee instead." << std::endl;
+
+	return newForm;
 }

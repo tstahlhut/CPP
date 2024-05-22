@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 08:38:24 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/05/21 15:50:17 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/05/22 11:00:24 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 Bureaucrat::Bureaucrat( void ) : _name(NULL), _grade(0) {
 
-	 std::cout << "Bureaucrat default constructor called" << std::endl;
+//	 std::cout << "Bureaucrat default constructor called" << std::endl;
 
 	return ;
 }
@@ -25,7 +25,7 @@ Bureaucrat::Bureaucrat( void ) : _name(NULL), _grade(0) {
 
 Bureaucrat::Bureaucrat( std::string name, int grade ) : _name(name), _grade(grade) {
 
-	std::cout << "Bureaucrat constructor called" << std::endl;
+	//std::cout << "Bureaucrat constructor called" << std::endl;
 
 	if (grade < 1)
 		throw GradeTooHighException();
@@ -39,7 +39,7 @@ Bureaucrat::Bureaucrat( std::string name, int grade ) : _name(name), _grade(grad
 
 Bureaucrat::Bureaucrat( Bureaucrat const & src ) : _name(src._name) {
 
-	std::cout << "Bureaucrat copy constructor called" << std::endl;
+//	std::cout << "Bureaucrat copy constructor called" << std::endl;
 
 	*this = src ;
 
@@ -50,7 +50,7 @@ Bureaucrat::Bureaucrat( Bureaucrat const & src ) : _name(src._name) {
 
 Bureaucrat &	Bureaucrat::operator=( Bureaucrat const & rhs ) {
 
-	std::cout << "Bureaucrat copy assignement operator called" << std::endl;
+//	std::cout << "Bureaucrat copy assignement operator called" << std::endl;
 
 	if (this != &rhs) {
 
@@ -65,7 +65,7 @@ Bureaucrat &	Bureaucrat::operator=( Bureaucrat const & rhs ) {
 
 Bureaucrat::~Bureaucrat( void ) {
 
-	std::cout << "Bureaucrat destructor called" << std::endl;
+//	std::cout << "Bureaucrat destructor called" << std::endl;
 
 	return ;
 }
