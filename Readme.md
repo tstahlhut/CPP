@@ -1262,7 +1262,142 @@ If you want to catch any exception, you can use the default catch:
 		cout << "Default Exception" << std::endl;
 	}
 
-## Additional Notes
+# CPP06: Casts
+
+## Casting in C
+
+### Implicit and Explicit Casts
+
+We already encountered casts in C. However, it may have slipped your attention that you cannot only do expicit casts but also implicit casts:
+
+	int		a = 42;
+
+	explicit cast:	double	b = (double)a;
+
+	implicit cast:	double	b = a;
+
+When implicitly casting a less precise type (e.g. int) to a more precise type (e.g. double), the compiler will do the casting for you (it will rearrange the bits so it matches the type) and you do not have to explicitly tell it to cast the integer to a double. However, when casting a more precise type (e.g. double) to a less precise type (e.g. int), you might loose precision. Normally, the compiler will warn you if you do so implicitly. It could be that you just forgot that your variable was of type double and not int. If you want to cast it, you should therefore cast it explicitly:
+
+	double	b = 42.42;
+	int		a = (int)b; -> 42
+
+This way the compiler knows that you want or do not care to loose precision in this case. If you implicitly cast from double to int, it can cause great miscalculations when you do a lot of calculations, in loops for example. So, be aware of that when casting.
+
+### Reinterpretation (Identity Conversion)
+
+In the above examples, the bits were rearranged so that even if the variable lost precision, it was still about the same value. However, it can also happen that the bits are *not* rearranged:
+
+	float	a = 420.042f;
+
+	void*	b = &a; 		// converting to a more generic type (no problem)
+	int*	c = b;			// converting (implicitly) the address of float to address of int -> reinterpretation (bits are not rearranged)
+	int*	d = (int*)b;	// converting (explicitly) the address of float to address of int -> reinterpretation (bits are not rearranged)
+
+In all three examples, the bits are not rearranged and when casting the address of a float type to the address of an int type, a reinterpretation of the bits happens: interpreting float bits as int bits will lead to a totally different value. However, this might be intended. Therefore, it is essential to **explictly** cast them.
+
+### Reinterpretation of Type Qualifier
+
+In C, type qualifiers specify the use of a declared variable. These are **const** and **volatile**. When you cast a non-const variable to a const, you can do so without doing any harm. The const type qualifier is more specific than a non-const. If however, you want to cast a const address to a non-const address, you may cause errors:
+
+	int	a = 42;
+
+	int const *	b = &a;		// implicit promotion to const -> OK!
+
+	int	*		c = b;		// implicit demotion -> NOT okay: it will not compile
+
+	int *		d = (int *) b;	// explicit demotion -> it will compile
+
+Reinterpretating a const type qualifier, as a non-const, will only work when you cast it explicitly. However, you should rethink your program design: **const** is used so that you do *not* change that variable, so why would you cast it to be able to change it?
+
+## Casting in C++
+
+In C++, casting from a more specific type to a more generic type is called **upcasting**:
+
+	class Animal {};
+	class Cat : public Animal {};
+
+	Cat		a;
+
+	Animal *	b = &a;
+
+ Casting from a more generic type to a more specific type is called **downcasting**:
+
+	Cat	*	c = b;
+
+The above implicit redefinition to the acutal more specific type *Cat* will not work. You have to explicitly cast it. In C syntax it would be:
+
+	Cat *	c = (Cat *) b;
+
+You could even downcast it explicitly to another derived class:
+
+	Dog *	c = (Dog *) b;
+
+The compiler will not complain but this cast could have dramatic consequences as you cast an actual Cat type to a Dog type which might have very different attributes. This is why C++ has its very own cast syntax.
+
+### Static Cast
+
+In order to convert simple values, you use the C++ keyword **static_cast** followed by the type in **<>** and the variable in brackets **()**:
+
+	int		a = 42;
+	double	b = a;
+
+	int		c = static_cast<int>(b);
+
+It is the same for classes:
+
+	class Animal				{};
+	class Cat : public Animal	{};
+	class Dog : public Animal	{};
+
+	class Unrelated				{};
+
+	Cat			a;
+
+	Animal *	b = &a;
+	Dog	*		c = static_cast<Dog *>(b);
+
+	Unrelated *	d = static_cast<Unrelated *>(&a);	// this will not work as the classes are not related
+
+It is the same example as in the C++ cast introduction but in C++ syntax. However, these explicit downcasts only work with classes that are related. If you try to cast the Cat class address to an unrelated class, the compiler will complain. Static cast makes sure that the cast is made between compatible addresses of the same inheritance tree.
+
+### Dynamic Cast
+
+The speciality of the dynamic cast is that it happens at runtime and not during compilation. And it only works properly with subtype polymorphism. As the dynamic cast only happens at runtime, you have to implement checks.
+
+If the dynamic cast did not work out for pointers, it will return NULL.
+
+
+
+	class	Animal				{ public: virtual ~Animal( void ) {} };
+	class	Cat : public Animal	{};
+	class	Dog : public Animal	{};
+
+	int	main( void ) {
+
+		Cat			a;
+		Animal *	b = &a;
+
+		Cat *		c = dynamic_cast<Cat *>(b);				// explicit downcast
+		if ( c == NULL ) {
+			std::cout << "Conversion NOT OK" << std::endl;
+		}
+		...
+
+However, this does not work for references (as they cannot be NULL). In that case dynamic_cast throws the exception bad_cast. 
+
+		...
+		try {
+			Dog &	d = dynamic_cast<Dog &>(*b);
+		}
+		catch ( std::bad_cast &e ){
+			std::cout << "Conversion NOT OK: "  << e.what() << std::endl;
+			return 0;
+		}
+
+		return 0;
+	}
+
+# Additional Notes
 
 For style, see: https://google.github.io/styleguide/cppguide.html
 
@@ -1270,7 +1405,7 @@ In cpp00/ex01: Don't mix methods. The setter functions of the Contact class shou
 
 Use one style: either function( void ); function(void); or function()
 
-## Recommended (and used) Resources
+# Recommended (and used) Resources
 
 General:
 
