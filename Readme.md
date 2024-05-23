@@ -1397,6 +1397,133 @@ However, this does not work for references (as they cannot be NULL). In that cas
 		return 0;
 	}
 
+### Reinterpret Cast
+
+The reinterpret cast is the most open cast in C++. It allows you to reinterpretate any address as any other address type without the compiler complaining.
+
+	int	main ( void ) {
+
+		float	a = 420.042f;
+
+		void *	b = &a;
+		int *	c = reinterpret_cast<int *>(b);
+		int &	d = reinterpret_cast<int &>(*b);
+
+		return 0;
+	}
+
+Without compiling problems you can up- and downcast and could even reinterpretate one class as another (not even related) class. So, if you use the reinterpret cast you have to be sure of what you are doing. The reinterpret cast is often used when information about the data type was lost, for example when you receive data from a network. You store all data in a void*. You also receive the information that the bits you received are chars. Thus, you can cast the void* to char* thanks to the reinterpret cast. 
+
+### Const Cast
+
+The const cast allows to reinterpret the type qualifier and has the same rules as the same cast in C:
+
+	int	main( void ) {
+
+		int			a = 42;
+
+		int const *	b = &a;						// Implicit promotion -> OK
+		int *		c = b;						// Implicit demotion -> NOT OK!
+		int *		d = const_cast<int *>(b);	// Explicit demotion -> OK (but know what you do!)
+	}
+
+Casting a non constant address to a constant one, is no problem. If, however, you want to cast a constant address to a non-constant one, you have to use the **const_cast**. Then the compiler will not complain. But you have to know why you have to do it (e.g. functions in a library that should use const, do not). Otherwise, better change your code to avoid this cast.
+
+### Overview (Casting Types)
+
+	Cast			 | Conversion	| Reinterpretation	| Upcast	| Downcast	| Type Qualifier	|
+	--------------------------------------------------------------------------------------------------
+	Implicit		 |	yes			| 					|	yes		|			|					|
+	static_cast		 |	yes			|					|	yes		|	yes		|					|
+	dynamic_cast	 |				|					|	yes		|	yes		|					|
+	const_cast		 |				|					|			|			|	yes				|
+	reinterpret_cast |				|	yes				|	yes		|	yes		|	yes				|
+	--------------------------------------------------------------------------------------------------
+	Legacy C cast	 |	yes			|	yes				|	yes		|	yes		|	yes				| --> should not be used in C++, as you do not know what happens
+	--------------------------------------------------------------------------------------------------
+
+	Cast			 | Semantic Checks	| Reliable at runtime	| Tested at runtime	| 
+	---------------------------------------------------------------------------------
+	Implicit		 |	yes				| 	yes					|					|	
+	static_cast		 |	yes				|						|					|	
+	dynamic_cast	 |	yes				|	yes					|	yes				|	
+	const_cast		 |					|						|					|	-> has no checks: you should know what you do
+	reinterpret_cast |					|						|					|	-> has no checks: you should know what you do
+	----------------------------------------------------------------------------------
+	Legacy C cast	 |					|						|					|	-> has no checks: you should use it in C++
+	----------------------------------------------------------------------------------
+
+
+
+## Cast Operators in C++
+
+You may also want to define in your class cast operators. So that the syntax when using the class is more simple:
+
+	class	Example {
+		
+		public:
+			Example( float const v ) : _v( v ) { }
+
+			float	getv( void )	{ return this->_v; }
+
+			operator float()		{ return this->_v; }
+			operator int()			{ return static_cast<int>( this->_v )};
+
+		private:
+
+			float	_v;
+
+	};
+
+
+	int	main( void ) {
+
+		Example	a( 420.024f );
+		
+		float	b = a;
+		int		c = a;
+
+		...
+
+		return 0;
+	}
+
+In this example we defined what should be returned if an instance of *Example* is assigned to float (then the float value is returned) or assigned to int (the float value is casted to int). The output would then be:
+
+	a -> 420.024
+	b -> 420.024
+	c -> 420
+
+### Explicit keyword
+
+You can use the **explicit** keyword when you want to prevent that an instance of your class is implicitly constructed.
+
+
+	Class	A{};
+	Class	B{};
+
+	Class	C {
+		public:
+						C( A const & _ ) { return ;}
+			explicit	C( B const & _ ) { return ;}
+	};
+
+	void	function( C const & _ ) {
+		return ;
+	}
+
+	int	main( void ) {
+
+		function( A() );	// implicitly casting A to C in constructor
+		function( B() );	// will not work, because of the explicit keyword
+
+		return 0;
+	}
+
+The first function call with A() as parameter will work, as there exists a constructor of C() which takes A() as a parameter. So, C will be implicitly constructed and passed to function(). In the case of B(), however, the explicit keyword prevents this implicit conversion. You have to construct a C instance first to be able to pass it to function().
+
+
+
 # Additional Notes
 
 For style, see: https://google.github.io/styleguide/cppguide.html
