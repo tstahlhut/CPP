@@ -551,7 +551,7 @@ If, however, you always want to show a decimal point, you use std::showpoint. It
 
 However, this will show the first 2 digits and not 2 decimals. In that case it is better to use std::fixed and std::setprecision.
 
-Setprecisionhas to only be used once to set a certain limit length. The same goes for std::fixed and showpoint. So, you can just set it at the beginning once:
+Setprecision has to only be used once to set a certain limit length. The same goes for std::fixed and showpoint. So, you can just set it at the beginning once:
 
 	std::cout << setprecision(2) << fixed;
 
@@ -1453,7 +1453,11 @@ Casting a non constant address to a constant one, is no problem. If, however, yo
 	Legacy C cast	 |					|						|					|	-> has no checks: you should use it in C++
 	----------------------------------------------------------------------------------
 
+## Converting a string to an int
 
+### istringstream
+
+The primary purpose of **std::istringstream** is to convert strings into other data types, such as integers, floats, or even custom types, by treating the string as an input stream. It provides functionality similar to that of std::cin, but instead of reading from the standard input, it reads from a string.
 
 ## Cast Operators in C++
 
@@ -1522,6 +1526,39 @@ You can use the **explicit** keyword when you want to prevent that an instance o
 
 The first function call with A() as parameter will work, as there exists a constructor of C() which takes A() as a parameter. So, C will be implicitly constructed and passed to function(). In the case of B(), however, the explicit keyword prevents this implicit conversion. You have to construct a C instance first to be able to pass it to function().
 
+# CPP08: Standard Template Library
+
+Finally, we are allowed to use the Standard Template Library (STL) in C++! It contains templates and containers of which I will show a few.
+
+### map
+
+	#include <map>
+
+	class	Example;
+	class	Animal;
+
+	int	main( void ) {
+
+		std::map<std::string, Example*>		map1;
+
+		map1["exA"] = new ExampleA;
+		map1["exB"] = new ExampleB;
+
+		std::map<int, Example*>				map2;
+
+		map2[0] = new Ex00;
+		map2[1] = new Ex01;
+		map2[2] = new Ex03;
+
+		std::map<std::string, Animal*>		map3;
+
+		map3["cat"] = new Cat;
+		map3["dog"] = new Dog;
+
+		return 0;
+	}
+
+**Map** allows you to create an array of objects that you can then access with the help of a specified attribute, e.g. the name of the object (as a string) or the index (as an int). 
 
 
 # Additional Notes
