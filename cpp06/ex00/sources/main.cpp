@@ -6,11 +6,11 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/24 10:12:29 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/05/26 15:22:47 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/05/26 15:54:56 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ScalarConverter.hpp"
+#include "../includes/ScalarConverter.hpp"
 
 int	main( int argc, char **argv ) {
 
