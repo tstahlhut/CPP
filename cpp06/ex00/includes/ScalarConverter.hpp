@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/23 16:04:26 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/05/24 17:05:02 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/05/26 14:53:51 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,9 @@ bool	isChar( std::string	literal, int *	intOutOfRange );
 bool	isInt( std::string	literal, int *	intOutOfRange );
 bool	isDouble( std::string	literal, int * outOfRange );
 bool	isFloat( std::string	literal, int *	intOutOfRange );
+bool	specialCase( std::string literal );
+
+void	printValues( int outOfRange, char c, int i, float f, double d );
 
 
 
