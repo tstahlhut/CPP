@@ -1526,6 +1526,122 @@ You can use the **explicit** keyword when you want to prevent that an instance o
 
 The first function call with A() as parameter will work, as there exists a constructor of C() which takes A() as a parameter. So, C will be implicitly constructed and passed to function(). In the case of B(), however, the explicit keyword prevents this implicit conversion. You have to construct a C instance first to be able to pass it to function().
 
+# CPP07: Templates
+
+## Introduction
+
+Parametric macros in C - and its limitations. [...]
+
+## Defining Templates
+
+Allowing you to define some code in which you will define type variables, e.g. function templates, class templates, structure templates. 
+
+		int	max( int x, int y ) {
+			return ( x>=y ? x : y );
+		}
+
+This function returns the maximum of two integers: If x is greater than or equal to y, return x, else return y.
+
+In order to make this function work for ints, floats and other types, we take the global type "T" instead:
+
+	template< typename T >
+	T	max ( T x, T y ) {
+		return (x>=y ? x : y);
+	}
+
+T has to be declared at the top: template< typename T >.
+
+To make it smoothly for instances of classes as well, we take a reference instead of copying the class instances everytime the max function is called. This safes us a lot of memory. Futhermore, we should set both variables as const, as they are not changed in the function. This also applies for the return type.
+
+	template< typename T >
+	T const &	max( T const & x, T const & y ) {
+		return( x>=y ? x : y );
+	}
+
+### Instanciating Templates
+
+Now, that we have the template, we can use it:
+
+	int	a = 21;
+	int	b = 42;
+
+	max<int>(a, b);		//Explicit instanciaton
+	max(a, b); 			//Implict instanciation
+
+We can either call our function as any other. The type of the variables is then implicitly instanciated. Or we explicitly instanciate it by writing the type of the variables passed in < >.
+
+Of course, you can also pass several parameters that you define in the template:
+
+	template < typename T, typename U, typename V >
+
+### Class Templates
+
+And you can write templates for classes:
+
+	template< typename T >
+	class ClassName {
+
+		public:
+			ClassName( T const & x, T const & y, T const & z) : _x(x), _y(y), _z(z) { }
+			~ClassName( void ){ }
+
+			T const &	getX( void ) const	{ return this->_x; }
+			T const &	getY( void ) const	{ return this->_y; }
+			T const &	getZ( void ) const	{ return this->_z; }
+			
+		private:
+
+			T const	_x;
+			T const	_y;
+			T const _z;
+
+			ClassName( void ); 	// Default constructor private so that it cannot be instantiated without parameters
+	};
+
+If you want to write an output operator overload, you have to tell the compiler again that it is a template:
+
+	template< typename T >
+	std::ostream&	operator<<( std::ostream & o, ClassName< T > const & n) {
+
+		o << n.getX() << ", ";
+		o << n.getY() << ", ";
+		o << n.getZ();
+		return o;
+	}
+
+#### File Naming Convention
+
+The convention is to name template files with the extension "tpp".
+
+## Default Types
+
+Default types tell the compiler what type it should use, if the type is not specified explicitly (see Instanciating Templates).
+
+	template< typename T = float >
+
+In this case the compiler will use float if the user did not specify another type upon instanciation.
+
+## Specialization
+
+When defining a template, you can also write specializations of this template. This way you can specify a specific behaviour if a specific type is given as parameter. You can do partial or full specializations, speciliasing only some of the given parameters or all.
+
+	template< typename T, typename U >
+	class Example { ...};
+
+	// Partial specialisation
+	template< typename U >
+	class Example < int, U > {...};
+
+	// Full specialisation
+	template<>
+	class Example < bool, bool > {...};
+
+If both parameters are booleans, the last template will be used, if the first parameter is an int, the second template will be used and if any other types are given as parameters, the first (generic) template is used. 
+
+Specialisations of templates allow you to alter the behavior of you template in special cases. If specific types are given, you might want to have a more simple behavior. Two booleans could for example be stored in one int and thus safe memory. Or calcualions with some types might be easier than with others. 
+
+
+
 # CPP08: Standard Template Library
 
 Finally, we are allowed to use the Standard Template Library (STL) in C++! It contains templates and containers of which I will show a few.
