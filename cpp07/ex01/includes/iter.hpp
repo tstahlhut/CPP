@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Swap.tpp                                           :+:      :+:    :+:   */
+/*   iter.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tstahlhu <tstahlhu@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/08 17:33:39 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/06/08 17:49:20 by tstahlhu         ###   ########.fr       */
+/*   Created: 2024/06/08 17:53:02 by tstahlhu          #+#    #+#             */
+/*   Updated: 2024/06/08 18:46:30 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef _SWAP_TPP_
-# define _SWAP_TPP_
+#ifndef _ITER_HPP_
+# define _ITER_HPP_
 
-template< typename T >
+template< typename T, typename F >
+void iter( T * array, int length, F function ) {
 
-void swap( T & x, T & y ) {
-
-	T	temp;
-
-	temp = x;
-	x = y;
-	y = temp;
+	for( int i = 0; i < length; i++) {
+		function(array[i]);
+	}
 }
 
 #endif
