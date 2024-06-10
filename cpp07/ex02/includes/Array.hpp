@@ -1,25 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   iter.hpp                                           :+:      :+:    :+:   */
+/*   Array.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tstahlhu <tstahlhu@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 17:53:02 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/06/08 19:01:08 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/06/10 18:22:37 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef _ITER_HPP_
-# define _ITER_HPP_
+#ifndef _ARRAY_HPP_
+# define _ARRAY_HPP_
 
-template< typename T, typename F >
-void iter( T * array, size_t length, F function ) {
+# include <iostream>
+# include <stdexcept>
+# include <string>
 
-	for( size_t i = 0; i < length; i++) {
-		function(array[i]);
-	}
-	return ;
-}
+template< typename T >
+class	Array {
+
+	public:
+		Array( void );
+		Array( unsigned int n );
+		Array( Array const & src );
+		~Array( void );
+
+		Array<T> &	operator=( Array const & rhs );
+		T &			operator[]( unsigned int const n ) const;
+
+		unsigned int	size( void ) const;
+
+
+	private:
+		T *				_array;
+		unsigned int	_size;
+};
+
+template< typename T >
+std::ostream &	operator<<( std::ostream & o, Array<T> const & a );
 
 #endif
