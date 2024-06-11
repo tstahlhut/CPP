@@ -6,15 +6,15 @@
 #    By: tstahlhu <tstahlhu@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/23 14:13:04 by vm                #+#    #+#              #
-#    Updated: 2024/06/11 17:27:44 by tstahlhu         ###   ########.fr        #
+#    Updated: 2024/06/11 18:24:22 by tstahlhu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
-NAME	=  array
+NAME	=  easyfind
 CXX		=	c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
-FILEEXT	= .*pp
+FILEEXT	= .cpp
 SRCDIR   = ./sources
 INCDIR   = ./includes
 OBJDIR   = ./objects
@@ -29,7 +29,7 @@ SRCS	= $(addsuffix $(FILEEXT), $(SRC))
 OBJS     = $(SRCS:%$(FILEEXT)=$(OBJDIR)/%.o)
 
 # List of header files
-INCLS    = $(wildcard $(INCDIR)/*.hpp)
+INCLS    = $(wildcard $(INCDIR)/*.h)
 
 
 

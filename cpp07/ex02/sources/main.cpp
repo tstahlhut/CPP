@@ -6,13 +6,13 @@
 /*   By: tstahlhu <tstahlhu@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 17:37:04 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/06/10 18:28:33 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/06/11 17:27:29 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string>
 #include "../includes/Array.hpp"
-#include "Array.cpp" // I guess I have to include it because it is a template?
+#include "Array.tpp" // I guess I have to include it because it is a template?
 
 #define NUM	5
 

@@ -1644,9 +1644,143 @@ Specialisations of templates allow you to alter the behavior of you template in 
 
 # CPP08: Standard Template Library
 
-Finally, we are allowed to use the Standard Template Library (STL) in C++! It contains templates and containers of which I will show a few.
+Finally, we are allowed to use the Standard Template Library (STL) in C++! It contains templates and containers of which I will show a few. 
 
-### map
+## Containers
+
+"A container is a holder object that stores a collection of other objects (its elements). They are implemented as class templates, which allows a great flexibility in the types supported as elements." [cplusplus.com][def]
+
+### Sequence containers
+
+- vector: dynamic arrays
+- deque: double ended queue
+- list: linked list
+
+since C++11:
+- array (since C++11)
+- forward_list (since C++11)
+
+#### Vector
+
+Vectors are arrays that can change in size. 
+
+1. They have a **strict linear sequence**.
+2. They are a **dynamic** array which allows:
+	1. **Direct access** to any element in the sequence; also through **pointer** arithmetics
+	2. addition & removal of elements at the **end** of the sequence
+3. Vectors use dynamically allocated arrays internally which means that they have to be reallocated when they grow. For this growth a certain amoutn of storage is reserved (capacity) but when this is reached, the array has to be reallocated which needs time.
+
++ very efficient accessing elements
+- addition/removal other than at the end
+
+#### Deque (Double ended queue)
+
+The double ended queue is in its use much alike the vector with the positive addition that elements can easily added and be removed at the beginning, too. 
+
+1. They have a **strict linear sequence**.
+2. They are a **dynamic** array which allows:
+	1. **Direct access** to any element in the sequence (pointers do not work!)
+	2. addition & removal of elements at the **end** and **beginning** of the sequence
+3. Internally, deques are more complex than vectors: the elements are internally not stored in an array
+
++ grow efficiently when you have long sequences
+- no pointer arithmetics
+
+#### Lists
+
+Lists are double-linked lists.
+
+1. They have a **strict linear sequence**.
+2. They are **double-linked lists** which allow:
+	1. easily insert, move and remove elements anywhere in the sequence, e.g. very good for sorting algorithms
+	2. no direct random access (you have to iterate through the list instead)
+	3. iteration in both directions
+
++ changing elements
+- no direct access
+- extra memory for linking (maybe not so good for large lists with small sized elements)
+
+### Container Adaptors
+
+Container adaptors "[...] are classes that use an encapsulated object of a specific container class as its underlying container, providing a specific set of member functions to access its elements." (https://cplusplus.com/reference/stack/stack/)
+
+#### Stack
+
+1. LIFO: last in, first out 
+	-> access elements only from one end of the container
+	-> elements are pushed/ popped back -> top of the stack
+
+2. Underlying containers may be **vector, deque or list**, as they support:
+	- empty()
+	- size()
+	- back()
+	- push_back()
+	- pop_back()
+
+	Default container: deque
+
+#### Queue
+
+1. FIFO: first in, first out
+	-> insert from one end and extract from other end
+	-> elements are pushed into the back and popped from the front
+
+2. Underlying containers may be **deque or list**, as they support:
+	- empty()
+	- size()
+	- front()
+	- back()
+	- push_back()
+	- pop_front()
+
+	Default container: deque
+
+#### Priority Queue
+
+1. The first element is always the maximum of the elements (strict weak ordering). This means that you can add the elements in the order you want, but only the max element can be retrieved from the top. (similar to heap)
+
+2. Underlying containers may be **vector or deque**, as they support:
+	- empty()
+	- size()
+	- front()
+	- push_back()
+	- pop_back()
+
+	and **random access iterators**.
+
+	Default container: vector
+
+### Associative Containers
+
+#### Set
+
+"Sets are containers that store unique elements following a specific order.
+" (https://cplusplus.com/reference/set/set/)
+
+1. Associative: Elements are referenced by their **key** and not their position. 
+2. Set: The value of an element identifies it (value = key, of type T)
+	-> each value must be **unique**
+	-> value cannot be modified (const)
+	-> but elements can be inserted or removed
+3. Odered: The elements are sorted (strict weak ordering) according to its internal comparison object (type Compare).
+
+- Slow in accessing individual elements by their key
++ They allow direct iteration based on their order
+
+#### Multiset
+
+They are the same as sets but can store elements that have equivalent values. 
+
+#### Map
+
+Map allows you to create an array of objects that you can then access with the help of a specified attribute, e.g. the name of the object (as a string) or the index (as an int). 
+
+1. Associative: Elements are referenced by their **key** and not their position. 
+2. Map: Each element consists of a **key value** and a **mapped value**. The key value of an element identifies it.
+	-> each key must be **unique**
+3. Odered: The elements are sorted (strict weak ordering) according to its internal comparison object (type Compare).
+4. The mapped values can be accessed directly by their corresponding key using **operator[]**.
+
 
 	#include <map>
 
@@ -1674,7 +1808,9 @@ Finally, we are allowed to use the Standard Template Library (STL) in C++! It co
 		return 0;
 	}
 
-**Map** allows you to create an array of objects that you can then access with the help of a specified attribute, e.g. the name of the object (as a string) or the index (as an int). 
+#### Multimap
+
+Multimaps are the same as maps but they can store elements with equivalent keys.
 
 
 # Additional Notes
@@ -1697,3 +1833,6 @@ General:
 Exceptions:
 
 - [Creating Custom, User Defined Exception Class](https://www.youtube.com/watch?v=Ix05fozWn0A)
+
+
+[def]: https://cplusplus.com/reference/stl/
