@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   template.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tstahlhu <tstahlhu@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 19:16:59 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/05/11 17:10:25 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/06/12 15:18:22 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ class	Template {
 	
 	private:
 };
+
+std::ostream &	operator<<( std::ostream & o, Template const & rhs );
 
 
 #endif

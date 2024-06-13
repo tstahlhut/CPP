@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 18:13:00 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/06/11 18:37:02 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/06/12 17:08:02 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	main( void ) {
 		std::cout << std::endl;
 	}
 
-	{	//Test 1: List container
+	{	//Test 3: List container
 		std::cout << "--------------------------" << std::endl << "Test 3: list" << std::endl << std::endl;
 	
 		std::list<int>	container;
