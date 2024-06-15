@@ -71,18 +71,6 @@ RPN::~RPN( void ) {
 	return ;
 }
 
-// Iterators
-/*
-RPN::iterator	RPN::begin() const {
-
-	return this->c.begin();
-}
-
-RPN::iterator	RPN::end() const {
-
-	return this->_stack.c.end();
-}*/
-
 
 // Member Functions
 
@@ -90,23 +78,7 @@ std::stack<int>	RPN::getStack( void ) const {
 
 	return this->_stack;
 }
-/*
-void	RPN::calculate( int c ) {
 
-if (this->_stack.empty())
-	throw SyntaxErrorException();
-int	operand2 = this->_stack.top();
-this->_stack.pop();
-
-if (this->_stack.empty())
-	throw SyntaxErrorException();
-int	operand1 = this->_stack.top();
-this->_stack.pop();
-
-this->_stack.push(operand1 )
-
-
-}*/
 
 int	RPN::getOperand( void ) {
 

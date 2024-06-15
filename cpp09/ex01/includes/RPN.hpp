@@ -59,8 +59,6 @@ class	RPN {
 		std::stack<int>	_stack;
 
 		int	getOperand( void );
-
-	//	void	calculate( char c );
 };
 
 std::ostream &	operator<<( std::ostream & o, RPN const & rhs );
