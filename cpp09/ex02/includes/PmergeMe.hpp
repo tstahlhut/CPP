@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 19:16:59 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/06/19 18:12:52 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/06/20 13:03:28 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ class	PmergeMe {
 		std::deque<unsigned int> const &	sortDeque( void );
 		void	insertElement( unsigned int element);//, unsigned int end );
 
+		bool	dequeIsSorted( void ) const;
 		template<typename T>
 		void	printSequence( T const & sequence, size_t const length );
 
