@@ -6,12 +6,13 @@
 /*   By: tstahlhu <tstahlhu@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 15:35:31 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/06/26 15:14:53 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/06/26 18:32:44 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/PmergeMe.hpp"
 #include <iostream>
+#include <iomanip>
 
 int	main( int argc, char **argv ) {
 
@@ -26,17 +27,22 @@ int	main( int argc, char **argv ) {
 
 
 		sequence.addSequence( argv+1, argc-1);
-	//	std::cout << "Input OK!" << std::endl;
-	//	std::cout << "Length of Sequence: " << sequence1.getLength() << std::endl;
-	//	std::cout << sequence1 << std::endl;
 
-	//	sequence1.sortDeque();
-	//	std::cout << "Deque sorted: \t";
-	//	sequence1.printSequence(sequence1.getDeque(), sequence1.getLength());
+		std::cout << "Before:\t";
+		sequence.printSequence(sequence.getUnsortedSequence(), sequence.getLength());
 
-		sequence.sortList();
-		std::cout << "List sorted: \t";
-		sequence.printSequence(sequence.getList(), 5);
+		double timeDeque = sequence.sortDeque();
+		double	timeList = sequence.sortList();
+
+		std::cout << "After:\t";
+		sequence.printSequence(sequence.getList(), sequence.getLength());
+
+		std::cout << "Time to process a range of " << sequence.getLength() << " elements with std::list:\t";
+		std::cout << std::fixed << std::setprecision( 6 );
+		std::cout << timeList << " us" << std::endl;
+
+		std::cout << "Time to process a range of " << sequence.getLength() << " elements with std::deque:\t";
+		std::cout << timeDeque << " us" << std::endl;
 	}
 	catch (std::exception &e) {
 		std::cout << e.what() << std::endl;

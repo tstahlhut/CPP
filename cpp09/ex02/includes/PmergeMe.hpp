@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 19:16:59 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/06/26 16:47:00 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/06/26 18:16:34 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <cstdlib>
 # include <climits>
 # include <algorithm>
-# include <iterator> //std::next
+# include <ctime>
 
 class	PmergeMe {
 
@@ -44,11 +44,11 @@ class	PmergeMe {
 		void								addNumber( char * number);					//adds a number to the unsorted sequence
 
 		//Deque
-		std::deque<unsigned int> const &	sortDeque( void );
+		double								sortDeque( void );
 		void								insertElement( unsigned int element);//, unsigned int end );
 
 		//List
-		std::list<unsigned int> const &		sortList( void );
+		double								sortList( void );
 
 		//Template Functions
 		template<typename T>
@@ -121,7 +121,7 @@ void	PmergeMe::printSequence( T const & sequence, size_t const length ) {
 		return ;
 	}
 	if (length > 20) {
-		for (int i = 0; i < 20; i++)
+		for (int i = 0; i < 10; i++)
 			std::cout << *it++ << " ";
 		std::cout << "[...]";
 	}

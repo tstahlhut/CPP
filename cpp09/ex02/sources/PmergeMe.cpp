@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 19:24:38 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/06/26 16:59:33 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/06/26 18:23:17 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,6 +159,13 @@ unsigned int	min( unsigned int a, unsigned int b ) {
 unsigned int	Jacobsthal( unsigned int n1, unsigned int n2) {
 
 	return n1 * 2 + n2;
+}
+
+double	calcTime( std::clock_t start ) {
+
+	double duration = ( std::clock() - start ) / (double) CLOCKS_PER_SEC;
+
+	return duration;
 }
 
 /* ************************************************************************** */
@@ -314,7 +321,9 @@ void	PmergeMe::_insertPintoS( std::deque<unsigned int> & p ) {
 }
 
 
-std::deque<unsigned int> const &	PmergeMe::sortDeque( void ) {
+double	PmergeMe::sortDeque( void ) {
+
+	std::clock_t	startTime = std::clock();
  
 	std::deque<unsigned int>	p; //deque of pends (min values)
 
@@ -339,7 +348,7 @@ std::deque<unsigned int> const &	PmergeMe::sortDeque( void ) {
 			std::cout << "Problem: unsorted!"<< std::endl;
 	}
 
-	return this->_deque;
+	return calcTime(startTime);
 }
 
 /* ************   Sort List  ****************************************************** */
@@ -450,7 +459,7 @@ void	PmergeMe::_insertPintoSLists( std::list< std::pair<unsigned int, unsigned i
 			it2--;			//move one backward so that copying begins at last element not the one after
 		for ( ; it2 != it1; it2--)
 				_insertElement(it2->second);
-
+			
 		//reset iterators
 		it2 = it3; //it2 is set back to end of J sublist (to its former position)
 		it1 = it2; //it1 is advanced to the end of the Jacobsthal numbers group, which will be the beginning in the next loop (it2's former position)
@@ -460,13 +469,9 @@ void	PmergeMe::_insertPintoSLists( std::list< std::pair<unsigned int, unsigned i
 		J3 = Jacobsthal(J1, J2);
 		//it2 is advanced to the end of the new Jacobsthal numbers group (but not farther than Sp.end())
 		if (std::distance(it2, Sp.end()) > J3 - J2 && it2 != Sp.end())
-			std::advance(it2, J3 - J2); 
-		else
+			std::advance(it2, (J3 - J2)); 
+		else 
 			it2 = Sp.end();
-		
-		//stops the loop (when it3 hits the last element, everything in Sp has been inserted)
-		if (*it3 == Sp.back())
-			it3++;
 	}
 
 	//if the length of the original sequence was odd, the last element is missing in Sp and is inserted now
@@ -479,8 +484,9 @@ void	PmergeMe::_insertPintoSLists( std::list< std::pair<unsigned int, unsigned i
 
 //Ford-Johnson Sort Algorithm (Insertion merge) for lists
 
-std::list<unsigned int> const &	PmergeMe::sortList( void ) {
+double	PmergeMe::sortList( void ) {
 	
+	std::clock_t	startTime = std::clock();
 	//0. Check if already sorted
 	if (isSorted(this->_unsortedSequence)) {
 		std::cout << "Sequence already sorted!" << std::endl;
@@ -508,10 +514,9 @@ std::list<unsigned int> const &	PmergeMe::sortList( void ) {
 		std::cout << "Error: List not sorted!" << std::endl;
 	else if (this->_list.size() != this->_length)
 		std::cout << "Error: Wrong list size!" << std::endl;
-	else
-		std::cout << "List successfully sorted!" << std::endl;
-	
-	return this->_list;	
+
+
+	return calcTime(startTime);	
 }
 
 
