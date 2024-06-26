@@ -6,15 +6,18 @@
 /*   By: tstahlhu <tstahlhu@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 19:24:38 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/06/21 00:15:14 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/06/26 16:59:33 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "../includes/PmergeMe.hpp"
 
-// Default Constructor
+/* ************************************************************************** */
+/*                Constructors & Destructor                                   */
+/* ************************************************************************** */
 
+// Default Constructor
 PmergeMe::PmergeMe( void ) : _deque(), _list(), _length(0){
 
 	//std::cout << "Default Constructor called" << std::endl;
@@ -24,7 +27,6 @@ PmergeMe::PmergeMe( void ) : _deque(), _list(), _length(0){
 
 
 // Copy Constructor
-
 PmergeMe::PmergeMe( PmergeMe const & src )  {
 
 	//std::cout << "Copy Constructor called" << std::endl;
@@ -35,7 +37,6 @@ PmergeMe::PmergeMe( PmergeMe const & src )  {
 }
 
 // Copy assignment operator overload
-
 PmergeMe &	PmergeMe::operator=( PmergeMe const & rhs ) {
 
 //	std::cout << "Copy assignement operator called" << std::endl;
@@ -44,13 +45,14 @@ PmergeMe &	PmergeMe::operator=( PmergeMe const & rhs ) {
 
 		this->_deque = rhs._deque;
 		this->_list = rhs._list;
+		this->_unsortedSequence = rhs._unsortedSequence;
+		this->_length = rhs._length;
 	}
 
 	return *this ;
 }
 
 // Destructor
-
 PmergeMe::~PmergeMe( void ) {
 
 //	std::cout << "Destructor called" << std::endl;
@@ -59,7 +61,9 @@ PmergeMe::~PmergeMe( void ) {
 }
 
 
-// Getters
+/* ************************************************************************** */
+/*                Getters                                                     */
+/* ************************************************************************** */
 
 std::deque<unsigned int> const &	PmergeMe::getDeque( void ) const {
 
@@ -83,7 +87,9 @@ size_t const &	PmergeMe::getLength( void ) const {
 
 
 
-// Member functions
+/* ************************************************************************** */
+/*                Member Functions  (General)                                 */
+/* ************************************************************************** */
 
 /* addNumber: adds a number to the sequence to be sorted (_unsortedSequence)
 		takes a char* string as parameter and converts it to unsigned int
@@ -91,24 +97,32 @@ size_t const &	PmergeMe::getLength( void ) const {
 
 void	PmergeMe::addNumber( char*	number) {
 
-//convert from char* to int
+	//convert from char* to int
 	long int n = std::strtol (number, 0, 10);
 
-//check if out of range (can be unsigned int)
+	//check if out of range (can be unsigned int)
 	if (n == LONG_MIN || n == LONG_MAX || n > UINT_MAX )
 		throw std::out_of_range("Error: Value out of range");
 	if (n == 0 && number[0] != '0')
 		throw std::out_of_range("Error: Value out of range");
 
-//add converted number to sequence 
+	//add converted number to sequence 
 	this->_unsortedSequence.push_back(static_cast<unsigned int>(n));
 	
+	return;
 }
 
-void	PmergeMe::addSequence( char ** sequence, int end ) {
+/* addSequence: checks given sequence (array) and stores it in _unsortedSequence
+	1. is a digit
+	2. is an unsigned int (positiv and not bigger than UINT_MAX)
+	3. no duplicates in sequence
+	Only if all three points are true, the sequence is saved,
+	otherwise an exeption is thrown*/
 
-//check for wrong symbols (only positive integer allowed)
-	for (int i = 0; i < end; i++) {
+void	PmergeMe::addSequence( char ** sequence, int size ) {
+
+	//check for wrong symbols (only positive integer allowed)
+	for (int i = 0; i < size; i++) {
 		for (int j = 0; sequence[i][j] != '\0'; j++) {
 			if (!isdigit(sequence[i][j])) {
 				throw WrongSymbolException();
@@ -118,19 +132,19 @@ void	PmergeMe::addSequence( char ** sequence, int end ) {
 		this->_length += 1;
 	}
 
-//check for duplicates
+	//check for duplicates
 	std::vector<unsigned int>	test = this->_unsortedSequence;
 	std::sort (test.begin(), test.end());
 	std::vector<unsigned int>::iterator	it = std::adjacent_find (test.begin(), test.end());
 	if(it != test.end())
 		throw DuplicateException();
-
-//copy sequence into deque and list containers (to be sorted)
-	//std::copy(this->_unsortedSequence.begin(), this->_unsortedSequence.end(), std::back_inserter(this->_deque));
-	std::copy(this->_unsortedSequence.begin(), this->_unsortedSequence.end(), std::back_inserter(this->_list));
 	
 	return ;
 }
+
+/* ************************************************************************** */
+/*                Member Functions  (Helper Functions)                        */
+/* ************************************************************************** */
 
 unsigned int	max( unsigned int a, unsigned int b ) {
 
@@ -142,23 +156,382 @@ unsigned int	min( unsigned int a, unsigned int b ) {
 	return a <= b ? a : b;
 }
 
-//original code from https://www.geeksforgeeks.org/jacobsthal-and-jacobsthal-lucas-numbers/
-/*
-unsigned int	Jacobsthal( unsigned int n ) {
-
-	if (n == 0)
-		return 0;
-	if (n == 1)
-		return 1;
-
-	return Jacobsthal(n - 1) + 2 * Jacobsthal(n - 2);
-}
-*/
-
 unsigned int	Jacobsthal( unsigned int n1, unsigned int n2) {
 
 	return n1 * 2 + n2;
 }
+
+/* ************************************************************************** */
+/*                Member Functions  (Sort Deque)                              */
+/* ************************************************************************** */
+
+/* 1. sortPairs: separate deque into pairs, sort pairs, copy max values of pairs into S and minvalues into p
+	S = this->_deque 
+	I do this in one step by looping through sequence and storing min values in p and max values in S.
+	This safes copying time and memory. But it does not use the insertion sort.*/
+
+void	PmergeMe::_sortPairs( std::deque<unsigned int> & p ) {
+	
+	for (size_t i = 1; i < (this->_length - (this->_length % 2)) ; i++){ // if len=4, i should iterate until i=3; if len=5, the same
+		this->_deque.push_back(max(this->_unsortedSequence[i-1], this->_unsortedSequence[i]));
+		p.push_back(min(this->_unsortedSequence[i-1], this->_unsortedSequence[i]));
+		i++;
+	}
+	if (this->_length % 2 == 1)
+		p.push_back(this->_unsortedSequence[this->_length - 1]);
+
+	return;
+}
+
+/* 2A. insertionSortDeque: modified insertion sort deque S so that deque p stays aligned */
+
+void	insertionSortDeque(std::deque<unsigned int> & S, std::deque<unsigned int> & p) {
+
+	for (unsigned int i = 1; i < S.size(); i++) {
+		unsigned int key[2] = {S[i], p[i]};
+		int	j = i - 1;
+	
+		while ( j >= 0 && key[0] < S[j]) {
+			S[j + 1] = S[j];
+			p[j + 1] = p[j]; // p is sorted so that it stays aligned to S
+			--j;
+		}
+		j += 1;
+		S[j] = key[0];
+		p[j] = key[1];
+	}
+}
+
+/* 2B. mergeSortDeque */
+
+void merge(std::deque<unsigned int> & S, std::deque<unsigned int> & p, int const begin, int const mid, int const end) {
+
+    int const Lsize = mid - begin + 1;
+    int const Rsize = end - mid;
+
+    std::deque<unsigned int> SL(Lsize);
+    std::copy(S.begin() + begin, S.begin() + mid + 1, SL.begin());
+
+    std::deque<unsigned int> SR(Rsize);
+    std::copy(S.begin() + mid + 1, S.begin() + end + 1, SR.begin());
+
+    std::deque<unsigned int> pL(Lsize);
+    std::copy(p.begin() + begin, p.begin() + mid + 1, pL.begin());
+
+    std::deque<unsigned int> pR(Rsize);
+    std::copy(p.begin() + mid + 1, p.begin() + end + 1, pR.begin());
+
+    int Li = 0;
+    int Ri = 0;
+    int i = begin;
+
+    while (Li < Lsize && Ri < Rsize) {
+        if (SL[Li] <= SR[Ri]) {
+            S[i] = SL[Li];
+            p[i] = pL[Li];
+            Li++;
+        } else {
+            S[i] = SR[Ri];
+            p[i] = pR[Ri];
+            Ri++;
+        }
+        i++;
+    }
+
+    while (Li < Lsize) {
+        S[i] = SL[Li];
+        p[i] = pL[Li];
+        Li++;
+        i++;
+    }
+
+    while (Ri < Rsize) {
+        S[i] = SR[Ri];
+        p[i] = pR[Ri];
+        Ri++;
+        i++;
+    }
+	return;
+}
+
+void mergeSort(std::deque<unsigned int> & S, std::deque<unsigned int> & p, int const begin, int const end) {
+	
+    if (begin >= end)
+        return;
+
+    int mid = begin + (end - begin) / 2;
+
+    mergeSort(S, p, begin, mid);
+
+    mergeSort(S, p, mid + 1, end);
+    merge(S, p, begin, mid, end);
+}
+
+
+void	PmergeMe::insertElement( unsigned int element) {
+
+	for (std::deque<unsigned int>::iterator it = this->_deque.begin(); it < this->_deque.end(); it++) {
+		if (element < *it) {
+			this->_deque.insert(it, element);
+			return ;
+		}
+	}
+	std::cout << "Problem in insert function" << std::endl;
+	return ;
+}
+
+
+/* 3. insert p into S
+	//we re-sort p: partition p into groups (size of groups: Jacobsthal numbers + 1) and sort the elements within these groups in descending order according to their indexes:
+	//p0, p1 (stay the same), p3, p4, p6, p5, p
+	// I do not rearrange p but just modify the order in which p's elements are inserted into S (this safes copying time and memory) */
+
+void	PmergeMe::_insertPintoS( std::deque<unsigned int> & p ) {
+
+	unsigned int	J1 = 0; // first Jacobsthal number
+	unsigned int	J2 = 1; //second jacobsthal number
+
+	//we add one number at the front of p, so that the indexes of S and p are aligned again when the first element of p is pushed to S
+	p.push_front(0);
+
+	unsigned int	J = Jacobsthal(J1, J2);
+	unsigned int	end = J1;
+
+	while ( J < p.size()) {
+		for (unsigned int i = J; i > end; i--) {
+			PmergeMe::insertElement(p[i]);
+		}
+		end = J;
+		J1 = J2;
+		J2 = J;
+		J = Jacobsthal(J1, J2);
+	}
+	//insert the last group of elements of p (where J > p.size())
+	for (unsigned int i = p.size() - 1; i > end; i--) {
+			insertElement(p[i]);
+	}
+	return;
+}
+
+
+std::deque<unsigned int> const &	PmergeMe::sortDeque( void ) {
+ 
+	std::deque<unsigned int>	p; //deque of pends (min values)
+
+	//0. Check if already sorted
+	if (isSorted(this->_unsortedSequence)) {
+		std::cout << "Sequence already sorted!" << std::endl;
+		std::copy(this->_unsortedSequence.begin(), this->_unsortedSequence.end(), std::back_inserter(this->_deque));
+	}
+	else {	
+	//1. separate deque into pairs, sort pairs, copy max values of pairs into S and minvalues into p
+	_sortPairs(p);	
+
+	//2. sort sequence S (either with insertion sort or with merge sort. In Wikipedia it says "recursively", so I guess merge Sort should be used)
+	//insertionSortDeque(this->_deque, p);//insertion sort deque S (modified so that deque p stays aligned)
+	mergeSort(this->_deque, p, 0, this->_deque.size() - 1);
+
+	//3. insert p into S
+	_insertPintoS(p);
+	
+	//4.check if really sorted
+	if (!isSorted(this->_deque))
+			std::cout << "Problem: unsorted!"<< std::endl;
+	}
+
+	return this->_deque;
+}
+
+/* ************   Sort List  ****************************************************** */
+
+
+void	PmergeMe::_createSortedPairs( std::list< std::pair<unsigned int, unsigned int> > & pairList ) {
+
+	for (size_t i = 1; i < (this->_length - (this->_length % 2)) ; i++){ // if len=4, i should iterate until i=3; if len=5, the same
+		pairList.push_back(std::make_pair(max(this->_unsortedSequence[i-1], this->_unsortedSequence[i]), min(this->_unsortedSequence[i-1], this->_unsortedSequence[i])));
+		i++;
+	}
+
+	return;
+}
+
+
+std::list< std::pair<unsigned int, unsigned int> >	PmergeMe::_merge(std::list< std::pair<unsigned int, unsigned int> > & left, std::list< std::pair<unsigned int, unsigned int> > & right ) {
+
+	std::list< std::pair<unsigned int, unsigned int> >	result;
+	std::list< std::pair<unsigned int, unsigned int> >::const_iterator	itl = left.begin();
+	std::list< std::pair<unsigned int, unsigned int> >::const_iterator	itr = right.begin();
+
+	//sort and merge left and right list into result in ascending order
+	while (itl != left.end() && itr != right.end()) {
+		if (itl->first <= itr->first) {
+			result.push_back(*itl);
+			itl++;
+		} else {
+			result.push_back(*itr);
+			itr++;
+		}
+	}
+
+	//append remaining elements
+	while (itl != left.end()) {
+		result.push_back(*itl);
+		itl++;
+	}
+	while (itr != right.end()) {
+		result.push_back(*itr);
+		itr++;
+	}
+
+	return result;
+}
+
+std::list< std::pair<unsigned int, unsigned int> >	PmergeMe::_mergeSortList(std::list< std::pair<unsigned int, unsigned int> > & Sp ) {
+
+	if (Sp.size() <= 1)
+		return Sp;
+
+	std::list< std::pair< unsigned int, unsigned int> > left(Sp);
+	std::list< std::pair<unsigned int, unsigned int> >	right;
+	std::list< std::pair<unsigned int, unsigned int> >::iterator	itm = left.begin();
+	std::advance(itm, (left.size() / 2));
+	right.splice( right.begin(), left, left.begin(), itm);
+	
+	left = _mergeSortList(left);
+	right = _mergeSortList(right);
+	
+	return _merge(left, right);
+}
+
+/*insertElement: Insert 1 element into a sorted list (ascending order)
+	-> loop until element is smaller and insert there
+	-> or if given element is bigger than last element in list, insert at last position */
+
+void	PmergeMe::_insertElement( unsigned int & element) {
+
+	if (element > this->_list.back())
+				this->_list.push_back(element);
+	for (std::list<unsigned int>::iterator it = this->_list.begin(); it != this->_list.end(); it++) {
+		if (element < *it) {
+			this->_list.insert(it, element);
+			break;
+		}
+	}
+	return;
+}
+
+/* Jacobsthal: The insertion works best if the area searched is one less than a power of two (https://en.wikipedia.org/wiki/Merge-insertion_sort)
+	It happens to be that the Jacobsthal numbers are exactly this sequence of numbers. Therefore, we use them in the Ford-Johnson algorithm.
+	Jacobsthalnumber: 	0 1 1 3 5 11 21 42 ...
+	area searched:		   0 2 2 6 10  22  ...
+	*/
+void	PmergeMe::_insertPintoSLists( std::list< std::pair<unsigned int, unsigned int> > & Sp ) {
+
+	
+	unsigned int	J1 = 0; 				 // first Jacobsthal number
+	unsigned int	J2 = 1; 				 // second Jacobsthal number
+	unsigned int	J3 = Jacobsthal(J1, J2); // third Jacobsthal number (can be calculated from the two numbers before it)
+
+	std::list< std::pair<unsigned int, unsigned int> >::iterator	it1 = Sp.begin(); //mark beginning of J sublist (p)
+	it1--; //move one back so that first element gets copied (because it2 has to be != it1)
+	std::list< std::pair<unsigned int, unsigned int> >::iterator	it2 = Sp.begin(); //mark beginning of J sublist (p) / end of J sublist (S)
+	it2++; //move one forward so that last element of S gets copied (when comparing to it3)
+	std::list< std::pair<unsigned int, unsigned int> >::iterator	it3 = Sp.begin(); //mark beginning of J sublist (S)
+
+	//loop: insert first and second elements according to Jacobsthal number into list
+	while (it3 != Sp.end() ) {
+
+		//insert S (which is already sorted) until end of Jacobsthal sublist
+		for ( ; it3 != it2; it3++)
+			this->_list.push_back(it3->first);
+
+		//insert p from same J group into list (but from the end; they are not sorted and have to find their place in the list)
+		if (it2 == Sp.end()) 
+			it2--;			//move one backward so that copying begins at last element not the one after
+		for ( ; it2 != it1; it2--)
+				_insertElement(it2->second);
+
+		//reset iterators
+		it2 = it3; //it2 is set back to end of J sublist (to its former position)
+		it1 = it2; //it1 is advanced to the end of the Jacobsthal numbers group, which will be the beginning in the next loop (it2's former position)
+		//compute new Jacobsthal number (and thus range of sublist)
+		J1 = J2;
+		J2 = J3;
+		J3 = Jacobsthal(J1, J2);
+		//it2 is advanced to the end of the new Jacobsthal numbers group (but not farther than Sp.end())
+		if (std::distance(it2, Sp.end()) > J3 - J2 && it2 != Sp.end())
+			std::advance(it2, J3 - J2); 
+		else
+			it2 = Sp.end();
+		
+		//stops the loop (when it3 hits the last element, everything in Sp has been inserted)
+		if (*it3 == Sp.back())
+			it3++;
+	}
+
+	//if the length of the original sequence was odd, the last element is missing in Sp and is inserted now
+	if (this->_length % 2 == 1)
+		_insertElement(this->_unsortedSequence[this->_length - 1]);
+
+	return;
+
+}
+
+//Ford-Johnson Sort Algorithm (Insertion merge) for lists
+
+std::list<unsigned int> const &	PmergeMe::sortList( void ) {
+	
+	//0. Check if already sorted
+	if (isSorted(this->_unsortedSequence)) {
+		std::cout << "Sequence already sorted!" << std::endl;
+		std::copy(this->_unsortedSequence.begin(), this->_unsortedSequence.end(), std::back_inserter(this->_list));
+	}
+	else {
+
+	//1. split in pairs (S&p) & sort (S > p) with insertion sort (as its only two, I used max/ min function)
+	std::list< std::pair<unsigned int, unsigned int> > Sp;
+	_createSortedPairs(Sp);
+
+	//2. sort all values in S in ascending order, recursively with merge sort
+	Sp = _mergeSortList(Sp);
+	/*std::cout << "After merge: " << std::endl;
+	for (std::list< std::pair<unsigned int, unsigned int> >::iterator it = Sp.begin(); it != Sp.end(); it++)
+		std::cout << it->first << "\t" << it->second << std::endl;
+	*/
+
+	//3. Merge sorted S and unsorted p into 1 list
+	_insertPintoSLists(Sp);
+	}
+
+	//4. check if sorting was successfull
+	if (!isSorted(this->_list))
+		std::cout << "Error: List not sorted!" << std::endl;
+	else if (this->_list.size() != this->_length)
+		std::cout << "Error: Wrong list size!" << std::endl;
+	else
+		std::cout << "List successfully sorted!" << std::endl;
+	
+	return this->_list;	
+}
+
+
+
+
+
+
+//insertion sort
+/*	for (unsigned int i = 1; i < this->_length; i++) {
+		unsigned int key = this->_deque[i];
+		int	j = i - 1;
+	
+		while ( j >= 0 && key < this->_deque[j]) {
+			this->_deque[j + 1] = this->_deque[j];
+			--j;
+		}
+		j += 1;
+		this->_deque[j] = key;
+	}
+*/
 
 //insertion sort
 /*void	insertionSort( unsigned int start, unsigned int	length, std::deque<unsigned int> & deque ) {
@@ -177,35 +550,18 @@ unsigned int	Jacobsthal( unsigned int n1, unsigned int n2) {
 }
 */
 
-void	PmergeMe::insertElement( unsigned int element) {//, unsigned int end ) {
+//original code from https://www.geeksforgeeks.org/jacobsthal-and-jacobsthal-lucas-numbers/
+/*
+unsigned int	Jacobsthal( unsigned int n ) {
 
-	for (std::deque<unsigned int>::iterator it = this->_deque.begin(); it < this->_deque.end(); it++) {// (this->_deque.begin() + end); it++) {
-		if (element < *it) {
-			this->_deque.insert(it, element);
-			return ;
-		}
-	}
-	std::cout << "problem in insert function" << std::endl;
-	return ;
+	if (n == 0)
+		return 0;
+	if (n == 1)
+		return 1;
+
+	return Jacobsthal(n - 1) + 2 * Jacobsthal(n - 2);
 }
-
-//modified insertion sort deque S so that deque p stays aligned
-void	insertionSort(std::deque<unsigned int> & S, std::deque<unsigned int> & p) {
-
-	for (unsigned int i = 1; i < S.size(); i++) {
-		unsigned int key[2] = {S[i], p[i]};
-		int	j = i - 1;
-	
-		while ( j >= 0 && key[0] < S[j]) {
-			S[j + 1] = S[j];
-			p[j + 1] = p[j]; // p is sorted so that it stays aligned to S
-			--j;
-		}
-		j += 1;
-		S[j] = key[0];
-		p[j] = key[1];
-	}
-}
+*/
 
 /*void	merge(std::deque<unsigned int> & S, std::deque<unsigned int> & p, int const begin, int const mid, int const end ) {
 
@@ -383,207 +739,3 @@ void merge(std::deque<unsigned int> & S, std::deque<unsigned int> & p, int const
         std::cout << *it << " ";
     std::cout << std::endl;
 }*/
-
-bool	isSorted( std::deque<unsigned int> deque) {
-	
-	for (std::deque<unsigned int>::iterator it = deque.begin() + 1; it != deque.end(); it++)
-		if (it < (it - 1))
-			return false;
-		
-	return true;
-}
-
-void merge(std::deque<unsigned int> & S, std::deque<unsigned int> & p, int const begin, int const mid, int const end) {
-    int const Lsize = mid - begin + 1;
-    int const Rsize = end - mid;
-
-    std::deque<unsigned int> SL(Lsize);
-    std::copy(S.begin() + begin, S.begin() + mid + 1, SL.begin());
-
-    std::deque<unsigned int> SR(Rsize);
-    std::copy(S.begin() + mid + 1, S.begin() + end + 1, SR.begin());
-
-    std::deque<unsigned int> pL(Lsize);
-    std::copy(p.begin() + begin, p.begin() + mid + 1, pL.begin());
-
-    std::deque<unsigned int> pR(Rsize);
-    std::copy(p.begin() + mid + 1, p.begin() + end + 1, pR.begin());
-
-    int Li = 0;
-    int Ri = 0;
-    int i = begin;
-
-	
-	if (!isSorted(SL)) {
-		std::cout << "!!!!!!!!SL not sorted" << std::endl;
-		return ;
-	}
-	if (!isSorted(SR)) {
-		std::cout << "!!!!!!!SR not sorted" << std::endl;
-		return ;
-
-	}
-
-    while (Li < Lsize && Ri < Rsize) {
-        if (SL[Li] <= SR[Ri]) {
-            S[i] = SL[Li];
-            p[i] = pL[Li];
-            Li++;
-        } else {
-            S[i] = SR[Ri];
-            p[i] = pR[Ri];
-            Ri++;
-        }
-        i++;
-    }
-
-    while (Li < Lsize) {
-        S[i] = SL[Li];
-        p[i] = pL[Li];
-        Li++;
-        i++;
-    }
-
-    while (Ri < Rsize) {
-        S[i] = SR[Ri];
-        p[i] = pR[Ri];
-        Ri++;
-        i++;
-    }
-
-    std::cout << "after merge: " << std::endl << "S: ";
-    for (std::deque<unsigned int>::const_iterator it = S.begin(); it != S.end(); it++)
-        std::cout << *it << " ";
-    std::cout << std::endl;
-}
-
-void mergeSort(std::deque<unsigned int> & S, std::deque<unsigned int> & p, int const begin, int const end) {
-    if (begin >= end)
-        return;
-
-    int mid = begin + (end - begin) / 2;
-    std::cout << "merge sort: " << "begin: " << begin << " mid: " << mid << " end: " << end << std::endl;
-    std::cout << "1 merge sort: " << "begin: " << begin << " end: " << mid << std::endl;
-
-    mergeSort(S, p, begin, mid);
-    std::cout << "2 merge sort: " << "begin: " << mid + 1 << " end: " << end << std::endl;
-
-    mergeSort(S, p, mid + 1, end);
-    merge(S, p, begin, mid, end);
-}
-
-
-std::deque<unsigned int> const &	PmergeMe::sortDeque( void ) {
-
- //1. sort pairs and separate into S(max value of each pair) and p(min value of each pair) arrays
-	std::deque<unsigned int>	p;
-	
-	for (size_t i = 1; i < (this->_length - (this->_length % 2)) ; i++){ // if len=4, i should iterate until i=3; if len=5, the same
-		this->_deque.push_back(max(this->_unsortedSequence[i-1], this->_unsortedSequence[i]));
-		p.push_back(min(this->_unsortedSequence[i-1], this->_unsortedSequence[i]));
-		i++;
-	}
-	if (this->_length % 2 == 1)
-		p.push_back(this->_unsortedSequence[this->_length - 1]);
-
-	std::cout << "Before mergeSort: " << std::endl << "S: ";
-	printSequence(this->_deque, this->_deque.size());
-	std::cout << "p: ";
-	printSequence(p, p.size());
-
-//insertion sort deque S (modified so that deque p stays aligned)
-//	insertionSort(this->_deque, p);
-	mergeSort(this->_deque, p, 0, this->_deque.size() - 1);
-	if (!dequeIsSorted())
-			std::cout << "Problem: unsorted!"<< std::endl;
-	std::cout << "After mergeSort: " << std::endl << "S: ";
-	printSequence(this->_deque, this->_deque.size());
-	std::cout << "p: ";
-	printSequence(p, p.size());
-//insert p into S
-	//we re-sort p: partition p into groups (size of groups: Jacobsthal numbers + 1) and sort the elements within these groups in descending order according to their indexes:
-	//p0, p1 (stay the same), p3, p4, p6, p5, p
-	// I do not rearrange p but just modify the order in which p's elements are inserted into S (this safes copying time and memory)
-	unsigned int	J1 = 0; // first Jacobsthal number
-	unsigned int	J2 = 1; //second jacobsthal number
-	//we add one number at the front of p, so that the indexes of S and p are aligned again when the first element of p is pushed to S
-	p.push_front(0);
-	unsigned int	J = Jacobsthal(J1, J2);
-	//unsigned int	inserted = 0;
-	unsigned int	end = J1;
-
-	while ( J < p.size()) {
-		for (unsigned int i = J; i > end; i--) {
-			//std::cout << "i: " << i << " for J: " << J  << " J1: " << J1 << std::endl;
-			insertElement(p[i]);//, i + inserted);
-			//inserted++;
-		}
-		end = J;
-		J1 = J2;
-		J2 = J;
-		J = Jacobsthal(J1, J2);
-	}
-	//insert the last group of elements of p (where J > p.size())
-	for (unsigned int i = p.size() - 1; i > end; i--) {
-			std::cout << "here i: " << i << " for J: " << J  << " J1: " << J1 << std::endl;
-			insertElement(p[i]);
-	}
-	
-//check if really sorted
-	if (!dequeIsSorted())
-			std::cout << "Problem: unsorted!"<< std::endl;
-
-	return this->_deque;
-}
-
-bool	PmergeMe::dequeIsSorted( void ) const {
-	
-	for (std::deque<unsigned int>::const_iterator it = this->_deque.begin() + 1; it != this->_deque.end(); it++)
-		if (it < (it - 1))
-			return false;
-		
-	return true;
-}
-
-
-std::ostream &	operator<<( std::ostream & o, PmergeMe const & rhs ) {
-
-
-/*//does not work:
-	size_t const	len = rhs.getLength();
-	std::vector<unsigned int> const	unsortedSeq = rhs.getUnsortedSequence();
-	rhs.printSequence(unsortedSeq, len);
-	*/
-	std::vector<unsigned int>	sequence = rhs.getUnsortedSequence();
-	std::vector<unsigned int>::iterator	it = sequence.begin();
-	
-	if (sequence.empty()) {
-		o << "Sequence: empty";
-		return o;
-	}
-	o << "Unsorted sequence: ";
-	if (rhs.getLength() > 7) {
-		for (int i = 0; i < 7; i++)
-			o << *(it + i) << " ";
-		o << "[...]";
-	}
-	else {
-		for (std::vector<unsigned int>::iterator it = sequence.begin(); it != sequence.end(); it++ )
-			o << *it << " ";
-	}
-	return o;
-}
-
-	//insertion sort
-/*	for (unsigned int i = 1; i < this->_length; i++) {
-		unsigned int key = this->_deque[i];
-		int	j = i - 1;
-	
-		while ( j >= 0 && key < this->_deque[j]) {
-			this->_deque[j + 1] = this->_deque[j];
-			--j;
-		}
-		j += 1;
-		this->_deque[j] = key;
-	}
-*/

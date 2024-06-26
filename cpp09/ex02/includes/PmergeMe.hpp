@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 19:16:59 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/06/20 13:03:28 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/06/26 16:47:00 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,30 +22,41 @@
 # include <cstdlib>
 # include <climits>
 # include <algorithm>
+# include <iterator> //std::next
 
 class	PmergeMe {
 
 	public:
-		PmergeMe( void );								// Default constructor (can also be put into private if user should not be able to use it )
+		//Constructors
+		PmergeMe( void );								// Default constructor
 		PmergeMe( PmergeMe const & src );				// Copy constructor: a new instance is created
 		PmergeMe &	operator=( PmergeMe const & rhs );	// Copy assignment operator overload
 		~PmergeMe( void );								// Destuctor
 
+		//Getters
 		std::deque<unsigned int> const &	getDeque( void ) const;
 		std::list<unsigned int> const &		getList( void ) const;
 		std::vector<unsigned int> const &	getUnsortedSequence( void ) const;
 		size_t const &						getLength( void ) const;
 
-		void	addSequence( char ** sequence, int end ); //parses and adds sequence
-		void	addNumber( char * number);				//adds a number to the unsorted sequence
+		//Add
+		void								addSequence( char ** sequence, int size ); 	//parses and adds sequence
+		void								addNumber( char * number);					//adds a number to the unsorted sequence
 
+		//Deque
 		std::deque<unsigned int> const &	sortDeque( void );
-		void	insertElement( unsigned int element);//, unsigned int end );
+		void								insertElement( unsigned int element);//, unsigned int end );
 
-		bool	dequeIsSorted( void ) const;
+		//List
+		std::list<unsigned int> const &		sortList( void );
+
+		//Template Functions
 		template<typename T>
-		void	printSequence( T const & sequence, size_t const length );
+		bool								isSorted( T const & sequence ) const;
+		template<typename T>
+		void								printSequence( T const & sequence, size_t const length );
 
+		//Exceptions
 		class WrongSymbolException : public std::exception {
 			public:
 			virtual const char*	what( void ) const throw()
@@ -58,7 +69,7 @@ class	PmergeMe {
 			public:
 			virtual const char*	what( void ) const throw()
 			{
-				return ("Error: At least one duplicate");
+				return ("Error: Duplicate in sequence!");
 			}
 		};
 
@@ -69,9 +80,36 @@ class	PmergeMe {
 		std::deque<unsigned int>	_deque;
 		std::list<unsigned int>		_list;
 		size_t						_length;
+
+		//Deque
+		void	_sortPairs( std::deque<unsigned int> & p );
+		void	_insertPintoS( std::deque<unsigned int> & p );
+
+		//List
+		void												_createSortedPairs( std::list< std::pair<unsigned int, unsigned int> > & pairList );
+		std::list< std::pair<unsigned int, unsigned int> >	_mergeSortList(std::list< std::pair<unsigned int, unsigned int> > & Sp );
+		std::list< std::pair<unsigned int, unsigned int> >	_merge(std::list< std::pair<unsigned int, unsigned int> > & left, std::list< std::pair<unsigned int, unsigned int> > & right );
+		void												_insertPintoSLists( std::list< std::pair<unsigned int, unsigned int> > & Sp );
+		void												_insertElement( unsigned int & element);
 };
 
-std::ostream &	operator<<( std::ostream & o, PmergeMe const & rhs );
+
+template<typename T>
+bool	PmergeMe::isSorted( T const & sequence ) const {
+	
+	typename T::const_iterator	it1 = sequence.begin();
+	typename T::const_iterator it2 = it1;
+	it2++;
+
+	while (it2 != sequence.end()) {
+		if (*it2 < (*it1))
+			return false;
+		it1++;
+		it2++;
+	}
+		
+	return true;
+}
 
 template<typename T>
 void	PmergeMe::printSequence( T const & sequence, size_t const length ) {
