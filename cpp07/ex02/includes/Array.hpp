@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Array.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tstahlhu <tstahlhu@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 17:53:02 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/06/10 18:22:37 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/08/22 13:00:54 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ class	Array {
 		~Array( void );
 
 		Array<T> &	operator=( Array const & rhs );
-		T &			operator[]( unsigned int const n ) const;
+		T &			operator[]( unsigned int n );
+		T const &	operator[]( unsigned int const n ) const;
 
 		unsigned int	size( void ) const;
 

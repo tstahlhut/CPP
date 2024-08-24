@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tstahlhu <tstahlhu@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/08 17:37:04 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/06/11 17:27:29 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/08/22 14:28:32 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,25 @@ int	main( void ) {
 		intArray[i] = i + 1;
 	std::cout << intArray << std::endl;
 	
-	std::cout << intArray[3] << std::endl;
+	std::cout << "Access third element: " << intArray[3] << std::endl;
+	intArray[3] = 42;
+	std::cout << "Access third element: " << intArray[3] << std::endl;
+	
 //	std::cout << intArray[NUM] << std::endl;
 
-//Test 3: char array
-	std::cout << std::endl << "--------------------------" << std::endl << "Test 3: char array" << std::endl << std::endl;
+//Test 3: float array
+	std::cout << std::endl << "--------------------------" << std::endl << "Test 3: float array" << std::endl << std::endl;
+	Array<float>	floatArray(NUM);
+	std::cout << floatArray << std::endl;
+
+	for (unsigned int i = 0; i < floatArray.size(); i++)
+		floatArray[i] = i + 1.42;
+	std::cout << floatArray << std::endl;
+	
+	std::cout << "Access third element: " << floatArray[3] << std::endl;
+
+//Test 4: char array
+	std::cout << std::endl << "--------------------------" << std::endl << "Test 4: char array" << std::endl << std::endl;
 	Array<char>	charArray(NUM);
 	std::cout << charArray << std::endl;
 
@@ -46,9 +60,9 @@ int	main( void ) {
 		charArray[i] = i + 97;
 	std::cout << charArray << std::endl;
 
-//Test 4: copy array
+//Test 5: copy array
 
-	std::cout << std::endl << "--------------------------" << std::endl << "Test 4: copy array" <<  std::endl << std::endl;
+	std::cout << std::endl << "--------------------------" << std::endl << "Test 5: copy array" <<  std::endl << std::endl;
 	Array<char>	char2(charArray);
 	std::cout << "old array:\t\t" << charArray << std::endl;
 	std::cout << "new array:\t\t" << char2 << std::endl;
@@ -58,25 +72,34 @@ int	main( void ) {
 	std::cout << "modified new array:\t" << char2 << std::endl;
 	std::cout << "old array:\t\t" << charArray << std::endl;
 
-//Test 5: assignment operator
+//Test 6: assignment operator
 
-	std::cout << std::endl << "--------------------------" << std::endl << "Test 5: assignment operator" <<  std::endl << std::endl;
+	std::cout << std::endl << "--------------------------" << std::endl << "Test 6: assignment operator" <<  std::endl << std::endl;
 	charArray = char2;
 
 	std::cout << "old array:\t" << charArray << std::endl;
 	std::cout << "new array:\t" << char2 << std::endl;
 
-//Test 6: modify an element
-	std::cout << std::endl << "--------------------------" << std::endl << "Test 6: modify an element" <<  std::endl << std::endl;
-
-	charArray[NUM - 1] = 'z';
-	intArray[0] = 42;
-
+//Test 7: modify an element
+	std::cout << std::endl << "--------------------------" << std::endl << "Test 7: modify an element" <<  std::endl << std::endl;
+	
 	std::cout << charArray << std::endl;
-	std::cout << intArray << std::endl;
+	charArray[NUM - 1] = 'z';
+	std::cout << "Last element: " << charArray[NUM - 1] << std::endl << std::endl;
 
-//Test 7: string array
-	std::cout << std::endl << "--------------------------" << std::endl << "Test 7: string array" <<  std::endl << std::endl;
+	std::cout << intArray << std::endl;
+	intArray[0] = 42;
+	std::cout << "First element: " << intArray[0] << std::endl;	
+	
+
+	const Array<int>	constArray(intArray);
+
+	std::cout << constArray << std::endl;
+	std::cout << "First element: " << intArray[0] << std::endl;	
+	//	constArray[0] = 0;
+
+//Test 8: string array
+	std::cout << std::endl << "--------------------------" << std::endl << "Test 8: string array" <<  std::endl << std::endl;
 
 	Array<std::string>	strArray(NUM);
 

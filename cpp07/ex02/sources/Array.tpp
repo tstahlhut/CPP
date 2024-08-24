@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Array.tpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tstahlhu <tstahlhu@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 13:35:24 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/06/11 17:27:21 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/08/24 15:56:20 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ Array<T>::Array( unsigned int n ) : _array(new T[n]), _size(n) {
 	std::cout << "Constructor called: array of size " << n << " created" << std::endl;
 
 	//to prevent a conditional jump because of unitialized values, set all to 0
-//	for (unsigned int i = 0; i < this->_size; i++)
-//		this->_array[i] = 0;
+	for (unsigned int i = 0; i < this->_size; i++)
+		this->_array[i] = T();
 
 	return;			
 }
@@ -84,7 +84,18 @@ Array<T> &	Array<T>::operator=( Array const & rhs ) {
 
 //Template of [] operator overload
 template <typename T>
-T &	Array<T>::operator[]( unsigned int const n ) const {
+T &	Array<T>::operator[]( unsigned int n ) {
+	
+
+	if (n >= this->_size){
+		throw std::out_of_range("Exception: Element out of bounds");
+	}
+	return this->_array[n];
+}
+
+//Template of [] operator overload for const array
+template <typename T>
+T const &	Array<T>::operator[]( unsigned int const n ) const {
 	
 
 	if (n >= this->_size){
