@@ -21,20 +21,6 @@ RPN::RPN( void ) : _stack() {
 
 	return ;
 }
-/*
-RPN::RPN( int n ) : _stack(n) {
-
-	std::cout << "Int Constructor called" << std::endl;
-
-	return ;
-}
-
-RPN::RPN( char & c ) : _stack((c - '0')) {
-
-	std::cout << "Char Constructor called" << std::endl;
-
-	return ;
-}*/
 
 // Copy Constructor
 
@@ -135,14 +121,10 @@ void	RPN::put( int n) {
 
 std::ostream &	operator<<( std::ostream & o, RPN const & rhs ) {
 
-	//o << "Stack: " << std::endl;
 	if (rhs.getStack().empty()) {
-	//	o << "Stack: empty";
 		return o;
 	}
 
-//	for (std::stack<int>::container_type::iterator it = rhs.getStack().c.begin(); it != rhs.getStack().c.end(); it++ )
-	//	o << *it << std::endl;
 	o << rhs.getStack().top() << std::endl;
 
 	return o;

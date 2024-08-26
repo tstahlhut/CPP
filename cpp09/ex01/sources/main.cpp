@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tstahlhu <tstahlhu@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 15:35:31 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/06/14 17:12:34 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/08/26 18:58:10 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,15 @@ int	main( int argc, char **argv ) {
 			break ;
 	
 	}
+	if (calc.getStack().size() > 1 || calc.getStack().empty())
+		throw RPN::WrongSymbolException();
+
+	std::cout << calc;
 	}
 
 	catch (std::exception &e) {
 		std::cout << e.what() << std::endl;
 	}
-
-	std::cout << calc << std::endl;
 	
 
 	return 0;

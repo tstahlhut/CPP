@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PmergeMe.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tstahlhu <tstahlhu@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 19:24:38 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/06/26 18:23:17 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/08/26 17:49:27 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,10 +179,10 @@ double	calcTime( std::clock_t start ) {
 
 void	PmergeMe::_sortPairs( std::deque<unsigned int> & p ) {
 	
-	for (size_t i = 1; i < (this->_length - (this->_length % 2)) ; i++){ // if len=4, i should iterate until i=3; if len=5, the same
+	for (size_t i = 1; i < (this->_length - (this->_length % 2)) ; i = i + 2){ // if len=4, i should iterate until i=3; if len=5, the same
 		this->_deque.push_back(max(this->_unsortedSequence[i-1], this->_unsortedSequence[i]));
 		p.push_back(min(this->_unsortedSequence[i-1], this->_unsortedSequence[i]));
-		i++;
+	//	i++;
 	}
 	if (this->_length % 2 == 1)
 		p.push_back(this->_unsortedSequence[this->_length - 1]);
@@ -283,7 +283,6 @@ void	PmergeMe::insertElement( unsigned int element) {
 			return ;
 		}
 	}
-	std::cout << "Problem in insert function" << std::endl;
 	return ;
 }
 
@@ -306,7 +305,7 @@ void	PmergeMe::_insertPintoS( std::deque<unsigned int> & p ) {
 
 	while ( J < p.size()) {
 		for (unsigned int i = J; i > end; i--) {
-			PmergeMe::insertElement(p[i]);
+			insertElement(p[i]);
 		}
 		end = J;
 		J1 = J2;
@@ -356,9 +355,9 @@ double	PmergeMe::sortDeque( void ) {
 
 void	PmergeMe::_createSortedPairs( std::list< std::pair<unsigned int, unsigned int> > & pairList ) {
 
-	for (size_t i = 1; i < (this->_length - (this->_length % 2)) ; i++){ // if len=4, i should iterate until i=3; if len=5, the same
+	for (size_t i = 1; i < (this->_length - (this->_length % 2)) ; i = i + 2){ // if len=4, i should iterate until i=3; if len=5, the same
 		pairList.push_back(std::make_pair(max(this->_unsortedSequence[i-1], this->_unsortedSequence[i]), min(this->_unsortedSequence[i-1], this->_unsortedSequence[i])));
-		i++;
+		//i++;
 	}
 
 	return;
@@ -487,6 +486,7 @@ void	PmergeMe::_insertPintoSLists( std::list< std::pair<unsigned int, unsigned i
 double	PmergeMe::sortList( void ) {
 	
 	std::clock_t	startTime = std::clock();
+	
 	//0. Check if already sorted
 	if (isSorted(this->_unsortedSequence)) {
 		std::cout << "Sequence already sorted!" << std::endl;

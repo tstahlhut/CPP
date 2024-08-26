@@ -21,17 +21,10 @@
 class	RPN {
 
 	public:
-		RPN( void );								// Default constructor (can also be put into private if user should not be able to use it )
-	//	RPN( int n );
-	//	RPN( char & c );
-		RPN( RPN const & src );				// Copy constructor: a new instance is created
-		RPN &	operator=( RPN const & rhs );	// Copy assignment operator overload
-		~RPN( void );								// Destuctor
-
-	//	typedef typename std::stack<int>::container_type::iterator	iterator;
-
-	//	iterator	begin() const;
-		//iterator	end() const;
+		RPN( void );
+		RPN( RPN const & src );
+		RPN &	operator=( RPN const & rhs );
+		~RPN( void );
 
 		std::stack<int>	getStack( void ) const;
 
