@@ -24,26 +24,15 @@
 class	BitcoinExchange {
 
 	public:
-		BitcoinExchange( void );								// Default constructor (can also be put into private if user should not be able to use it )
 		BitcoinExchange( std::string Datafile, std::string Delimiter );
-		BitcoinExchange( BitcoinExchange const & src );				// Copy constructor: a new instance is created
-		BitcoinExchange &	operator=( BitcoinExchange const & rhs );	// Copy assignment operator overload
-		~BitcoinExchange( void );								// Destuctor
+		BitcoinExchange( BitcoinExchange const & src );	
+		BitcoinExchange &	operator=( BitcoinExchange const & rhs );
+		~BitcoinExchange( void );
 
 
 		std::map<std::string, double>	getDatabase( void ) const;
-
-		bool	checkDateFormat( std::string date ) ;
-	//	bool	checkValue( unsigned int value ) const;
-	//	bool	checkValue( double value ) const;
-
-		void	saveDatabase( std::string Datafile ) ;
-
-		double	findExchangeRate( std::string date ) ;
-
-		double	getBitcoinAmount( double value, std::string date) ;
-
-		void	printBitcoinAmount( std::string date_value, std::string delimiter );
+		double							getBitcoinAmount( double value, std::string date) ;
+		void							printBitcoinAmount( std::string date_value, std::string delimiter );
 
 		class WrongFormatException : public std::exception {
 			public:
@@ -61,12 +50,28 @@ class	BitcoinExchange {
 			}
 		};
 
+			class InitErrorException : public std::exception {
+			public:
+			virtual const char*	what( void ) const throw()
+			{
+				return ("Database could not be initialized");
+			}
+		};
+
 	
 	private:
 		std::map< std::string, double >	_database;
 
 		std::string						_file;
 		std::string						_delimiter;
+
+		BitcoinExchange( void );
+
+		void	deleteWhitespaceAtBeginning( std::string & str);
+		bool	checkDateFormat( std::string date ) ;
+		bool	isNumeric(std::string value) const;
+		void	saveDatabase( std::string Datafile ) ;
+		double	findExchangeRate( std::string date ) ;
 	
 };
 

@@ -10,10 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../includes/BitcoinExchange.hpp"
 
-// Default Constructor
 
 BitcoinExchange::BitcoinExchange( void ) : _database() {
 
@@ -34,12 +32,11 @@ BitcoinExchange::BitcoinExchange( std::string Datafile, std::string Delimiter ) 
 	this->saveDatabase(Datafile);
 	}
 	catch (std::exception &e) {
-		this->_delimiter.clear();
-		this->_file.clear();
-		this->_database.clear();
 		std::cout << e.what() << std::endl;
-		std::cout << "Database could not be intialized." << std::endl;
+		throw InitErrorException();
 	}
+	if (this->_database.empty())
+		throw InitErrorException();
 }
 
 
@@ -88,7 +85,20 @@ std::map<std::string, double>	BitcoinExchange::getDatabase( void ) const {
 	return this->_database;
 }
 
+
+/* To determine if a year is a leap year, we apply a simple rule: 
+if the year is divisible by 4, it's a leap year, 
+except for end-of-century years, which must also be divisible by 400.*/
+bool	isLeapYear( int year ) {
+
+	return ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0); 
+}
+
+
+/* checks if the format of the date is correct (for data file and input file)*/
 bool	BitcoinExchange::checkDateFormat( std::string date ) {
+
+	deleteWhitespaceAtBeginning(date);
 
 //expected date format: yyyy-mm-dd
 
@@ -101,7 +111,7 @@ bool	BitcoinExchange::checkDateFormat( std::string date ) {
 	if (pos != 4)
 		return false;
 	int	year = std::atoi(date.substr(0, pos).c_str());
-	if (year < 1900 || year > 9999)
+	if (year < 2009 || year > 3000) //bitcoin started in 2009
 		return false;
 	
 //check month
@@ -117,9 +127,32 @@ bool	BitcoinExchange::checkDateFormat( std::string date ) {
 	int	day = std::atoi(date.substr(pos, 10).c_str());
 	if (day < 1 || day > 31)
 		return false;
-
+	// months with 30 days
+	if (month == 4 || month == 6 || month == 9 || month == 11)
+		return (day <= 30);
+	// check day for February
+	if (month == 2) {
+		if (isLeapYear(year))
+			return (day <= 29);
+		else
+			return (day <= 28);
+	}
 	return true;
 
+}
+
+bool	BitcoinExchange::isNumeric(std::string value) const {
+	
+	int	point = 0;
+	std::string::const_iterator it = value.begin();
+	if (*it == '-')
+		it++;
+	for (; it != value.end(); it++) {
+		if (*it == '.')
+			point++;
+		if (!std::isdigit(*it) && (*it != '.' || (*it == '.' && point > 1)) && !std::isspace(*it))
+			return false;
+	} return true;
 }
 
 void	BitcoinExchange::saveDatabase( std::string Datafile ) {
@@ -133,7 +166,6 @@ void	BitcoinExchange::saveDatabase( std::string Datafile ) {
 		std::cout << Datafile << " could not be opened" << std::endl;
 		throw FileErrorException();
 	}
-	//std::cout << "data file opened" << std::endl;
 
 //read into map structure
 	std::string	line;
@@ -148,39 +180,55 @@ void	BitcoinExchange::saveDatabase( std::string Datafile ) {
 				fin.close();
 				throw WrongFormatException();
 			}
+			//check if rest of line is numeric (whitespace after number allowed)
+			if (!isNumeric(line.substr(pos+1, line.find('\n'))))
+				throw WrongFormatException();
 			this->_database[line.substr(0, pos)] = std::atof(line.substr(pos+1, line.find('\n')).c_str());
 			line.erase();
 		}
 	}
 	this->_file = Datafile;
 	fin.close();
-	//std::cout << *this << std::endl;
 }
 
 void	BitcoinExchange::printBitcoinAmount( std::string date_value, std::string delimiter ) {
 
+	deleteWhitespaceAtBeginning(date_value);
+	if (date_value.empty())
+		return;
+
+	//find delimiter
 	size_t	pos = date_value.find(delimiter);
+	if (pos == std::string::npos)
+		throw WrongFormatException();
+		
+
+	//extract date
 	std::string	date = date_value.substr(0, pos);
-	
 	if (!checkDateFormat(date)) {
 		std::cout << "Error: Invalid date format: " << date << std::endl;
 		return ;
 	}
-
 	std::string	output = date;
 	output.append(" => ");
 	pos += delimiter.length();
 
+	//check if rest of string is numeric (whitespace after number allowed)
+	if (!isNumeric(date_value.substr(pos, date_value.length())))
+		throw WrongFormatException();
+
+	//extract value
 	double	value = std::atof(date_value.substr(pos, date_value.length()).c_str());
 	
+	//calculate result
+	double	result = getBitcoinAmount(value, date);
+	if (result < 0) //if result negative, number is out of range
+		return ;
 	
+	//print result
 	output.append(date_value.substr(pos, date_value.length()));
 	output.append(" = ");
 
-	double	result = getBitcoinAmount(value, date);
-	if (result < 0)
-		return ;
-	
 	std::cout << output << result << std::endl;
 
 	return ;
@@ -207,12 +255,14 @@ double	BitcoinExchange::getBitcoinAmount( double value, std::string date) {
 
 double	BitcoinExchange::findExchangeRate( std::string date ) {
 
-	if (this->_database.count(date)) //returns 1 if found, 0 if not
+	if (this->_database.count(date)) { //returns 1 if found, 0 if not
 		return this->_database.find(date)->second;
-
+	}
+	
+	//if date not found in database, the date before is used
 	std::map<std::string, double>::iterator	lowerBound = this->_database.lower_bound(date);
-	//	std::cout << this->_database.upper_bound(date)->first << " " << this->_database.upper_bound(date)->second << std::endl;
-	lowerBound--;
+	if (lowerBound != _database.begin())
+		lowerBound--;
 	return lowerBound->second;
 	
 }
@@ -228,4 +278,13 @@ std::ostream &	operator<<( std::ostream & o, BitcoinExchange const & rhs ) {
 		o << it->first << " " << it->second << std::endl;
 
 	return o;
+}
+
+void	BitcoinExchange::deleteWhitespaceAtBeginning( std::string & str) {
+
+	//delete whitespace at the beginning
+	std::string::iterator	it = str.begin();
+	while (std::isspace(*it)) {
+		str.erase(it);
+	}
 }

@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tstahlhu <tstahlhu@student.42berlin.de>    +#+  +:+       +#+         #
+#    By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/23 14:13:04 by vm                #+#    #+#              #
-#    Updated: 2024/06/15 14:17:15 by tstahlhu         ###   ########.fr        #
+#    Updated: 2024/08/24 17:44:34 by tstahlhu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 NAME	=  btc
 CXX		=	c++
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -g
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 FILEEXT	= .cpp
 SRCDIR   = ./sources
 INCDIR   = ./includes

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tstahlhu <tstahlhu@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 15:35:31 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/06/15 22:52:07 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/08/26 15:00:50 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int	main( int argc, char **argv ) {
 		BitcoinExchange btc(DATA_FILE, DELIMITER);
 
 		//open input file
-	//	std::cout << argv[1] << std::endl;
 		std::ifstream	inputFile(argv[1]);
 		if (inputFile.fail()) {
 			std::cout << "Error: Input file failed to open" << std::endl;
@@ -48,8 +47,8 @@ int	main( int argc, char **argv ) {
 			//	std::cout << line.substr(0, 9) << " => " << 
 			}
 			catch (std::exception &e) {
-				std::cout << e.what() << std::endl;
-				inputFile.close();
+				std::cout << e.what()  << " => " << line << std::endl;
+				//inputFile.close();
 			}
 			line.erase();
 		}
