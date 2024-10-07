@@ -1,2 +1,6 @@
 # Ignore all object files
 *.o
+
+# Ignore vscode folder
+vscode/
+.vscode/
