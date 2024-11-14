@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tstahlhu <tstahlhu@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 15:35:31 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/06/26 18:32:44 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/11/14 14:52:05 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ int	main( int argc, char **argv ) {
 		double	timeList = sequence.sortList();
 
 		std::cout << "After:\t";
-		sequence.printSequence(sequence.getList(), sequence.getLength());
+		//sequence.printSequence(sequence.getList(), sequence.getLength());
+		sequence.printSequence(sequence.getDeque(), sequence.getLength());
 
 		std::cout << "Time to process a range of " << sequence.getLength() << " elements with std::list:\t";
 		std::cout << std::fixed << std::setprecision( 6 );

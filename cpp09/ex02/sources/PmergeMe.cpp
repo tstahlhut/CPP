@@ -6,7 +6,7 @@
 /*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 19:24:38 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/08/26 17:49:27 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/11/14 16:06:27 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -286,6 +286,42 @@ void	PmergeMe::insertElement( unsigned int element) {
 	return ;
 }
 
+int	PmergeMe::_binarySearch( unsigned int value, unsigned int pos) {
+	
+	// limit area to search for: from beginning (p element could be the smallest) to 
+	std::deque<unsigned int>::iterator left = this->_deque.begin();
+	std::deque<unsigned int>::iterator right = this->_deque.end();
+	if (pos >= 0 && pos < this->_deque.size())
+		right = this->_deque.begin() + pos;		
+		
+	std::deque<unsigned int>::iterator middle = left + (right - left) / 2;
+	
+	while (middle != right && middle != left) {
+		//std::cout << "binary: value = " << value << " left = " << *left << " right =" << *right << " middle = " << *middle << std::endl;
+		if (value < *middle) {
+			right = middle;
+			// in the case that (right - left) / 2 = 0, middle should be equal to right and not left
+			//middle = right - (right - left) / 2;
+		}
+		else { // as there are no numbers twice value cannot be equal to *middle
+			left = middle;
+			// in the case that (right - left) / 2 = 0, middle should be equal to left and not right
+			
+		}
+		middle = left + (right - left) / 2;
+	}
+	// check if value has to be inserted left or right of middle
+	if (value > *middle)
+		++middle;
+	//std::cout << "binary: value = " << value << " left = " << *left << " right =" << *right << " middle = " << *middle << std::endl;
+	unsigned int insert_position = std::distance(this->_deque.begin(), middle);
+	this->_deque.insert(middle, value);
+
+	if (insert_position > pos)
+		return 1;
+	return 0;
+}
+
 
 /* 3. insert p into S
 	//we re-sort p: partition p into groups (size of groups: Jacobsthal numbers + 1) and sort the elements within these groups in descending order according to their indexes:
@@ -296,16 +332,25 @@ void	PmergeMe::_insertPintoS( std::deque<unsigned int> & p ) {
 
 	unsigned int	J1 = 0; // first Jacobsthal number
 	unsigned int	J2 = 1; //second jacobsthal number
-
-	//we add one number at the front of p, so that the indexes of S and p are aligned again when the first element of p is pushed to S
-	p.push_front(0);
-
 	unsigned int	J = Jacobsthal(J1, J2);
 	unsigned int	end = J1;
-
+	unsigned int	J_case = 0; // binarySearch returns 1, if element was inserted at last possible position which means that search interval for next element is 1 element shorter (if J != i, i.e. going backwards in p sequence) 
+	unsigned int	n = 0;	// number of elements inserted
+	int				pos; // position until which to search in S
+	
+	
+	// we add one number at the front of p, so that the loop works for the first number where: J = 1 and i (1) > end (0)
+	p.push_front(0);
 	while ( J < p.size()) {
 		for (unsigned int i = J; i > end; i--) {
-			insertElement(p[i]);
+			// calculate position until which to search in sorted S (we know that we only have to search up to p[i]'s pair which is bigger than p[i])
+		//	pos = i - 2 + n - J_case;
+		//	if (J == i)
+			pos = i - 1 + n;
+			// insert p[i] with binary search
+			J_case = _binarySearch(p[i], pos);
+			n++;
+			//insertElement(p[i]);
 		}
 		end = J;
 		J1 = J2;
@@ -314,7 +359,7 @@ void	PmergeMe::_insertPintoS( std::deque<unsigned int> & p ) {
 	}
 	//insert the last group of elements of p (where J > p.size())
 	for (unsigned int i = p.size() - 1; i > end; i--) {
-			insertElement(p[i]);
+			_binarySearch(p[i], -1);
 	}
 	return;
 }
