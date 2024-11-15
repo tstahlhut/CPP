@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PmergeMe.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tstahlhu <tstahlhu@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 19:24:38 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/11/14 16:06:27 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/11/15 13:22:52 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ PmergeMe::PmergeMe( void ) : _deque(), _list(), _length(0){
 
 	return ;
 }
-
 
 // Copy Constructor
 PmergeMe::PmergeMe( PmergeMe const & src )  {
@@ -84,7 +83,6 @@ size_t const &	PmergeMe::getLength( void ) const {
 
 	return this->_length;
 }
-
 
 
 /* ************************************************************************** */
@@ -163,7 +161,7 @@ unsigned int	Jacobsthal( unsigned int n1, unsigned int n2) {
 
 double	calcTime( std::clock_t start ) {
 
-	double duration = ( std::clock() - start ) / (double) CLOCKS_PER_SEC;
+	double duration = ( std::clock() - start ) / static_cast<double> CLOCKS_PER_SEC;
 
 	return duration;
 }
@@ -274,7 +272,7 @@ void mergeSort(std::deque<unsigned int> & S, std::deque<unsigned int> & p, int c
     merge(S, p, begin, mid, end);
 }
 
-
+/* This was my first approach of inserting all p elements into S (now it is done in binary-search)
 void	PmergeMe::insertElement( unsigned int element) {
 
 	for (std::deque<unsigned int>::iterator it = this->_deque.begin(); it < this->_deque.end(); it++) {
@@ -284,44 +282,36 @@ void	PmergeMe::insertElement( unsigned int element) {
 		}
 	}
 	return ;
-}
+}*/
 
-int	PmergeMe::_binarySearch( unsigned int value, unsigned int pos) {
+void	PmergeMe::_binarySearch( unsigned int value, int pos) {
 	
-	// limit area to search for: from beginning (p element could be the smallest) to 
 	std::deque<unsigned int>::iterator left = this->_deque.begin();
 	std::deque<unsigned int>::iterator right = this->_deque.end();
-	if (pos >= 0 && pos < this->_deque.size())
+
+	// limit area to search for: from beginning (p element could be the smallest) to pos
+	if (pos >= 0 && static_cast<unsigned int>(pos) < this->_deque.size())
 		right = this->_deque.begin() + pos;		
 		
 	std::deque<unsigned int>::iterator middle = left + (right - left) / 2;
 	
+	// find place where to insert value
 	while (middle != right && middle != left) {
-		//std::cout << "binary: value = " << value << " left = " << *left << " right =" << *right << " middle = " << *middle << std::endl;
 		if (value < *middle) {
 			right = middle;
-			// in the case that (right - left) / 2 = 0, middle should be equal to right and not left
-			//middle = right - (right - left) / 2;
 		}
 		else { // as there are no numbers twice value cannot be equal to *middle
-			left = middle;
-			// in the case that (right - left) / 2 = 0, middle should be equal to left and not right
-			
+			left = middle;			
 		}
 		middle = left + (right - left) / 2;
 	}
+
 	// check if value has to be inserted left or right of middle
 	if (value > *middle)
 		++middle;
-	//std::cout << "binary: value = " << value << " left = " << *left << " right =" << *right << " middle = " << *middle << std::endl;
-	unsigned int insert_position = std::distance(this->_deque.begin(), middle);
 	this->_deque.insert(middle, value);
 
-	if (insert_position > pos)
-		return 1;
-	return 0;
 }
-
 
 /* 3. insert p into S
 	//we re-sort p: partition p into groups (size of groups: Jacobsthal numbers + 1) and sort the elements within these groups in descending order according to their indexes:
@@ -331,10 +321,9 @@ int	PmergeMe::_binarySearch( unsigned int value, unsigned int pos) {
 void	PmergeMe::_insertPintoS( std::deque<unsigned int> & p ) {
 
 	unsigned int	J1 = 0; // first Jacobsthal number
-	unsigned int	J2 = 1; //second jacobsthal number
-	unsigned int	J = Jacobsthal(J1, J2);
+	unsigned int	J2 = 1; // second Jacobsthal number
+	unsigned int	J = Jacobsthal(J1, J2); // third Jacobsthal number
 	unsigned int	end = J1;
-	unsigned int	J_case = 0; // binarySearch returns 1, if element was inserted at last possible position which means that search interval for next element is 1 element shorter (if J != i, i.e. going backwards in p sequence) 
 	unsigned int	n = 0;	// number of elements inserted
 	int				pos; // position until which to search in S
 	
@@ -344,13 +333,10 @@ void	PmergeMe::_insertPintoS( std::deque<unsigned int> & p ) {
 	while ( J < p.size()) {
 		for (unsigned int i = J; i > end; i--) {
 			// calculate position until which to search in sorted S (we know that we only have to search up to p[i]'s pair which is bigger than p[i])
-		//	pos = i - 2 + n - J_case;
-		//	if (J == i)
 			pos = i - 1 + n;
 			// insert p[i] with binary search
-			J_case = _binarySearch(p[i], pos);
+			_binarySearch(p[i], pos);
 			n++;
-			//insertElement(p[i]);
 		}
 		end = J;
 		J1 = J2;
@@ -460,7 +446,7 @@ std::list< std::pair<unsigned int, unsigned int> >	PmergeMe::_mergeSortList(std:
 	-> loop until element is smaller and insert there
 	-> or if given element is bigger than last element in list, insert at last position */
 
-void	PmergeMe::_insertElement( unsigned int & element) {
+/*void	PmergeMe::_insertElement( unsigned int & element) {
 
 	if (element > this->_list.back())
 				this->_list.push_back(element);
@@ -470,6 +456,46 @@ void	PmergeMe::_insertElement( unsigned int & element) {
 			break;
 		}
 	}
+	return;
+}*/
+
+void	PmergeMe::_insertElement( unsigned int & element) {
+
+
+	if (element > this->_list.back()) {
+				this->_list.push_back(element);
+				return ;
+	}
+	std::list<unsigned int>::iterator left = this->_list.begin();
+	std::list<unsigned int>::iterator right = this->_list.end();
+	std::advance(right, -1); // right end should be last element
+	std::list<unsigned int>::iterator middle = left;
+
+	//calculate middle of left and right
+	std::advance(middle, (std::distance(left, right) / 2));
+
+	
+	// find place where to insert element
+	while (middle != right && middle != left) {
+
+		if (element < *middle) {
+			right = middle;
+			std::advance(middle, -(std::distance(left, right) / 2));
+			if (middle == right && std::distance(left, right) == 1)
+				middle = left;
+		}
+		else { // as there are no numbers twice element cannot be equal to *middle
+			left = middle;
+			std::advance(middle, (std::distance(left, right) / 2));			
+		}
+	}
+	// check if element has to be inserted left or right of middle
+	if (element > *middle)
+		std::advance(middle, 1);
+
+
+	this->_list.insert(middle, element);
+	
 	return;
 }
 
@@ -493,7 +519,6 @@ void	PmergeMe::_insertPintoSLists( std::list< std::pair<unsigned int, unsigned i
 
 	//loop: insert first and second elements according to Jacobsthal number into list
 	while (it3 != Sp.end() ) {
-
 		//insert S (which is already sorted) until end of Jacobsthal sublist
 		for ( ; it3 != it2; it3++)
 			this->_list.push_back(it3->first);
@@ -517,7 +542,6 @@ void	PmergeMe::_insertPintoSLists( std::list< std::pair<unsigned int, unsigned i
 		else 
 			it2 = Sp.end();
 	}
-
 	//if the length of the original sequence was odd, the last element is missing in Sp and is inserted now
 	if (this->_length % 2 == 1)
 		_insertElement(this->_unsortedSequence[this->_length - 1]);
@@ -526,7 +550,7 @@ void	PmergeMe::_insertPintoSLists( std::list< std::pair<unsigned int, unsigned i
 
 }
 
-//Ford-Johnson Sort Algorithm (Insertion merge) for lists
+// Ford-Johnson Sort Algorithm (Insertion merge) for lists
 
 double	PmergeMe::sortList( void ) {
 	
@@ -545,10 +569,6 @@ double	PmergeMe::sortList( void ) {
 
 	//2. sort all values in S in ascending order, recursively with merge sort
 	Sp = _mergeSortList(Sp);
-	/*std::cout << "After merge: " << std::endl;
-	for (std::list< std::pair<unsigned int, unsigned int> >::iterator it = Sp.begin(); it != Sp.end(); it++)
-		std::cout << it->first << "\t" << it->second << std::endl;
-	*/
 
 	//3. Merge sorted S and unsorted p into 1 list
 	_insertPintoSLists(Sp);

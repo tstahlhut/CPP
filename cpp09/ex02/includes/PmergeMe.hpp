@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PmergeMe.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tstahlhu <tstahlhu@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 19:16:59 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/11/13 13:46:41 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/11/15 11:18:25 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ class	PmergeMe {
 		//Deque
 		void	_sortPairs( std::deque<unsigned int> & p );
 		void	_insertPintoS( std::deque<unsigned int> & p );
-		int		_binarySearch( unsigned int value, unsigned int pos);
+		void	_binarySearch( unsigned int value, int pos);
 		
 		//List
 		void												_createSortedPairs( std::list< std::pair<unsigned int, unsigned int> > & pairList );

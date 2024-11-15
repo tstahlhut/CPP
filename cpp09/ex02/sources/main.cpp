@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tstahlhu <tstahlhu@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tstahlhu <tstahlhu@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 15:35:31 by tstahlhu          #+#    #+#             */
-/*   Updated: 2024/11/14 14:52:05 by tstahlhu         ###   ########.fr       */
+/*   Updated: 2024/11/15 12:53:59 by tstahlhu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,15 @@ int	main( int argc, char **argv ) {
 		double	timeList = sequence.sortList();
 
 		std::cout << "After:\t";
-		//sequence.printSequence(sequence.getList(), sequence.getLength());
-		sequence.printSequence(sequence.getDeque(), sequence.getLength());
+		sequence.printSequence(sequence.getList(), sequence.getLength());
+		//sequence.printSequence(sequence.getDeque(), sequence.getLength());
 
 		std::cout << "Time to process a range of " << sequence.getLength() << " elements with std::list:\t";
 		std::cout << std::fixed << std::setprecision( 6 );
-		std::cout << timeList << " us" << std::endl;
+		std::cout << timeList << " s" << std::endl;
 
 		std::cout << "Time to process a range of " << sequence.getLength() << " elements with std::deque:\t";
-		std::cout << timeDeque << " us" << std::endl;
+		std::cout << timeDeque << " s" << std::endl;
 	}
 	catch (std::exception &e) {
 		std::cout << e.what() << std::endl;
